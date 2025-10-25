@@ -1,0 +1,18 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "fr.dev1lroot.mcmods.littlecraft.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "PlayerLittleMixin",
+    "LittleSizeMixin",
+    "PlayerTickSizeMixin",
+    "LocalPlayerLittleMixin",
+    "PlayerPersistentLittleMixin"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

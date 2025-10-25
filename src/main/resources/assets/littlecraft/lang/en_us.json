@@ -1,0 +1,6 @@
+{
+  "littlecraft.command.islittle.true": "You are in Little Mode",
+  "littlecraft.command.islittle.false": "You are in Adult Mode",
+  "littlecraft.command.setlittle.true": "You’ve regressed into the little mode",
+  "littlecraft.command.setlittle.false": "You’ve grown up again!"
+}

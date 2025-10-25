@@ -1,16 +1,11 @@
 # LittleCraft
 
-**LittleCraft** is a soft and cozy mod for **Minecraft 1.21.1** built on **NeoForge**.  
-It introduces a **Little Mode** that lets players shrink down to child-like proportions — their size and hitbox match that of a **baby zombie**.  
-While small, players can walk through 1-block gaps and sneak under trapdoors, experiencing the world from a whole new perspective.
+**LittleCraft** is a lightweight NeoForge mod for **Minecraft 1.21.1**, designed for roleplay-focused gameplay.  
+It introduces a **Little Mode** that lets players take the role of a smaller “Little” character with a reduced model size, hitbox, and camera height.  
+The mod is especially useful for **ABDL** and **Agere** themed servers, where size-based interactions and character dynamics are part of the roleplay experience.  
+It also offers a unique gameplay perspective by changing how players move, explore, and interact with the environment.  
+Further updates are planned to expand customization, add interactive items, and enhance compatibility with community-driven features.
 
----
-
-## 🧸 Gameplay Overview
-
-When a player enters **Little Mode**, their visual and physical scale are reduced to baby-zombie size (0.35× width, 0.9× height).  
-While sneaking, they become even smaller (0.7× height).  
-All states are fully synchronized between server and client and persist across sessions.
 
 ---
 
@@ -18,17 +13,18 @@ All states are fully synchronized between server and client and persist across s
 
 | Command | Description |
 |----------|-------------|
-| `/islittle` | Displays whether you are in Little Mode or Adult Mode. |
-| `/little true` | Switch to Little Mode. |
-| `/little false` | Return to Adult Mode. |
+| `/islittle` | Shows whether you are currently in Little Mode. |
+| `/little true` | Enables Little Mode. |
+| `/little false` | Disables Little Mode. |
 
-> Currently, mode switching is only available through commands.  
-> Future versions will include themed Agere/ABDL items (pacifiers, plushies, bottles, etc.) for immersive roleplay transitions.
+> Currently, switching modes is only available via commands.  
+> Future versions will introduce optional items to toggle size and enhance immersion.
 
 ---
 
-## 🌍 Supported Languages
+## 🌍 Localization
 
+Supported languages:
 - English (`en_us`)
 - Russian (`ru_ru`)
 - French (`fr_fr`)
@@ -38,50 +34,45 @@ All states are fully synchronized between server and client and persist across s
 
 ---
 
-## ⚙️ Technical Information
+## ⚙️ Technical Details
 
-LittleCraft works in both **Singleplayer** and **Multiplayer (Server)** environments.  
-It introduces two NBT tags that store player-specific data (applied **only to players**):
+LittleCraft supports both **Singleplayer** and **Multiplayer** environments.  
+It uses two player-specific NBT tags:
 
 | Tag | Type | Description |
 |------|------|-------------|
 | `IsLittle` | `boolean` | Indicates whether the player is in Little Mode. |
-| `LittleAge` | `int` | Represents the player’s “Little Age” (currently unused, reserved for future updates). |
+| `LittleAge` | `int` | Reserved for future features involving gradual scaling. |
 
-These tags are saved in the world’s player data and automatically synchronized between client and server.
-
----
-
-## 🧩 Known Issues
-
-- Player **nameplates** (nicknames) become distorted or misaligned when scaled via PoseStack.  
-  *(Pull requests to improve this are warmly welcome!)*
+These tags are saved in the player’s data and synchronized between client and server.
 
 ---
 
-## 🧱 Version Information
+## 🧱 Known Issues
 
-- **Current Minecraft Version:** 1.21.1  
-- **Next Planned Update:** 1.21.10  
-- **No backports** to older Minecraft versions are planned.
+- Player nameplates may appear slightly misaligned when scaled.  
+  *Contributions and pull requests are welcome.*
 
 ---
 
-## 🚧 Planned Features
+## 🗓 Version Info
 
-- **LittleAge-based scaling:**  
-  Player size will gradually scale depending on their LittleAge value, ranging from **baby zombie size** to **full adult Steve height**.
-- **Agere/ABDL items:**  
-  Pacifiers, bottles, plushies, and comfort items that toggle Little Mode or apply emotional effects.
-- **Caregiver mechanics:**  
-  Interaction features between adult and little players.
-- **Improved rendering:**  
-  Proper nameplate alignment and visual polish for scaled models.
+- **Minecraft:** 1.21.1  
+- **Next planned update:** 1.21.10  
+- **No backports** to older versions are planned.
+
+---
+
+## 🔮 Planned Features
+
+- Gradual scaling based on `LittleAge`.  
+- Optional items to toggle or influence Little Mode.  
+- Caregiver-style interaction mechanics.  
+- Improved rendering and nameplate alignment.
 
 ---
 
 ## 👤 Author
 
 **David von Eichendorf** (`dev1lroot` / `Davy`)  
-License: **MIT**  
-Made with love and care for the Agere & ABDL Minecraft community.
+License: **MIT**

@@ -1,5 +1,6 @@
 package fr.dev1lroot.mcmods.littlecraft;
 
+import fr.dev1lroot.mcmods.littlecraft.content.LittleContentRegistry;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.bus.api.IEventBus;
 import fr.dev1lroot.mcmods.littlecraft.command.LittleCommand;
@@ -39,5 +40,7 @@ public class LittleMod
     {
         // Register all the cute little commands (like /little true/false or /islittle)
         LittleCommand.register();
+        // Register all the cute little items and blocks
+        LittleContentRegistry.register(modEventBus);
     }
 }

@@ -1,4 +1,4 @@
-package fr.dev1lroot.mcmods.littlecraft.client;
+package fr.dev1lroot.mcmods.littlecraft.client.render;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import fr.dev1lroot.mcmods.littlecraft.DiaperModel;

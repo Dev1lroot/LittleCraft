@@ -1,11 +1,15 @@
 # LittleCraft
 
-**LittleCraft** is a lightweight NeoForge mod for **Minecraft 1.21.1**, designed for roleplay-focused gameplay.  
-It introduces a **Little Mode** that lets players take the role of a smaller “Little” character with a reduced model size, hitbox, and camera height.  
-The mod is especially useful for **ABDL** and **Agere** themed servers, where size-based interactions and character dynamics are part of the roleplay experience.  
-It also offers a unique gameplay perspective by changing how players move, explore, and interact with the environment.  
-Further updates are planned to expand customization, add interactive items, and enhance compatibility with community-driven features.
+**LittleCraft** is a lightweight NeoForge mod for **Minecraft 1.21.1**, created to bring **Agere** and **ABDL** elements into roleplay gameplay.
 
+The mod currently adds two main features:
+- **Little Mode** - players can shrink into a smaller "Little" form with reduced model size, hitbox, and camera height. Switching is done via commands.
+- **Diaper Item (since v2.0)** - can be worn for immersive roleplay. At this stage, it works passively without extra mechanics.
+
+These features are especially useful for **ABDL** and **Agere** servers, where size differences and roleplay props matter.  
+They also provide a new perspective on how players move, explore, and interact with the game world.
+
+Future updates will expand customization, add more interactive items, and improve compatibility with community-driven features.
 
 ---
 
@@ -53,21 +57,25 @@ These tags are saved in the player’s data and synchronized between client and 
 - Player nameplates may appear slightly misaligned when scaled.  
   *Contributions and pull requests are welcome.*
 
+- Diapers are currently rendered only on players, since they use a dedicated player renderer.  
+  *This issue is planned to be fixed by the author in a future update.*
+
 ---
 
 ## 🗓 Version Info
 
-- **Minecraft:** 1.21.1  
-- **Next planned update:** 1.21.10  
+- **Minecraft:** 1.21.1
+- **Next planned update:** 1.21.10
 - **No backports** to older versions are planned.
+- **Since 2.0:** Added a **Diaper** item for immersive ABDL roleplay.
 
 ---
 
 ## 🔮 Planned Features
 
-- Gradual scaling based on `LittleAge`.  
-- Optional items to toggle or influence Little Mode.  
-- Caregiver-style interaction mechanics.  
+- Gradual scaling based on `LittleAge`.
+- Optional items to toggle or influence Little Mode.
+- Caregiver-style interaction mechanics.
 - Improved rendering and nameplate alignment.
 
 ---

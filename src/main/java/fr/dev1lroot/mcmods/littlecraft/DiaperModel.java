@@ -70,14 +70,14 @@ public class DiaperModel<T extends Entity> extends EntityModel<T> {
     public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, int rgb)
     {
         // Primary layer = the fluffy base, actual design layer
-        ResourceLocation primaryTexture = ResourceLocation.parse(MODID + ":textures/texture2.png");
+        ResourceLocation primaryTexture = ResourceLocation.parse(MODID + ":textures/texture2.png"); //test
         VertexConsumer primaryConsumer = Minecraft.getInstance().renderBuffers().bufferSource()
                 .getBuffer(RenderType.entityCutout(primaryTexture));
 
         primary.render(poseStack, primaryConsumer, packedLight, packedOverlay, rgb);
 
         // Overlay = the wetness indicator that fades in with usage.
-        ResourceLocation overlayTexture = ResourceLocation.parse(MODID + ":textures/texture2-overlay.png");
+        ResourceLocation overlayTexture = ResourceLocation.parse(MODID + ":textures/texture2-overlay.png"); //test
         VertexConsumer overlayConsumer = Minecraft.getInstance().renderBuffers().bufferSource()
                 .getBuffer(RenderType.entityTranslucent(overlayTexture));
 

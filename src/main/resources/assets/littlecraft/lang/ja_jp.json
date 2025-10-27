@@ -1,0 +1,8 @@
+{
+  "littlecraft.command.islittle.true": "あなたはいまリトルモードです",
+  "littlecraft.command.islittle.false": "あなたはいまアダルトモードです",
+  "littlecraft.command.setlittle.true": "あなたはリトルモードに退行しました",
+  "littlecraft.command.setlittle.false": "あなたはまた大人に戻りました！",
+
+  "item.littlecraft.diaper": "おむつ"
+}

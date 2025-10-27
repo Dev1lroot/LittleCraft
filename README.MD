@@ -30,11 +30,12 @@ Future updates will expand customization, add more interactive items, and improv
 
 Supported languages:
 - English (`en_us`)
-- Russian (`ru_ru`)
 - French (`fr_fr`)
 - German (`de_de`)
-- Ukrainian (`uk_ua`)
+- Japanese (`ja_jp`)
+- Russian (`ru_ru`)
 - Spanish (`es_es`)
+- Ukrainian (`uk_ua`)
 
 ---
 

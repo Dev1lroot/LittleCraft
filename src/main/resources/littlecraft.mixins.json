@@ -6,7 +6,7 @@
   "mixins": [
     "PlayerLittleMixin",
     "LittleSizeMixin",
-    "PlayerTickSizeMixin",
+    "PlayerTickMixin",
     "LocalPlayerLittleMixin",
     "PlayerPersistentLittleMixin"
   ],

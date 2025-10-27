@@ -20,54 +20,59 @@ import net.neoforged.neoforge.client.event.RenderPlayerEvent;
 @EventBusSubscriber(value = Dist.CLIENT)
 public class DiaperLayerRenderer
 {
+    // The diaper fashion statement texture. 100% absorbency guaranteed.
     private static final ResourceLocation DIAPER_TEXTURE =
             ResourceLocation.parse("littlecraft:textures/texture.png");
-    private static DiaperModel<Player> MODEL; // изначально null
+
+    // Lazy diaper model – it only spawns when needed, like a baby waking up at 3 AM.
+    private static DiaperModel<Player> MODEL;
 
     @SubscribeEvent
-    public static void onRenderPlayerPost(RenderPlayerEvent.Post event) {
+    public static void onRenderPlayerPost(RenderPlayerEvent.Post event)
+    {
         Player player = event.getEntity();
 
-        // Надето ли наше «LEGS»
-        ItemStack legs = player.getItemBySlot(EquipmentSlot.LEGS);
-        if (!(legs.getItem() instanceof Diaper.DiaperItem)) return;
+        // Time to check the booty slot. Is baby padded or nah?
+        ItemStack butt = player.getItemBySlot(EquipmentSlot.LEGS);
 
+        // No diaper? No render. No bab vibes allowed.
+        if (!(butt.getItem() instanceof Diaper.DiaperItem)) return;
+
+        // Summon the sacred diaper model if it doesn't exist yet.
         if (MODEL == null) {
             MODEL = new DiaperModel<>(Minecraft.getInstance()
                     .getEntityModels().bakeLayer(DiaperModel.LAYER_LOCATION));
         }
 
-        Item diaper = legs.getItem();
+        // Grab the actual diaper item. Handle with care, it's crinkly.
+        Item diaper = butt.getItem();
 
         PoseStack pose = event.getPoseStack();
-        pose.pushPose();
+        pose.pushPose(); // entering padded dimension
 
-        // 1) ДОБАВЛЯЕМ ГЛОБАЛЬНЫЙ ПОВОРОТ ТЕЛА (yaw)
-        float pt = event.getPartialTick();
-        float bodyYaw = net.minecraft.util.Mth.lerp(pt, player.yBodyRotO, player.yBodyRot);
-        // В Post глобальный поворот уже «снят», поэтому вернём его.
-        // Знак может отличаться в зависимости от твоей модели — если будет развёрнуто, поменяй на -bodyYaw.
-        pose.mulPose(com.mojang.math.Axis.YP.rotationDegrees(-bodyYaw));
-
-        // 2) ПРИВЯЗКА К КОСТИ ТЕЛА
+        // Sync up with the player's torso, so the diaper hugs snugly.
         var playerModel = event.getRenderer().getModel();
         playerModel.body.translateAndRotate(pose);
 
-        // 3) КОРРЕКТНАЯ АНИМАЦИЯ (шаги и т.п.)
-        // В 1.20+:
+        // Make sure the diaper doesn't free-spin like a rogue pacifier.
+        float pt = event.getPartialTick();
+        float bodyYaw = net.minecraft.util.Mth.lerp(pt, player.yBodyRotO, player.yBodyRot);
+        pose.mulPose(com.mojang.math.Axis.YP.rotationDegrees(-bodyYaw));
+
+        // Harvest walky-walky and waddle animations from the player.
         float limbSwing = player.walkAnimation.position(pt);
         float limbSwingAmount = player.walkAnimation.speed();
         float ageInTicks = player.tickCount + pt;
         float headYaw = net.minecraft.util.Mth.lerp(pt, player.yHeadRotO, player.getYHeadRot());
         float headPitch = net.minecraft.util.Mth.lerp(pt, player.xRotO, player.getXRot());
 
-        // Если твой DiaperModel рендерится поверх корпуса, чаще всего анимации ног не нужны,
-        // но пусть будут корректные значения.
+        // Teach the diaper how to wiggle with maximum crinkle physics.
         MODEL.setupAnim(player, limbSwing, limbSwingAmount, ageInTicks, headYaw, headPitch);
 
-        // (необязательно, но полезно) — если у DiaperModel есть часть "body", можно скопировать локальную позу:
-        // MODEL.body.copyFrom(playerModel.body);
+        // Report diaper condition: fresh, soggy, or absolutely destroyed.
+        MODEL.damage = diaper.getDamage(butt);
 
+        // Behold: the ultimate padded protection layer, rendered in glorious HD crinkles.
         MODEL.renderToBuffer(
                 pose,
                 event.getMultiBufferSource().getBuffer(RenderType.entityCutout(DIAPER_TEXTURE)),
@@ -76,7 +81,6 @@ public class DiaperLayerRenderer
                 0xFFFFFF
         );
 
-        pose.popPose();
+        pose.popPose(); // leaving padded dimension, back to big-kid land
     }
-
 }

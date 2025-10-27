@@ -2,5 +2,7 @@
   "littlecraft.command.islittle.true": "Tu es en mode Petit",
   "littlecraft.command.islittle.false": "Tu es en mode Adulte",
   "littlecraft.command.setlittle.true": "Tu es redevenu tout petit",
-  "littlecraft.command.setlittle.false": "Tu as grandi à nouveau!"
+  "littlecraft.command.setlittle.false": "Tu as grandi à nouveau!",
+
+  "item.littlecraft.diaper": "Couche"
 }

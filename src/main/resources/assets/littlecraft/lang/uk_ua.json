@@ -2,5 +2,7 @@
   "littlecraft.command.islittle.true": "Ти в режимі Малюка",
   "littlecraft.command.islittle.false": "Ти в режимі Дорослого",
   "littlecraft.command.setlittle.true": "Ти повернувся до режиму Малюка",
-  "littlecraft.command.setlittle.false": "Ти знову подорослішав!"
+  "littlecraft.command.setlittle.false": "Ти знову подорослішав!",
+
+  "item.littlecraft.diaper": "Підгузок"
 }

@@ -2,5 +2,7 @@
   "littlecraft.command.islittle.true": "Du bist im Little-Modus",
   "littlecraft.command.islittle.false": "Du bist im Erwachsenen-Modus",
   "littlecraft.command.setlittle.true": "Du bist in den Little-Modus zurückgekehrt",
-  "littlecraft.command.setlittle.false": "Du bist wieder erwachsen geworden!"
+  "littlecraft.command.setlittle.false": "Du bist wieder erwachsen geworden!",
+
+  "item.littlecraft.diaper": "Windel"
 }

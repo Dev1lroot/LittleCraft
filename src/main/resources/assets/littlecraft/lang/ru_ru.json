@@ -2,5 +2,7 @@
   "littlecraft.command.islittle.true": "Ты сейчас малыш.",
   "littlecraft.command.islittle.false": "Ты взрослый.",
   "littlecraft.command.setlittle.true": "Ты снова стал малышом!",
-  "littlecraft.command.setlittle.false": "Ты снова вырос!"
+  "littlecraft.command.setlittle.false": "Ты снова вырос!",
+
+  "item.littlecraft.diaper": "Подгузник"
 }

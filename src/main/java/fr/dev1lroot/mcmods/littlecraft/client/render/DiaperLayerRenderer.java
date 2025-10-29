@@ -4,9 +4,11 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import fr.dev1lroot.mcmods.littlecraft.DiaperModel;
 import fr.dev1lroot.mcmods.littlecraft.content.item.Diaper;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -14,6 +16,7 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.client.event.RenderLivingEvent;
 import net.neoforged.neoforge.client.event.RenderPlayerEvent;
 
 @OnlyIn(Dist.CLIENT)
@@ -28,12 +31,12 @@ public class DiaperLayerRenderer
     private static DiaperModel<Player> MODEL;
 
     @SubscribeEvent
-    public static void onRenderPlayerPost(RenderPlayerEvent.Post event)
+    public static void onRenderLiving(RenderLivingEvent.Post event)
     {
-        Player player = event.getEntity();
+        LivingEntity entity = event.getEntity();
 
         // Time to check the booty slot. Is baby padded or nah?
-        ItemStack butt = player.getItemBySlot(EquipmentSlot.LEGS);
+        ItemStack butt = entity.getItemBySlot(EquipmentSlot.LEGS);
 
         // No diaper? No render. No bab vibes allowed.
         if (!(butt.getItem() instanceof Diaper.DiaperItem)) return;
@@ -51,23 +54,33 @@ public class DiaperLayerRenderer
         pose.pushPose(); // entering padded dimension
 
         // Sync up with the player's torso, so the diaper hugs snugly.
-        var playerModel = event.getRenderer().getModel();
-        playerModel.body.translateAndRotate(pose);
+        var entityModel = event.getRenderer().getModel();
 
-        // Make sure the diaper doesn't free-spin like a rogue pacifier.
+        // We wouldn't render diaper on a cow, wouldn't we?
+        if(!(entityModel instanceof HumanoidModel<?>)) return;
+
+        //((HumanoidModel<?>) entityModel).body.translateAndRotate(pose); // scam that causes all the problems
+
+        // this is real "following model's body" function
         float pt = event.getPartialTick();
-        float bodyYaw = net.minecraft.util.Mth.lerp(pt, player.yBodyRotO, player.yBodyRot);
+        float bodyYaw = net.minecraft.util.Mth.lerp(pt, entity.yBodyRotO, entity.yBodyRot);
         pose.mulPose(com.mojang.math.Axis.YP.rotationDegrees(-bodyYaw));
 
-        // Harvest walky-walky and waddle animations from the player.
-        float limbSwing = player.walkAnimation.position(pt);
-        float limbSwingAmount = player.walkAnimation.speed();
-        float ageInTicks = player.tickCount + pt;
-        float headYaw = net.minecraft.util.Mth.lerp(pt, player.yHeadRotO, player.getYHeadRot());
-        float headPitch = net.minecraft.util.Mth.lerp(pt, player.xRotO, player.getXRot());
+        // For players only, allow diaper to follow sneaking and other animations
+        if(entity instanceof Player)
+        {
+            Player player = (Player) entity;
 
-        // Teach the diaper how to wiggle with maximum crinkle physics.
-        MODEL.setupAnim(player, limbSwing, limbSwingAmount, ageInTicks, headYaw, headPitch);
+            // Harvest walky-walky and waddle animations from the player.
+            float limbSwing = player.walkAnimation.position(pt);
+            float limbSwingAmount = player.walkAnimation.speed();
+            float ageInTicks = player.tickCount + pt;
+            float headYaw = net.minecraft.util.Mth.lerp(pt, player.yHeadRotO, player.getYHeadRot());
+            float headPitch = net.minecraft.util.Mth.lerp(pt, player.xRotO, player.getXRot());
+
+            // Teach the diaper how to wiggle with maximum crinkle physics.
+            MODEL.setupAnim(player, limbSwing, limbSwingAmount, ageInTicks, headYaw, headPitch);
+        }
 
         // Report diaper condition: fresh, soggy, or absolutely destroyed.
         MODEL.damage = diaper.getDamage(butt);

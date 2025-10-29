@@ -58,9 +58,6 @@ These tags are saved in the player’s data and synchronized between client and 
 - Player nameplates may appear slightly misaligned when scaled.  
   *Contributions and pull requests are welcome.*
 
-- Diapers are currently rendered only on players, since they use a dedicated player renderer.  
-  *This issue is planned to be fixed by the author in a future update.*
-
 ---
 
 ## 🗓 Version Info

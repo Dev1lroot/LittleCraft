@@ -13,6 +13,7 @@ import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.EntityModel;
+import net.minecraft.world.entity.player.Player;
 
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -53,14 +54,14 @@ public class DiaperModel<T extends Entity> extends EntityModel<T> {
         PartDefinition primary = partdefinition.addOrReplaceChild("primary",
                 CubeListBuilder.create()
                         .texOffs(0, 0)
-                        .addBox(-4.0F, -14.0F, -2.0F, 8.0F, 7.0F, 4.0F, new CubeDeformation(0.1F)),
-                PartPose.offset(0.0F, 24.0F, 0.0F));
+                        .addBox(-4.0F, 0.0F, -2.0F, 8.0F, 7.0F, 4.0F, new CubeDeformation(0.1F)),
+                PartPose.offset(0.0F, 0.0F, 0.0F));
 
         PartDefinition overlay = partdefinition.addOrReplaceChild("overlay",
                 CubeListBuilder.create()
                         .texOffs(0, 0)
-                        .addBox(-4.0F, -14.0F, -2.0F, 8.0F, 7.0F, 4.0F, new CubeDeformation(0.2F)),
-                PartPose.offset(0.0F, 24.0F, 0.0F));
+                        .addBox(-4.0F, 0.0F, -2.0F, 8.0F, 7.0F, 4.0F, new CubeDeformation(0.2F)),
+                PartPose.offset(0.0F, 0.0F, 0.0F));
 
         return LayerDefinition.create(meshdefinition, 32, 32);
     }
@@ -85,25 +86,40 @@ public class DiaperModel<T extends Entity> extends EntityModel<T> {
         int alpha = damage; // 0..255
         int rgba = (alpha << 24) | (rgb & 0xFFFFFF);
 
+        this.reset();
+
         overlay.render(poseStack, overlayConsumer, packedLight, packedOverlay, rgba);
+    }
+
+    private void reset()
+    {
+        float pi = (float) Math.PI;
+
+        this.primary.y = 16.0F;
+        this.primary.z = 0.0F;
+        this.overlay.y = 16.0F;
+        this.overlay.z = 0.0F;
+        this.primary.xRot = pi;
+        this.overlay.xRot = pi;
     }
 
     // Fixes vanilla offsetting (upsetting) while crouch or other animations
     public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch)
     {
-        if(entity.isCrouching())
+        float pi = (float) Math.PI;
+
+        if(entity instanceof Player && entity.isCrouching())
         {
-            this.primary.y = 16.0F;
-            this.primary.z = -8.0F;
-            this.overlay.y = 16.0F;
-            this.overlay.z = -8.0F;
+            this.primary.y = 15.0F;
+            this.primary.z = -2.5F;
+            this.overlay.y = 15.0F;
+            this.overlay.z = -2.5F;
+            this.primary.xRot = pi + (pi/6);
+            this.overlay.xRot = pi;
         }
         else
         {
-            this.primary.y = 24.0F;
-            this.primary.z = 0.0F;
-            this.overlay.y = 24.0F;
-            this.overlay.z = 0.0F;
+            this.reset();
         }
     }
 }

@@ -9,7 +9,6 @@ The mod currently adds these main features:
 This feature enhances interactivity and roleplay immersion, especially on ABDL and Agere servers.
 
 These features are especially useful for **ABDL** and **Agere** servers, where size differences and roleplay props matter.  
-They also provide a new perspective on how players move, explore, and interact with the game world.
 
 Future updates will expand customization, add more interactive items, and improve compatibility with community-driven features.
 

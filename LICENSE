@@ -1,16 +1,38 @@
-MIT License
+Modified MIT License (Source Disclosure & Chain Attribution, GPL-Compatible)
 
-Copyright (c) 2025 David Eichendorf
+Copyright (c) 2025 David Eichendorf (a.k.a. Dev1lroot)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+of this software and associated documentation files (the "Software"), to use,
+copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+the Software, and to permit persons to whom the Software is furnished to do so,
+subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+1. Attribution Requirement:
+   Every distributed copy of the Software, in source or binary form, must
+   include a clearly visible list of authors at the beginning of the source
+   code, license or documentation.
+   - The list must preserve the order of derivation:
+     the original author first, followed by authors of subsequent forks and
+     modifications, in the order of descent (i.e., parent above child).
+   - Each entry should include the author's name (and/or pseudonym) and year.
+
+2. Source Availability:
+   Any distribution of the Software, whether modified or not, must include
+   the complete corresponding source code, or provide a freely accessible
+   repository, available without registration of any kind, or a link where
+   the full source code can be freely obtained under the same terms.
+
+3. Inclusion:
+   The above copyright notice, this permission notice, and all attribution
+   information must be included in all copies or substantial portions of
+   the Software.
+
+4. Dual Licensing:
+   Any person receiving a copy of the Software may redistribute it under the
+   terms of this License or, at their option, under the terms of the
+   GNU General Public License version 3 (GPLv3) as published by the
+   Free Software Foundation.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,

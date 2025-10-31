@@ -81,4 +81,4 @@ These tags are saved in the player’s data and synchronized between client and 
 ## 👤 Author
 
 **David von Eichendorf** (`dev1lroot` / `Davy`)  
-License: **MIT**
+License: **MIT-SCAG or GPL-3.0**

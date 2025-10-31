@@ -4,5 +4,10 @@
   "littlecraft.command.setlittle.true": "You’ve regressed into the little mode",
   "littlecraft.command.setlittle.false": "You’ve grown up again!",
 
-  "item.littlecraft.diaper": "Diaper"
+  "item.littlecraft.diaper": "Diaper",
+
+  "littlecraft.notification.item.diaper.change.error.armor_equipped": "You can not equip a diaper instead of someone's armor!",
+  "littlecraft.notification.item.diaper.change.error.diaper_used": "You can not equip a used diaper on!",
+  "littlecraft.notification.item.diaper.change.success": "You've changed the diaper!",
+  "littlecraft.notification.item.diaper.change.changed_by_other": "You've beed changed!"
 }

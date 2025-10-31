@@ -1,6 +1,6 @@
 package fr.dev1lroot.mcmods.littlecraft.client;
 
-import fr.dev1lroot.mcmods.littlecraft.DiaperModel;
+import fr.dev1lroot.mcmods.littlecraft.model.DiaperModel;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;

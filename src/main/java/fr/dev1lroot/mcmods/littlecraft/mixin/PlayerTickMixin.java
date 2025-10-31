@@ -53,7 +53,13 @@ public abstract class PlayerTickMixin
         ItemStack diaper = player.getItemBySlot(EquipmentSlot.LEGS);
         if (diaper.getItem() instanceof Diaper.DiaperItem)
         {
+            // A Minecraft day lasts 24000 ticks
+            // Diaper must be changed at least two times so we have to split 24000 by (diaper_durability * 2)
+            // Diaper durability is now 255 (for alpha channel of the wetness texture)
+            // 24000 / (255 * 2) = 24000 / 510 ≈ 47.05
+            // but, we must also include the time player spent in used diaper so 40 is good
             // Every 40 ticks (2 seconds) the diaper takes one "usage bonk".
+            // TODO: Deal damage based on diaper's absorbency NBT tag
             if (player.tickCount % 40 == 0)
             {
                 // But don’t fully destroy it - no exploding diapers, please.

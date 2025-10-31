@@ -1,7 +1,7 @@
 package fr.dev1lroot.mcmods.littlecraft.client.render;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import fr.dev1lroot.mcmods.littlecraft.DiaperModel;
+import fr.dev1lroot.mcmods.littlecraft.model.DiaperModel;
 import fr.dev1lroot.mcmods.littlecraft.content.item.Diaper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
@@ -17,7 +17,6 @@ import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.RenderLivingEvent;
-import net.neoforged.neoforge.client.event.RenderPlayerEvent;
 
 @OnlyIn(Dist.CLIENT)
 @EventBusSubscriber(value = Dist.CLIENT)
@@ -42,10 +41,7 @@ public class DiaperLayerRenderer
         if (!(butt.getItem() instanceof Diaper.DiaperItem)) return;
 
         // Summon the sacred diaper model if it doesn't exist yet.
-        if (MODEL == null) {
-            MODEL = new DiaperModel<>(Minecraft.getInstance()
-                    .getEntityModels().bakeLayer(DiaperModel.LAYER_LOCATION));
-        }
+        if (MODEL == null) MODEL = new DiaperModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(DiaperModel.LAYER_LOCATION));
 
         // Grab the actual diaper item. Handle with care, it's crinkly.
         Item diaper = butt.getItem();
@@ -64,12 +60,13 @@ public class DiaperLayerRenderer
         // this is real "following model's body" function
         float pt = event.getPartialTick();
         float bodyYaw = net.minecraft.util.Mth.lerp(pt, entity.yBodyRotO, entity.yBodyRot);
-        pose.mulPose(com.mojang.math.Axis.YP.rotationDegrees(-bodyYaw));
 
         // For players only, allow diaper to follow sneaking and other animations
         if(entity instanceof Player)
         {
             Player player = (Player) entity;
+
+            if(!player.isSleeping()) pose.mulPose(com.mojang.math.Axis.YP.rotationDegrees(-bodyYaw));
 
             // Harvest walky-walky and waddle animations from the player.
             float limbSwing = player.walkAnimation.position(pt);
@@ -80,6 +77,10 @@ public class DiaperLayerRenderer
 
             // Teach the diaper how to wiggle with maximum crinkle physics.
             MODEL.setupAnim(player, limbSwing, limbSwingAmount, ageInTicks, headYaw, headPitch);
+        }
+        else
+        {
+            pose.mulPose(com.mojang.math.Axis.YP.rotationDegrees(-bodyYaw));
         }
 
         // Report diaper condition: fresh, soggy, or absolutely destroyed.

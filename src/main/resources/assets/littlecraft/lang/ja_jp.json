@@ -4,5 +4,10 @@
   "littlecraft.command.setlittle.true": "あなたはリトルモードに退行しました",
   "littlecraft.command.setlittle.false": "あなたはまた大人に戻りました！",
 
-  "item.littlecraft.diaper": "おむつ"
+  "item.littlecraft.diaper": "おむつ",
+
+  "littlecraft.notification.item.diaper.change.error.armor_equipped": "誰かの鎧の代わりにおむつを装備することはできません！",
+  "littlecraft.notification.item.diaper.change.error.diaper_used": "使用済みのおむつを装備することはできません！",
+  "littlecraft.notification.item.diaper.change.success": "おむつを替えました！",
+  "littlecraft.notification.item.diaper.change.changed_by_other": "おむつを替えてもらいました！"
 }

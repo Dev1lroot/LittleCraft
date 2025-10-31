@@ -4,5 +4,10 @@
   "littlecraft.command.setlittle.true": "Tu es redevenu tout petit",
   "littlecraft.command.setlittle.false": "Tu as grandi à nouveau!",
 
-  "item.littlecraft.diaper": "Couche"
+  "item.littlecraft.diaper": "Couche",
+
+  "littlecraft.notification.item.diaper.change.error.armor_equipped": "Tu ne peux pas mettre une couche à la place d'une armure!",
+  "littlecraft.notification.item.diaper.change.error.diaper_used": "Tu ne peux pas mettre une couche déjà utilisée!",
+  "littlecraft.notification.item.diaper.change.success": "Tu as changé la couche!",
+  "littlecraft.notification.item.diaper.change.changed_by_other": "On t’a changé!"
 }

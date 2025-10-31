@@ -4,5 +4,10 @@
   "littlecraft.command.setlittle.true": "Has regresado al modo Pequeño",
   "littlecraft.command.setlittle.false": "¡Has crecido de nuevo!",
 
-  "item.littlecraft.diaper": "Pañal"
+  "item.littlecraft.diaper": "Pañal",
+
+  "littlecraft.notification.item.diaper.change.error.armor_equipped": "¡No puedes ponerte un pañal en lugar de una armadura!",
+  "littlecraft.notification.item.diaper.change.error.diaper_used": "¡No puedes ponerte un pañal usado!",
+  "littlecraft.notification.item.diaper.change.success": "¡Has cambiado el pañal!",
+  "littlecraft.notification.item.diaper.change.changed_by_other": "¡Te han cambiado el pañal!"
 }

@@ -4,5 +4,10 @@
   "littlecraft.command.setlittle.true": "Ти повернувся до режиму Малюка",
   "littlecraft.command.setlittle.false": "Ти знову подорослішав!",
 
-  "item.littlecraft.diaper": "Підгузок"
+  "item.littlecraft.diaper": "Підгузок",
+
+  "littlecraft.notification.item.diaper.change.error.armor_equipped": "Не можна вдягти підгузок замість обладунків!",
+  "littlecraft.notification.item.diaper.change.error.diaper_used": "Не можна вдягти вже використаний підгузок!",
+  "littlecraft.notification.item.diaper.change.success": "Ти змінив підгузок!",
+  "littlecraft.notification.item.diaper.change.changed_by_other": "Тебе переодягнули!"
 }

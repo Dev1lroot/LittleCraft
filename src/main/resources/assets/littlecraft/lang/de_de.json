@@ -4,5 +4,10 @@
   "littlecraft.command.setlittle.true": "Du bist in den Little-Modus zurückgekehrt",
   "littlecraft.command.setlittle.false": "Du bist wieder erwachsen geworden!",
 
-  "item.littlecraft.diaper": "Windel"
+  "item.littlecraft.diaper": "Windel",
+
+  "littlecraft.notification.item.diaper.change.error.armor_equipped": "Du kannst keine Windel anstelle einer Rüstung anlegen!",
+  "littlecraft.notification.item.diaper.change.error.diaper_used": "Du kannst keine benutzte Windel anlegen!",
+  "littlecraft.notification.item.diaper.change.success": "Du hast die Windel gewechselt!",
+  "littlecraft.notification.item.diaper.change.changed_by_other": "Du wurdest gewickelt!"
 }

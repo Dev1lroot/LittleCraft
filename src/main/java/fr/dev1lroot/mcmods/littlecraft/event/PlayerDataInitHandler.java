@@ -1,4 +1,4 @@
-package fr.dev1lroot.mcmods.littlecraft;
+package fr.dev1lroot.mcmods.littlecraft.event;
 
 import fr.dev1lroot.mcmods.littlecraft.common.LittleData;
 import net.minecraft.network.syncher.SynchedEntityData;

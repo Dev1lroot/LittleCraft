@@ -2,5 +2,10 @@
   "parent": "minecraft:item/generated",
   "textures": {
     "layer0": "littlecraft:item/diaper"
-  }
+  },
+  "overrides": [
+    { "predicate": { "damage": 0.0 }, "model": "littlecraft:item/diaper" },
+    { "predicate": { "damage": 0.5 }, "model": "littlecraft:item/diaper_wet" },
+    { "predicate": { "damage": 0.9 }, "model": "littlecraft:item/diaper_full" }
+  ]
 }

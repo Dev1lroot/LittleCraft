@@ -1,17 +1,23 @@
 package fr.dev1lroot.mcmods.littlecraft.client.render;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.math.Axis;
 import fr.dev1lroot.mcmods.littlecraft.model.DiaperModel;
 import fr.dev1lroot.mcmods.littlecraft.content.item.Diaper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -77,6 +83,7 @@ public class DiaperLayerRenderer
 
             // Teach the diaper how to wiggle with maximum crinkle physics.
             MODEL.setupAnim(player, limbSwing, limbSwingAmount, ageInTicks, headYaw, headPitch);
+            MODEL.setupRotations((AbstractClientPlayer) player, pose, ageInTicks, headYaw, headPitch);
         }
         else
         {

@@ -1,9 +1,12 @@
 package fr.dev1lroot.mcmods.littlecraft.model;
 
+import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.client.model.geom.builders.PartDefinition;
@@ -15,12 +18,16 @@ import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.EntityModel;
+import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.player.Player;
 
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.world.level.block.BedBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.Vec3;
+
+import java.util.Objects;
 
 import static fr.dev1lroot.mcmods.littlecraft.LittleMod.MODID;
 import static net.minecraft.core.Direction.EAST;
@@ -126,47 +133,102 @@ public class DiaperModel<T extends Entity> extends EntityModel<T>
             this.primary.z    = this.overlay.z    = -2.5F;
             this.primary.xRot = this.overlay.xRot = pi + (pi/6);
         }
-        else if (entity instanceof Player && ((Player) entity).isSleeping())
+        else if(entity.isVisuallySwimming() || entity.isVisuallyCrawling())
+        {
+            this.primary.xRot = this.overlay.xRot = pi;
+            this.primary.z    = this.overlay.z    = -10F;
+            //this.primary.xRot = this.overlay.xRot = (float) Math.toRadians(entity.getXRot());
+        }
+        else if (entity.hasPose(Pose.SLEEPING))
         {
             this.reset();
 
+            if(!(entity instanceof Player)) return;
+
             Player player = ((Player) entity);
+            Direction dir = player.getBedOrientation();
 
-            // This is how's rendering hell is looks like:
-            BlockPos bedPos = player.getSleepingPos().orElse(null);
-            if (bedPos != null)
+            if(dir == NORTH)
             {
-                BlockState bedState = player.level().getBlockState(bedPos);
-                if (bedState.getBlock() instanceof BedBlock)
-                {
-                    Direction dir = bedState.getValue(BedBlock.FACING);
-
-                    if(dir == NORTH)
-                    {
-                        this.primary.yRot = this.overlay.yRot = -0.0F;
-                        this.primary.z    = this.overlay.z    = 10.0F;
-                    }
-                    if(dir == SOUTH)
-                    {
-                        this.primary.yRot = this.overlay.yRot = -(float)Math.PI;
-                        this.primary.z    = this.overlay.z    = -10.0F;
-                    }
-                    if(dir == WEST)
-                    {
-                        this.primary.yRot = this.overlay.yRot = -(float)(-Math.PI / 2.0F);
-                        this.primary.x    = this.overlay.x    = 10.0F;
-                    }
-                    if(dir == EAST)
-                    {
-                        this.primary.yRot = this.overlay.yRot = -(float)(Math.PI / 2.0F);
-                        this.primary.x    = this.overlay.x    = -10.0F;
-                    }
-                }
+                this.primary.yRot = this.overlay.yRot = -0.0F;
+                this.primary.z    = this.overlay.z    = 10.0F;
+            }
+            if(dir == SOUTH)
+            {
+                this.primary.yRot = this.overlay.yRot = -(float)Math.PI;
+                this.primary.z    = this.overlay.z    = -10.0F;
+            }
+            if(dir == WEST)
+            {
+                this.primary.yRot = this.overlay.yRot = -(float)(-Math.PI / 2.0F);
+                this.primary.x    = this.overlay.x    = 10.0F;
+            }
+            if(dir == EAST)
+            {
+                this.primary.yRot = this.overlay.yRot = -(float)(Math.PI / 2.0F);
+                this.primary.x    = this.overlay.x    = -10.0F;
             }
 
             this.primary.y    = this.overlay.y    = 0.0F;
             this.primary.xRot = this.overlay.xRot = pi - (pi/2);
         }
     }
+    public void setupRotations(AbstractClientPlayer player, PoseStack poseStack, float ageInTicks, float yaw, float partialTicks)
+    {
+        // Насколько игрок сейчас "в режиме плавания" (0..1)
+        float swimAmount = player.getSwimAmount(partialTicks);
+
+        // Угол наклона взгляда (pitch) с интерполяцией
+        float viewPitch = player.getViewXRot(partialTicks);
+
+        // --- Полет на элитрах ---
+        if (player.isFallFlying())
+        {
+            float flightTicks = (float) player.getFallFlyingTicks() + partialTicks;
+            float flightProgress = Mth.clamp(flightTicks * flightTicks / 100.0F, 0.0F, 1.0F);
+
+            // Если не выполняется автоспиновая атака
+            if (!player.isAutoSpinAttack())
+            {
+                // Наклон тела игрока вперед
+                poseStack.mulPose(Axis.XP.rotationDegrees(-(flightProgress * (-90.0F - viewPitch))));
+            }
+
+            // Коррекция поворота тела по направлению фактического движения
+            Vec3 lookVec = player.getViewVector(partialTicks);
+            Vec3 motionVec = player.getDeltaMovementLerped(partialTicks);
+
+            double motionLen = motionVec.horizontalDistanceSqr();
+            double lookLen = lookVec.horizontalDistanceSqr();
+
+            if (motionLen > 0.0 && lookLen > 0.0)
+            {
+                double dot = (motionVec.x * lookVec.x + motionVec.z * lookVec.z) / Math.sqrt(motionLen * lookLen);
+                double cross = motionVec.x * lookVec.z - motionVec.z * lookVec.x;
+
+                // Поворот вокруг оси Y (тело "поворачивается" по траектории)
+                poseStack.mulPose(Axis.YP.rotation((float)(Math.signum(cross) * Math.acos(dot))));
+            }
+        }
+
+        // --- Плавание ---
+        else if (swimAmount > 0.0F)
+        {
+            // Базовый угол тела
+            boolean inSwimmableFluid = player.isInWater() || player.isInFluidType((fluidType, height) -> player.canSwimInFluidType(fluidType));
+            float baseAngle = inSwimmableFluid ? -90.0F - player.getXRot() : -90.0F;
+
+            // Плавный переход от стоячего положения к плаванию
+            float bodyPitch = Mth.lerp(swimAmount, 0.0F, baseAngle);
+            poseStack.mulPose(Axis.XP.rotationDegrees(-bodyPitch));
+
+            // Сдвиг модели вперед и вниз, чтобы "лежать" на воде
+            if (player.isVisuallySwimming())
+            {
+                poseStack.translate(0.0F, -1.0F, 0.3F);
+            }
+        }
+    }
+
 }
 

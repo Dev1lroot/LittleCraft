@@ -1,5 +1,9 @@
 # LittleCraft
 
+![Minecraft Version](https://img.shields.io/badge/Minecraft-1.21.1-green.svg)
+![Loader](https://img.shields.io/badge/Loader-NeoForge-orange.svg)
+[![License: Custom](https://img.shields.io/badge/License-Custom-blue.svg)](LICENSE)
+
 **LittleCraft** is a lightweight NeoForge mod for **Minecraft 1.21.1**, created to bring **Agere** and **ABDL** elements into roleplay gameplay.
 
 The mod currently adds these main features:

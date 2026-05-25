@@ -59,9 +59,10 @@ public class DiaperModel extends EntityModel<HumanoidRenderState>
 
         if (state.isCrouching)
         {
-            // Body tilts forward ~25° when crouching; lean the diaper to follow.
-            this.primary.y = this.overlay.y = 10.0F;
-            this.primary.xRot = this.overlay.xRot = -0.4F;
+            // body.xRot = +0.5F when crouching (lean forward); diaper matches.
+            this.primary.y = this.overlay.y = 9.0F; // Moving it down
+            this.primary.z = this.overlay.z = 3.0F; // Moving it back
+            this.primary.xRot = this.overlay.xRot = 0.5F; // Rotating to the pose of the body element
         }
         // Swimming and sleeping rotations are handled by the entity renderer's setupRotations;
         // the diaper inherits those poseStack transforms automatically as a RenderLayer.
@@ -69,9 +70,8 @@ public class DiaperModel extends EntityModel<HumanoidRenderState>
 
     private void reset()
     {
-        // y=9 places the box at model y=9–16 (the hip joint of a standard player model).
-        // xRot=0 keeps faces outward; the scale(-1,-1,1) entity flip is applied by the renderer.
-        this.primary.y = this.overlay.y = 9.0F;
+        // y=8 places the box at model y=8–16 (the hip joint of a standard player model).
+        this.primary.y = this.overlay.y = 8.0F;
         this.primary.z = this.overlay.z = 0.0F;
         this.primary.x = this.overlay.x = 0.0F;
         this.primary.xRot = this.overlay.xRot = 0.0F;

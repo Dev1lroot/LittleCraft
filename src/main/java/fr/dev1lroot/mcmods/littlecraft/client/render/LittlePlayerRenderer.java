@@ -3,10 +3,10 @@ package fr.dev1lroot.mcmods.littlecraft.client.render;
 import com.mojang.blaze3d.vertex.PoseStack;
 import fr.dev1lroot.mcmods.littlecraft.common.LittleData;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.player.PlayerModel;
 import net.minecraft.client.renderer.entity.state.AvatarRenderState;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -28,7 +28,7 @@ public class LittlePlayerRenderer
 
         if (LittleData.get(player))
         {
-            renderLittle(event);
+            renderLittle(event, renderState);
         }
         else
         {
@@ -42,30 +42,24 @@ public class LittlePlayerRenderer
         event.getPoseStack().popPose();
     }
 
-    private static void renderLittle(RenderPlayerEvent.Pre<?> event)
+    // head top in world-space = (1.5 + 24/16) * 0.5 = 1.5 blocks; place tag just above that
+    private static final float LITTLE_NAMETAG_Y = 2.8F;
+
+    private static void renderLittle(RenderPlayerEvent.Pre<?> event, AvatarRenderState state)
     {
         PoseStack poseStack = event.getPoseStack();
-        PlayerModel model = event.getRenderer().getModel();
 
         poseStack.pushPose();
-
         poseStack.scale(0.5F, 0.5F, 0.5F);
 
-        model.head.xScale = 2.0F;
-        model.head.yScale = 2.0F;
-        model.head.zScale = 2.0F;
+        if (state.nameTagAttachment != null)
+        {
+            state.nameTagAttachment = new Vec3(state.nameTagAttachment.x, LITTLE_NAMETAG_Y, state.nameTagAttachment.z);
+        }
     }
 
     private static void renderAdult(RenderPlayerEvent.Pre<?> event)
     {
-        PoseStack poseStack = event.getPoseStack();
-        PlayerModel model = event.getRenderer().getModel();
-
-        poseStack.pushPose();
-
-        poseStack.scale(1F, 1F, 1F);
-        model.head.xScale = 1.0F;
-        model.head.yScale = 1.0F;
-        model.head.zScale = 1.0F;
+        event.getPoseStack().pushPose();
     }
 }

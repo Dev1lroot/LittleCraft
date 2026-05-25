@@ -11,6 +11,7 @@
     "PlayerPersistentLittleMixin"
   ],
   "client": [
+    "client.LittleHeadScaleMixin"
   ],
   "injectors": {
     "defaultRequire": 1

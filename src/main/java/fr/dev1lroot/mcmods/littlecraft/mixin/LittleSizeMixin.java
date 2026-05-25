@@ -44,16 +44,24 @@ public abstract class LittleSizeMixin
         {
             if (LittleData.get(player))
             {
-                float width = 0.35F;
-                float height = 0.9F;
+                int age = LittleData.getAge(player);
+                float t = LittleData.getAgeBlend(age);
 
-                // If the little one is crouching, make them even tinier
+                // Age >= 18 blends fully to adult — no hitbox override needed
+                if (t >= 1.0F) return;
+
+                float width = 0.35F + (0.6F - 0.35F) * t;
+                float height;
+
                 if (player.isCrouching())
                 {
-                    height = 0.7F;
+                    height = 0.7F + (1.5F - 0.7F) * t;
+                }
+                else
+                {
+                    height = 0.9F + (1.8F - 0.9F) * t;
                 }
 
-                // Apply new server-side hitbox dimensions
                 cir.setReturnValue(EntityDimensions.scalable(width, height));
             }
         }

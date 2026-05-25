@@ -8,6 +8,7 @@
 
 The mod currently adds these main features:
 - **Little Mode** - players can shrink into a smaller "Little" form with reduced model size, hitbox, and camera height. Switching is done via commands.
+- **Age Scalling** - the player model, hitboxes and camera position scales to the age of the player.
 - **Diaper** - can be worn for immersive roleplay. While equipped, it gradually **loses durability**, simulating **wetness or fullness** equal to the durability lost. Both the **player model** and the **item in inventory** visually update to reflect the diaper’s current state.
 - **Diaper Change** - another player can **change your diaper** by holding a fresh Diaper item in hand and **right-clicking** on you.  
 This feature enhances interactivity and roleplay immersion, especially on ABDL and Agere servers.
@@ -25,6 +26,8 @@ Future updates will expand customization, add more interactive items, and improv
 | `/islittle` | Shows whether you are currently in Little Mode. |
 | `/little true` | Enables Little Mode. |
 | `/little false` | Disables Little Mode. |
+| `/age {number}` | Sets your age to exact number. |
+| `/age {player} {number}` | Sets player's age to exact number. |
 
 > Currently, switching modes is only available via commands.  
 > Future versions will introduce optional items to toggle size and enhance immersion.
@@ -58,13 +61,6 @@ These tags are saved in the player’s data and synchronized between client and 
 
 ---
 
-## 🧱 Known Issues
-
-- Player nameplates may appear slightly misaligned when scaled.  
-  *Contributions and pull requests are welcome.*
-
----
-
 ## 🗓 Version Info
 
 - **Minecraft:** 1.21.1 / 26.1.2
@@ -72,15 +68,14 @@ These tags are saved in the player’s data and synchronized between client and 
 - **No backports** to older versions are planned.
 - **Since 2.0:** Added a **Diaper** item for immersive ABDL roleplay.
 - **Since 2.0.2:** Added **Diaper Change** mechanic - another player can change your diaper by right-clicking with a fresh one.
+- **Since 2.0.3:** Player model gradual scaling based on their little age
 
 ---
 
 ## 🔮 Planned Features
 
-- Gradual scaling based on `LittleAge`.
 - Optional items to toggle or influence Little Mode.
 - Caregiver-style interaction mechanics.
-- Improved rendering and nameplate alignment.
 
 ---
 

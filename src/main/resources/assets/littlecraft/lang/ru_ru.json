@@ -4,6 +4,10 @@
   "littlecraft.command.setlittle.true": "Ты снова стал малышом!",
   "littlecraft.command.setlittle.false": "Ты снова вырос!",
 
+  "littlecraft.command.setage.self": "Твой маленький возраст теперь %s",
+  "littlecraft.command.setage.other": "Маленький возраст %s теперь %s",
+  "littlecraft.command.setage.notified": "Твой маленький возраст установлен на %s",
+
   "item.littlecraft.diaper": "Подгузник",
 
   "littlecraft.notification.item.diaper.change.error.armor_equipped": "Нельзя надеть подгузник вместо брони!",

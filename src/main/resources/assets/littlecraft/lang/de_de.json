@@ -4,6 +4,10 @@
   "littlecraft.command.setlittle.true": "Du bist in den Little-Modus zurückgekehrt",
   "littlecraft.command.setlittle.false": "Du bist wieder erwachsen geworden!",
 
+  "littlecraft.command.setage.self": "Dein Little-Alter ist jetzt %s",
+  "littlecraft.command.setage.other": "Das Little-Alter von %s ist jetzt %s",
+  "littlecraft.command.setage.notified": "Dein Little-Alter wurde auf %s gesetzt",
+
   "item.littlecraft.diaper": "Windel",
 
   "littlecraft.notification.item.diaper.change.error.armor_equipped": "Du kannst keine Windel anstelle einer Rüstung anlegen!",

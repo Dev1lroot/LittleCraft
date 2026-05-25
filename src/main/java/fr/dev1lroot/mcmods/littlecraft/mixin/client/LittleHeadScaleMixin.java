@@ -26,12 +26,13 @@ public class LittleHeadScaleMixin
 
         if (LittleData.get(player))
         {
+            int age = LittleData.getAge(player);
+            float headScale = LittleData.computeHeadScale(age);
+
             PlayerModel model = (PlayerModel) (Object) this;
-            
-            // Correct head side, we scale the player 2 times smaller but keeping their head intact so making it 2 times bigger;
-            model.head.xScale = 2.0F;
-            model.head.yScale = 2.0F;
-            model.head.zScale = 2.0F;
+            model.head.xScale = headScale;
+            model.head.yScale = headScale;
+            model.head.zScale = headScale;
         }
     }
 }

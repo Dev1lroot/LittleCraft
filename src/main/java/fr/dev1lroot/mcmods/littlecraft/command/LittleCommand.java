@@ -1,6 +1,9 @@
 package fr.dev1lroot.mcmods.littlecraft.command;
 
+import com.mojang.brigadier.arguments.IntegerArgumentType;
 import fr.dev1lroot.mcmods.littlecraft.common.LittleData;
+import net.minecraft.commands.arguments.EntityArgument;
+import net.minecraft.server.permissions.Permissions;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
 import net.minecraft.commands.Commands;
@@ -85,6 +88,41 @@ public class LittleCommand
                             );
                             return 1;
                         }))
+        );
+
+        // Set little age — self: /age <number>  other: /age <player> <number>
+        event.getDispatcher().register(
+                Commands.literal("age")
+                        // /age <number>
+                        .then(Commands.argument("age", IntegerArgumentType.integer(0))
+                                .executes(ctx -> {
+                                    ServerPlayer player = ctx.getSource().getPlayerOrException();
+                                    int age = IntegerArgumentType.getInteger(ctx, "age");
+                                    LittleData.setAge(player, age);
+                                    ctx.getSource().sendSuccess(
+                                            () -> Component.translatable("littlecraft.command.setage.self", age), false
+                                    );
+                                    return 1;
+                                })
+                        )
+                        // /age <player> <number>
+                        .then(Commands.argument("player", EntityArgument.player())
+                                .requires(src -> src.permissions().hasPermission(Permissions.COMMANDS_GAMEMASTER))
+                                .then(Commands.argument("age", IntegerArgumentType.integer(0))
+                                        .executes(ctx -> {
+                                            ServerPlayer target = EntityArgument.getPlayer(ctx, "player");
+                                            int age = IntegerArgumentType.getInteger(ctx, "age");
+                                            LittleData.setAge(target, age);
+                                            ctx.getSource().sendSuccess(
+                                                    () -> Component.translatable("littlecraft.command.setage.other", target.getDisplayName(), age), false
+                                            );
+                                            target.sendSystemMessage(
+                                                    Component.translatable("littlecraft.command.setage.notified", age)
+                                            );
+                                            return 1;
+                                        })
+                                )
+                        )
         );
     }
 }

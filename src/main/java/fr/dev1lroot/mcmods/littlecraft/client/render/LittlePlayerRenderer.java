@@ -28,11 +28,13 @@ public class LittlePlayerRenderer
 
         if (LittleData.get(player))
         {
-            renderLittle(event, renderState);
+            int age = LittleData.getAge(player);
+            float bodyScale = LittleData.computeBodyScale(age);
+            renderScaled(event, renderState, bodyScale);
         }
         else
         {
-            renderAdult(event);
+            event.getPoseStack().pushPose();
         }
     }
 
@@ -42,24 +44,20 @@ public class LittlePlayerRenderer
         event.getPoseStack().popPose();
     }
 
-    // head top in world-space = (1.5 + 24/16) * 0.5 = 1.5 blocks; place tag just above that
     private static final float LITTLE_NAMETAG_Y = 2.8F;
+    private static final float ADULT_NAMETAG_Y = 2.0F;
 
-    private static void renderLittle(RenderPlayerEvent.Pre<?> event, AvatarRenderState state)
+    private static void renderScaled(RenderPlayerEvent.Pre<?> event, AvatarRenderState state, float bodyScale)
     {
         PoseStack poseStack = event.getPoseStack();
-
         poseStack.pushPose();
-        poseStack.scale(0.5F, 0.5F, 0.5F);
+        poseStack.scale(bodyScale, bodyScale, bodyScale);
 
-        if (state.nameTagAttachment != null)
+        if (bodyScale < 1.0F && state.nameTagAttachment != null)
         {
-            state.nameTagAttachment = new Vec3(state.nameTagAttachment.x, LITTLE_NAMETAG_Y, state.nameTagAttachment.z);
+            float t = (bodyScale - 0.5F) / 0.5F; // 0 at little scale, 1 at adult scale
+            float nametagY = LITTLE_NAMETAG_Y + (ADULT_NAMETAG_Y - LITTLE_NAMETAG_Y) * t;
+            state.nameTagAttachment = new Vec3(state.nameTagAttachment.x, nametagY, state.nameTagAttachment.z);
         }
-    }
-
-    private static void renderAdult(RenderPlayerEvent.Pre<?> event)
-    {
-        event.getPoseStack().pushPose();
     }
 }

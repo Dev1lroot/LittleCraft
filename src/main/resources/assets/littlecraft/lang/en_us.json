@@ -4,6 +4,10 @@
   "littlecraft.command.setlittle.true": "You’ve regressed into the little mode",
   "littlecraft.command.setlittle.false": "You’ve grown up again!",
 
+  "littlecraft.command.setage.self": "Your little age is now %s",
+  "littlecraft.command.setage.other": "%s's little age is now %s",
+  "littlecraft.command.setage.notified": "Your little age has been set to %s",
+
   "item.littlecraft.diaper": "Diaper",
 
   "littlecraft.notification.item.diaper.change.error.armor_equipped": "You can not equip a diaper instead of someone's armor!",

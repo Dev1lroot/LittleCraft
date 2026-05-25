@@ -60,4 +60,24 @@ public class LittleData
     {
         return player.getData(LITTLEAGE.get());
     }
+
+    // Returns [0,1] blend factor: 0 = full little scale, 1 = full adult scale
+    public static float getAgeBlend(int age)
+    {
+        if (age <= 6) return 0.0F;
+        if (age >= 18) return 1.0F;
+        return (age - 6) / 12.0F;
+    }
+
+    // Body/model scale for a little player of the given age
+    public static float computeBodyScale(int age)
+    {
+        return 0.5F + 0.5F * getAgeBlend(age);
+    }
+
+    // Head scale (relative to body) to keep head visually proportional
+    public static float computeHeadScale(int age)
+    {
+        return 2.0F - getAgeBlend(age);
+    }
 }

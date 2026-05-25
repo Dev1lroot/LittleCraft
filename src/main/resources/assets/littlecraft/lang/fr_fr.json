@@ -4,6 +4,10 @@
   "littlecraft.command.setlittle.true": "Tu es redevenu tout petit",
   "littlecraft.command.setlittle.false": "Tu as grandi à nouveau!",
 
+  "littlecraft.command.setage.self": "Ton âge petit est maintenant %s",
+  "littlecraft.command.setage.other": "L'âge petit de %s est maintenant %s",
+  "littlecraft.command.setage.notified": "Ton âge petit a été défini à %s",
+
   "item.littlecraft.diaper": "Couche",
 
   "littlecraft.notification.item.diaper.change.error.armor_equipped": "Tu ne peux pas mettre une couche à la place d'une armure!",

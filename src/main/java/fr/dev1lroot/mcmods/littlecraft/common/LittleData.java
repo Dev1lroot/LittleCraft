@@ -1,89 +1,63 @@
 package fr.dev1lroot.mcmods.littlecraft.common;
 
-import net.minecraft.network.syncher.EntityDataAccessor;
-import net.minecraft.network.syncher.EntityDataSerializers;
-import net.minecraft.network.syncher.SynchedEntityData;
+import com.mojang.serialization.Codec;
+import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
-import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.neoforge.attachment.AttachmentType;
+import net.neoforged.neoforge.registries.DeferredHolder;
+import net.neoforged.neoforge.registries.DeferredRegister;
+import net.neoforged.neoforge.registries.NeoForgeRegistries;
 
-/*
-    LittleData
-    ------------
-    This is the *core class* that manages all LittleCraft-specific
-    player attributes and data access. ♡
+import static fr.dev1lroot.mcmods.littlecraft.LittleMod.MODID;
 
-    Role:
-    - Registers synchronized data parameters (EntityDataAccessor)
-      for Little Mode and Little Age.
-    - Provides unified getters and setters that handle both
-      synced entity data (for runtime) and persistent NBT
-      (for saving and reloading).
-    - Acts as the single source of truth for a player’s "littleness".
-
-    Registered parameters:
-      • LITTLE — boolean: whether the player is currently in Little Mode.
-      • LITTLEAGE — int: current "Little Age" value (placeholder for future mechanics).
-
-    Behavior summary:
-    - During common setup, we define and register our custom synced fields.
-    - These fields are automatically replicated between client and server.
-    - When modified, they are also written to persistent player NBT,
-      ensuring that Little Mode survives restarts, respawns, and saves.
-
-    In short:
-    This class keeps every little heart consistent between sessions,
-    dimensions, and even crashes. It’s the backbone of the whole system.
-*/
-
-@Mod("littlecraft")
+@Mod(MODID)
 public class LittleData
 {
-    // Synced attributes used by all players
-    public static EntityDataAccessor<Boolean> LITTLE;
-    public static EntityDataAccessor<Integer> LITTLEAGE;
+    private static final DeferredRegister<AttachmentType<?>> ATTACHMENT_TYPES =
+        DeferredRegister.create(NeoForgeRegistries.Keys.ATTACHMENT_TYPES, MODID);
+
+    @SuppressWarnings("unchecked")
+    public static final DeferredHolder<AttachmentType<?>, AttachmentType<Boolean>> LITTLE =
+        (DeferredHolder<AttachmentType<?>, AttachmentType<Boolean>>) ATTACHMENT_TYPES.register("little", () ->
+            AttachmentType.builder(() -> false)
+                .serialize(Codec.BOOL.optionalFieldOf("value", false))
+                .copyOnDeath()
+                .sync(ByteBufCodecs.BOOL)
+                .build());
+
+    @SuppressWarnings("unchecked")
+    public static final DeferredHolder<AttachmentType<?>, AttachmentType<Integer>> LITTLEAGE =
+        (DeferredHolder<AttachmentType<?>, AttachmentType<Integer>>) ATTACHMENT_TYPES.register("little_age", () ->
+            AttachmentType.builder(() -> 0)
+                .serialize(Codec.INT.optionalFieldOf("value", 0))
+                .copyOnDeath()
+                .sync(ByteBufCodecs.VAR_INT)
+                .build());
 
     public LittleData(IEventBus modBus)
     {
-        // Register setup callback
-        modBus.addListener(this::onCommonSetup);
+        ATTACHMENT_TYPES.register(modBus);
     }
 
-    // Define the synchronized data IDs used by players
-    private void onCommonSetup(final FMLCommonSetupEvent event)
-    {
-        event.enqueueWork(() -> {
-            LITTLE = SynchedEntityData.defineId(Player.class, EntityDataSerializers.BOOLEAN);
-            LITTLEAGE = SynchedEntityData.defineId(Player.class, EntityDataSerializers.INT);
-        });
-    }
-
-    // Set whether the player is in Little Mode
     public static void set(Player player, boolean value)
     {
-        player.getEntityData().set(LITTLE, value);
-        player.getPersistentData().putBoolean("IsLittle", value);
+        player.setData(LITTLE.get(), value);
     }
 
-    // Get the current Little Mode state
     public static boolean get(Player player)
     {
-        if (player.getPersistentData().getBoolean("IsLittle")) return true;
-        if (player.getEntityData().get(LITTLE)) return true;
-        return false;
+        return player.getData(LITTLE.get());
     }
 
-    // Set player's Little Age
     public static void setAge(Player player, int value)
     {
-        player.getEntityData().set(LITTLEAGE, value);
-        player.getPersistentData().putInt("LittleAge", value);
+        player.setData(LITTLEAGE.get(), value);
     }
 
-    // Get player's Little Age
     public static int getAge(Player player)
     {
-        return player.getEntityData().get(LITTLEAGE);
+        return player.getData(LITTLEAGE.get());
     }
 }

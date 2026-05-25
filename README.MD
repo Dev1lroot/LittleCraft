@@ -1,10 +1,10 @@
 # LittleCraft
 
-![Minecraft Version](https://img.shields.io/badge/Minecraft-1.21.1-green.svg)
+![Minecraft Version](https://img.shields.io/badge/Minecraft-26.1.2-green.svg)
 ![Loader](https://img.shields.io/badge/Loader-NeoForge-orange.svg)
 [![License: Custom](https://img.shields.io/badge/License-Custom-blue.svg)](LICENSE)
 
-**LittleCraft** is a lightweight NeoForge mod for **Minecraft 1.21.1**, created to bring **Agere** and **ABDL** elements into roleplay gameplay.
+**LittleCraft** is a lightweight NeoForge mod for **Minecraft 26.1.2**, created to bring **Agere** and **ABDL** elements into roleplay gameplay.
 
 The mod currently adds these main features:
 - **Little Mode** - players can shrink into a smaller "Little" form with reduced model size, hitbox, and camera height. Switching is done via commands.
@@ -67,8 +67,8 @@ These tags are saved in the player’s data and synchronized between client and 
 
 ## 🗓 Version Info
 
-- **Minecraft:** 1.21.1
-- **Next planned update:** 1.21.10
+- **Minecraft:** 1.21.1 / 26.1.2
+- **Next planned update:** 26.2
 - **No backports** to older versions are planned.
 - **Since 2.0:** Added a **Diaper** item for immersive ABDL roleplay.
 - **Since 2.0.2:** Added **Diaper Change** mechanic - another player can change your diaper by right-clicking with a fresh one.

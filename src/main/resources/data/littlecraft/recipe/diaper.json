@@ -7,12 +7,8 @@
     "aaa"
   ],
   "key": {
-    "a": {
-      "item": "minecraft:white_wool"
-    },
-    "b": {
-      "item": "minecraft:sponge"
-    }
+    "a": "minecraft:white_wool",
+    "b": "minecraft:sponge"
   },
   "result": {
     "id": "littlecraft:diaper",

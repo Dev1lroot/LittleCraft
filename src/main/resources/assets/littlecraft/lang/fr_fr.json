@@ -9,6 +9,7 @@
   "littlecraft.command.setage.notified": "Ton âge petit a été défini à %s",
 
   "item.littlecraft.diaper": "Couche",
+  "item.littlecraft.diaper.design": "Design : %s",
 
   "littlecraft.notification.item.diaper.change.error.armor_equipped": "Tu ne peux pas mettre une couche à la place d'une armure!",
   "littlecraft.notification.item.diaper.change.error.diaper_used": "Tu ne peux pas mettre une couche déjà utilisée!",

@@ -9,6 +9,7 @@
   "littlecraft.command.setage.notified": "Tu edad pequeña ha sido establecida en %s",
 
   "item.littlecraft.diaper": "Pañal",
+  "item.littlecraft.diaper.design": "Diseño: %s",
 
   "littlecraft.notification.item.diaper.change.error.armor_equipped": "¡No puedes ponerte un pañal en lugar de una armadura!",
   "littlecraft.notification.item.diaper.change.error.diaper_used": "¡No puedes ponerte un pañal usado!",

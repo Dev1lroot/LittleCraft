@@ -9,6 +9,7 @@
   "littlecraft.command.setage.notified": "Your little age has been set to %s",
 
   "item.littlecraft.diaper": "Diaper",
+  "item.littlecraft.diaper.design": "Design: %s",
 
   "littlecraft.notification.item.diaper.change.error.armor_equipped": "You can not equip a diaper instead of someone's armor!",
   "littlecraft.notification.item.diaper.change.error.diaper_used": "You can not equip a used diaper on!",

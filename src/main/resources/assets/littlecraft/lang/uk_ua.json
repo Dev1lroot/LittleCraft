@@ -9,6 +9,7 @@
   "littlecraft.command.setage.notified": "Твій маленький вік встановлено на %s",
 
   "item.littlecraft.diaper": "Підгузок",
+  "item.littlecraft.diaper.design": "Дизайн: %s",
 
   "littlecraft.notification.item.diaper.change.error.armor_equipped": "Не можна вдягти підгузок замість обладунків!",
   "littlecraft.notification.item.diaper.change.error.diaper_used": "Не можна вдягти вже використаний підгузок!",

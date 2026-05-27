@@ -3,7 +3,7 @@
 [![Minecraft Version](https://img.shields.io/badge/Minecraft-26.1.2-darkgreen.svg?logo=minecraft)](https://minecraft.net)
 [![NeoForge Version](https://img.shields.io/badge/NeoForge-26.1.2.64--beta-orange.svg)](https://neoforged.net)
 [![License](https://img.shields.io/badge/License-GNU%20GPL%203.0--Only-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.html)
-[![Mod Version](https://img.shields.io/badge/Version-2.0.5-purple.svg)](https://semver.org/)
+[![Mod Version](https://img.shields.io/badge/Version-2.0.6-purple.svg)](https://semver.org/)
 
 **LittleCraft** is a lightweight NeoForge mod for **Minecraft 26.1.2**, created to bring **Agere** and **ABDL** elements into roleplay gameplay.
 
@@ -14,6 +14,7 @@ The mod currently adds the following features:
 - **Diaper Change** - another player can **change your diaper** by holding a fresh Diaper in hand and **right-clicking** on you.
 - **Potion of Regression** - brewed from an Awkward Potion and a **Golden Dandelion**. Drinking it reduces the player's little age by 1. Throwing the splash variant turns adult animals and monsters into their baby form (where one exists).
 - **Potion of Growth** - brewed from an Awkward Potion and **Bone Meal**. Drinking it increases the player's little age by 1. Throwing the splash variant turns baby animals and monsters into adults. The **lingering** variant also acts as a continuous Bone Meal source, growing nearby plants once per second while the cloud is active.
+- **Carry** - a player with little age ≥ 18 can **carry** a little player (age 1–12) by **right-clicking** them with an empty main hand. The little player is held visually in front of the carrier at arm height and has no movement controls while carried - only camera rotation or **Shift** to dismount. The carrier can also press **Shift** to put the little player down. Both players receive a chat notification when carrying starts and ends.
 
 These features are especially useful on **ABDL** and **Agere** servers where size differences and roleplay props matter.
 
@@ -78,6 +79,7 @@ Custom **MobEffects** (`littlecraft:regression`, `littlecraft:growth`) are insta
 | 26.1.2 | 2.0.3 | Player model gradual scaling based on little age |
 | 26.1.2 | 2.0.4 | Added Potion of Regression and Potion of Growth with splash and lingering variants, license changed to GPL 3.0-ONLY |
 | 26.1.2 | 2.0.5 | Colored Cribs |
+| 26.1.2 | 2.0.6 | Carry mechanic - adult players can carry little players (age 1-12) |
 
 - **Current Maintained Minecraft Version:** 26.1.2
 - **No backports** to older versions are planned.
@@ -86,8 +88,8 @@ Custom **MobEffects** (`littlecraft:regression`, `littlecraft:growth`) are insta
 
 ## Planned Features
 
-- Items (pacifiers, bottles, plushies) to toggle or influence Little Mode naturally.
-- Caregiver-specific interaction mechanics.
+- Additional caregiver interaction mechanics (feeding, rocking, etc.).
+- Additional baby equipment (plushies, toys, tall chairs, pacifiers, bottles)
 - Additional diaper designs and customization options.
 
 ---

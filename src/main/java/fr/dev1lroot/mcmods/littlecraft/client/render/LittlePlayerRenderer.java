@@ -49,7 +49,7 @@ public class LittlePlayerRenderer
                     //   (b) R*(0,-1.501,0) = -bedDir * 1.501  (model-base offset after lie-flat rotation)
                     // Pre-apply the missing (1-bodyScale) fraction here to restore world-space parity.
                     float headOffset  = renderState.eyeHeight - 0.1f;
-                    float totalOffset = headOffset + 1.501f;
+                    float totalOffset = (headOffset + 1.501f) / 1.8f;
                     float factor      = (1.0f - bodyScale) / bodyScale;
                     event.getPoseStack().translate(
                         -bedDir.getStepX() * totalOffset * factor,

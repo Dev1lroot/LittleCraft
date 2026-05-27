@@ -7,6 +7,8 @@ package fr.dev1lroot.mcmods.littlecraft.event;
 
 import fr.dev1lroot.mcmods.littlecraft.common.LittleData;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.protocol.game.ClientboundSetPassengersPacket;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
@@ -15,16 +17,20 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.UUID;
 
 import static fr.dev1lroot.mcmods.littlecraft.LittleMod.MODID;
 
 @EventBusSubscriber(modid = MODID)
 public class CarryEventHandler
 {
-    // Carrier (age >= 18) right-clicks a little (1 <= age <= 12) with an empty main hand
-    // → little player rides on carrier; carrier moves freely, little can only look and shift-dismount.
-    // Carrier pressing shift also ejects the little.
+    // Tracks carriers currently holding a little so we can detect dismount transitions
+    // and push the updated (empty) passenger list to their own client.
+    private static final Set<UUID> activeCarriers = new HashSet<>();
+
     @SubscribeEvent
     public static void onEntityInteract(PlayerInteractEvent.EntityInteract event)
     {
@@ -42,10 +48,17 @@ public class CarryEventHandler
         if (carrierAge < 18) return;
         if (littleAge < 1 || littleAge > 12) return;
 
-        // Prevent stacking or double-mounting
         if (little.isPassenger() || carrier.isPassenger() || !carrier.getPassengers().isEmpty()) return;
 
         little.startRiding(carrier, true, true);
+
+        // The entity tracker skips self-updates (player != this.entity guard in ChunkMap),
+        // so the carrier's own client never receives ClientboundSetPassengersPacket via the
+        // tracker. Send it directly so their client sets up the riding relationship immediately.
+        if (carrier instanceof ServerPlayer serverCarrier) {
+            serverCarrier.connection.send(new ClientboundSetPassengersPacket(carrier));
+            activeCarriers.add(serverCarrier.getUUID());
+        }
 
         carrier.sendSystemMessage(Component.translatable("littlecraft.carry.started.carrier", little.getName()));
         little.sendSystemMessage(Component.translatable("littlecraft.carry.started.little", carrier.getName()));
@@ -53,24 +66,41 @@ public class CarryEventHandler
         event.setCanceled(true);
     }
 
-    // When the carrier (vehicle) starts sneaking, eject any little passenger
     @SubscribeEvent
     public static void onEntityTick(EntityTickEvent.Post event)
     {
-        if (!(event.getEntity() instanceof Player carrier)) return;
+        if (!(event.getEntity() instanceof ServerPlayer carrier)) return;
         if (carrier.level().isClientSide()) return;
-        if (!carrier.isShiftKeyDown()) return;
-        if (carrier.getPassengers().isEmpty()) return;
 
-        for (Entity passenger : List.copyOf(carrier.getPassengers()))
-        {
-            if (!(passenger instanceof Player little)) continue;
-            int littleAge = LittleData.getAge(little);
-            if (littleAge < 1 || littleAge > 12) continue;
+        // Carrier pressing shift ejects the little passenger
+        if (carrier.isShiftKeyDown()) {
+            for (Entity passenger : List.copyOf(carrier.getPassengers())) {
+                if (!(passenger instanceof Player little)) continue;
+                int littleAge = LittleData.getAge(little);
+                if (littleAge < 1 || littleAge > 12) continue;
 
-            little.stopRiding();
-            carrier.sendSystemMessage(Component.translatable("littlecraft.carry.stopped.carrier", little.getName()));
-            little.sendSystemMessage(Component.translatable("littlecraft.carry.stopped.little", carrier.getName()));
+                little.stopRiding();
+                carrier.sendSystemMessage(Component.translatable("littlecraft.carry.stopped.carrier", little.getName()));
+                little.sendSystemMessage(Component.translatable("littlecraft.carry.stopped.little", carrier.getName()));
+            }
+        }
+
+        // Keep the carrier's own client in sync. The entity tracker never sends the carrier
+        // their own entity's passenger changes, so we push the packet on every state transition.
+        boolean isCarrying = carrier.getPassengers().stream()
+            .anyMatch(p -> p instanceof Player lp
+                && LittleData.getAge(lp) >= 1 && LittleData.getAge(lp) <= 12);
+
+        UUID id = carrier.getUUID();
+        boolean wasCarrying = activeCarriers.contains(id);
+
+        if (isCarrying) {
+            activeCarriers.add(id);
+            carrier.connection.send(new ClientboundSetPassengersPacket(carrier));
+        } else if (wasCarrying) {
+            // Passenger dismounted (little pressed shift or another cause) — clear on carrier's client
+            activeCarriers.remove(id);
+            carrier.connection.send(new ClientboundSetPassengersPacket(carrier));
         }
     }
 }

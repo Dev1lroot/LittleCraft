@@ -10,7 +10,8 @@
     "LocalPlayerLittleMixin",
     "PlayerPersistentLittleMixin",
     "PlayerVehicleMixin",
-    "PlayerCarryPositionMixin"
+    "PlayerCarryPositionMixin",
+    "PlayerSleepHitboxMixin"
   ],
   "client": [
     "client.LittleHeadScaleMixin"

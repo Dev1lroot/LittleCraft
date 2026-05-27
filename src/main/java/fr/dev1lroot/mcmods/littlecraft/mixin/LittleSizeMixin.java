@@ -52,10 +52,17 @@ public abstract class LittleSizeMixin
                 int age = LittleData.getAge(player);
                 float t = LittleData.getAgeBlend(age);
 
-                // Age >= 18 blends fully to adult — no hitbox override needed
                 if (t >= 1.0F) return;
 
-                float width = 0.35F + (0.6F - 0.35F) * t;
+                if (pose == Pose.SLEEPING)
+                {
+                    // Use a bed-cell-sized hitbox so the little player is easy to interact with
+                    // while sleeping. Width covers most of a block; height matches vanilla bed thickness.
+                    cir.setReturnValue(EntityDimensions.fixed(0.9F, 0.3F));
+                    return;
+                }
+
+                float width  = 0.35F + (0.6F - 0.35F) * t;
                 float height;
 
                 if (player.isCrouching())

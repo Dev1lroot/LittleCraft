@@ -9,12 +9,11 @@
 
 The mod currently adds the following features:
 
-- **Little Mode** — players can shrink into a smaller "Little" form with a reduced model size, hitbox, and camera height. Switching is done via commands.
-- **Age Scaling** — the player model, hitbox, and camera position scale smoothly to the player's little age (range 0–18+).
-- **Diaper** — can be worn for immersive roleplay. While equipped, it gradually **loses durability**, simulating wetness or fullness. Both the **player model** and the **inventory item** visually update to reflect the current diaper state.
-- **Diaper Change** — another player can **change your diaper** by holding a fresh Diaper in hand and **right-clicking** on you.
-- **Potion of Regression** — brewed from an Awkward Potion and a **Golden Dandelion**. Drinking it reduces the player's little age by 1. Throwing the splash variant turns adult animals and monsters into their baby form (where one exists).
-- **Potion of Growth** — brewed from an Awkward Potion and **Bone Meal**. Drinking it increases the player's little age by 1. Throwing the splash variant turns baby animals and monsters into adults. The **lingering** variant also acts as a continuous Bone Meal source, growing nearby plants once per second while the cloud is active.
+- **Age Scaling** - the player model, hitbox, and camera position scale smoothly to the player's age (range 6..18)
+- **Diaper** - can be worn for immersive roleplay. While equipped, it gradually **loses durability**, simulating wetness or fullness. Both the **player model** and the **inventory item** visually update to reflect the current diaper state.
+- **Diaper Change** - another player can **change your diaper** by holding a fresh Diaper in hand and **right-clicking** on you.
+- **Potion of Regression** - brewed from an Awkward Potion and a **Golden Dandelion**. Drinking it reduces the player's little age by 1. Throwing the splash variant turns adult animals and monsters into their baby form (where one exists).
+- **Potion of Growth** - brewed from an Awkward Potion and **Bone Meal**. Drinking it increases the player's little age by 1. Throwing the splash variant turns baby animals and monsters into adults. The **lingering** variant also acts as a continuous Bone Meal source, growing nearby plants once per second while the cloud is active.
 
 These features are especially useful on **ABDL** and **Agere** servers where size differences and roleplay props matter.
 
@@ -63,8 +62,7 @@ Player data is stored using NeoForge **Attachment Types** and synced between cli
 
 | Attachment | Type | Description |
 |------------|------|-------------|
-| `littlecraft:little` | `boolean` | Whether the player is in Little Mode. |
-| `littlecraft:little_age` | `int` | The player's current little age (0 = infant scale, 18+ = adult scale). |
+| `littlecraft:little_age` | `int` | The player's current little age (6..17 = infant scale, 18+ = adult scale). |
 
 Custom **MobEffects** (`littlecraft:regression`, `littlecraft:growth`) are instantaneous and apply their logic immediately when the potion is consumed or the splash hits an entity.
 
@@ -72,14 +70,15 @@ Custom **MobEffects** (`littlecraft:regression`, `littlecraft:growth`) are insta
 
 ## Version History
 
-| Version | Changes |
-|---------|---------|
-| 2.0 | Added Diaper item for immersive ABDL roleplay |
-| 2.0.2 | Added Diaper Change mechanic — another player can change your diaper |
-| 2.0.3 | Player model gradual scaling based on little age |
-| 2.0.4 | Added Potion of Regression and Potion of Growth with splash and lingering variants, license changed to GPL 3.0-ONLY |
+| Game Version | Mod Version | Changes |
+|--------------|-------------|---------|
+| 1.20.1 | 1.0 | Base feature of toggling between little and adult modes |
+| 1.20.1 | 2.0 | Added Diaper item for immersive ABDL roleplay |
+| 1.20.1 | 2.0.2 | Added Diaper Change mechanic - another player can change your diaper |
+| 26.1.2 | 2.0.3 | Player model gradual scaling based on little age |
+| 26.1.2 | 2.0.4 | Added Potion of Regression and Potion of Growth with splash and lingering variants, license changed to GPL 3.0-ONLY |
 
-- **Minecraft:** 26.1.2
+- **Current Maintained Minecraft Version:** 26.1.2
 - **No backports** to older versions are planned.
 
 ---
@@ -94,7 +93,7 @@ Custom **MobEffects** (`littlecraft:regression`, `littlecraft:growth`) are insta
 
 ## License
 
-**GPL-3.0-only** — see [LICENSE](LICENSE) for full terms.
+**GPL-3.0-only** - see [LICENSE](LICENSE) for full terms.
 
 ## Author
 

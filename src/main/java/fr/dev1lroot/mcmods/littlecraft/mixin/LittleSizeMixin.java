@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2026 David Eichendorf <admin@dev1lroot.com>
+ * SPDX-License-Identifier: GPL-3.0-only
+ */
+
 package fr.dev1lroot.mcmods.littlecraft.mixin;
 
 import fr.dev1lroot.mcmods.littlecraft.common.LittleData;
@@ -42,7 +47,7 @@ public abstract class LittleSizeMixin
         // Only apply to players — mobs don’t use Little Mode ♡
         if (entity instanceof Player player)
         {
-            if (LittleData.get(player))
+            if (LittleData.isLittle(player))
             {
                 int age = LittleData.getAge(player);
                 float t = LittleData.getAgeBlend(age);

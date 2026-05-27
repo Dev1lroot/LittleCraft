@@ -1,42 +1,51 @@
 # LittleCraft
 
-![Minecraft Version](https://img.shields.io/badge/Minecraft-26.1.2-green.svg)
-![Loader](https://img.shields.io/badge/Loader-NeoForge-orange.svg)
-[![License: Custom](https://img.shields.io/badge/License-Custom-blue.svg)](LICENSE)
+[![Minecraft Version](https://img.shields.io/badge/Minecraft-26.1.2-darkgreen.svg?logo=minecraft)](https://minecraft.net)
+[![NeoForge Version](https://img.shields.io/badge/NeoForge-26.1.2.64--beta-orange.svg)](https://neoforged.net)
+[![License](https://img.shields.io/badge/License-GNU%20GPL%203.0--Only-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.html)
+[![Mod Version](https://img.shields.io/badge/Version-2.0.4-purple.svg)](https://semver.org/)
 
 **LittleCraft** is a lightweight NeoForge mod for **Minecraft 26.1.2**, created to bring **Agere** and **ABDL** elements into roleplay gameplay.
 
-The mod currently adds these main features:
-- **Little Mode** - players can shrink into a smaller "Little" form with reduced model size, hitbox, and camera height. Switching is done via commands.
-- **Age Scalling** - the player model, hitboxes and camera position scales to the age of the player.
-- **Diaper** - can be worn for immersive roleplay. While equipped, it gradually **loses durability**, simulating **wetness or fullness** equal to the durability lost. Both the **player model** and the **item in inventory** visually update to reflect the diaper’s current state.
-- **Diaper Change** - another player can **change your diaper** by holding a fresh Diaper item in hand and **right-clicking** on you.  
-This feature enhances interactivity and roleplay immersion, especially on ABDL and Agere servers.
+The mod currently adds the following features:
 
-These features are especially useful for **ABDL** and **Agere** servers, where size differences and roleplay props matter.  
+- **Little Mode** — players can shrink into a smaller "Little" form with a reduced model size, hitbox, and camera height. Switching is done via commands.
+- **Age Scaling** — the player model, hitbox, and camera position scale smoothly to the player's little age (range 0–18+).
+- **Diaper** — can be worn for immersive roleplay. While equipped, it gradually **loses durability**, simulating wetness or fullness. Both the **player model** and the **inventory item** visually update to reflect the current diaper state.
+- **Diaper Change** — another player can **change your diaper** by holding a fresh Diaper in hand and **right-clicking** on you.
+- **Potion of Regression** — brewed from an Awkward Potion and a **Golden Dandelion**. Drinking it reduces the player's little age by 1. Throwing the splash variant turns adult animals and monsters into their baby form (where one exists).
+- **Potion of Growth** — brewed from an Awkward Potion and **Bone Meal**. Drinking it increases the player's little age by 1. Throwing the splash variant turns baby animals and monsters into adults. The **lingering** variant also acts as a continuous Bone Meal source, growing nearby plants once per second while the cloud is active.
 
-Future updates will expand customization, add more interactive items, and improve compatibility with community-driven features.
-
----
-
-## 💬 Commands
-
-| Command | Description |
-|----------|-------------|
-| `/islittle` | Shows whether you are currently in Little Mode. |
-| `/little true` | Enables Little Mode. |
-| `/little false` | Disables Little Mode. |
-| `/age {number}` | Sets your age to exact number. |
-| `/age {player} {number}` | Sets player's age to exact number. |
-
-> Currently, switching modes is only available via commands.  
-> Future versions will introduce optional items to toggle size and enhance immersion.
+These features are especially useful on **ABDL** and **Agere** servers where size differences and roleplay props matter.
 
 ---
 
-## 🌍 Localization
+## Commands
+
+| Command | Permission | Description |
+|---------|------------|-------------|
+| `/age get` | Everyone | Shows your current little age. |
+| `/age set <number>` | Cheats | Sets your own little age to the given number. |
+| `/age <player> get` | Everyone | Shows another player's current little age. |
+| `/age <player> set <number>` | Cheats | Sets another player's little age. |
+
+---
+
+## Brewing Recipes
+
+| Result | Ingredients |
+|--------|-------------|
+| Potion of Regression | Awkward Potion + Golden Dandelion |
+| Potion of Growth | Awkward Potion + Bone Meal |
+
+Splash and Lingering variants follow standard vanilla brewing (Gunpowder / Dragon's Breath).
+
+---
+
+## Localization
 
 Supported languages:
+
 - English (`en_us`)
 - French (`fr_fr`)
 - German (`de_de`)
@@ -47,39 +56,47 @@ Supported languages:
 
 ---
 
-## ⚙️ Technical Details
+## Technical Details
 
 LittleCraft supports both **Singleplayer** and **Multiplayer** environments.  
-It uses two player-specific NBT tags:
+Player data is stored using NeoForge **Attachment Types** and synced between client and server.
 
-| Tag | Type | Description |
-|------|------|-------------|
-| `IsLittle` | `boolean` | Indicates whether the player is in Little Mode. |
-| `LittleAge` | `int` | Reserved for future features involving gradual scaling. |
+| Attachment | Type | Description |
+|------------|------|-------------|
+| `littlecraft:little` | `boolean` | Whether the player is in Little Mode. |
+| `littlecraft:little_age` | `int` | The player's current little age (0 = infant scale, 18+ = adult scale). |
 
-These tags are saved in the player’s data and synchronized between client and server.
+Custom **MobEffects** (`littlecraft:regression`, `littlecraft:growth`) are instantaneous and apply their logic immediately when the potion is consumed or the splash hits an entity.
 
 ---
 
-## 🗓 Version Info
+## Version History
 
-- **Minecraft:** 1.21.1 / 26.1.2
-- **Next planned update:** 26.2
+| Version | Changes |
+|---------|---------|
+| 2.0 | Added Diaper item for immersive ABDL roleplay |
+| 2.0.2 | Added Diaper Change mechanic — another player can change your diaper |
+| 2.0.3 | Player model gradual scaling based on little age |
+| 2.0.4 | Added Potion of Regression and Potion of Growth with splash and lingering variants, license changed to GPL 3.0-ONLY |
+
+- **Minecraft:** 26.1.2
 - **No backports** to older versions are planned.
-- **Since 2.0:** Added a **Diaper** item for immersive ABDL roleplay.
-- **Since 2.0.2:** Added **Diaper Change** mechanic - another player can change your diaper by right-clicking with a fresh one.
-- **Since 2.0.3:** Player model gradual scaling based on their little age
 
 ---
 
-## 🔮 Planned Features
+## Planned Features
 
-- Optional items to toggle or influence Little Mode.
-- Caregiver-style interaction mechanics.
+- Items (pacifiers, bottles, plushies) to toggle or influence Little Mode naturally.
+- Caregiver-specific interaction mechanics.
+- Additional diaper designs and customization options.
 
 ---
 
-## 👤 Author
+## License
 
-**David von Eichendorf** (`dev1lroot` / `Davy`)  
-License: **MIT-SCAG or GPL-3.0**
+**GPL-3.0-only** — see [LICENSE](LICENSE) for full terms.
+
+## Author
+
+**David Eichendorf** (`dev1lroot` / `DavyBoy`)  
+Contact: admin@dev1lroot.com

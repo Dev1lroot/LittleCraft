@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2026 David Eichendorf <admin@dev1lroot.com>
+ * SPDX-License-Identifier: GPL-3.0-only
+ */
+
 package fr.dev1lroot.mcmods.littlecraft.content;
 
 import net.minecraft.world.item.Item;
@@ -20,5 +25,8 @@ public class LittleContentRegistry
         // Регистрируем отдельные классы контента
         fr.dev1lroot.mcmods.littlecraft.content.item.Diaper.register();
         // fr.dev1lroot.mcmods.littlecraft.content.block.MyBlock.register();
+
+        LittleMobEffects.register(bus);
+        LittlePotions.register(bus);
     }
 }

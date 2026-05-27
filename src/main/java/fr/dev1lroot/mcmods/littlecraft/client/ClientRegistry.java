@@ -1,14 +1,22 @@
+/*
+ * Copyright (c) 2026 David Eichendorf <admin@dev1lroot.com>
+ * SPDX-License-Identifier: GPL-3.0-only
+ */
+
 package fr.dev1lroot.mcmods.littlecraft.client;
 
 import fr.dev1lroot.mcmods.littlecraft.client.render.DiaperLayer;
 import fr.dev1lroot.mcmods.littlecraft.model.DiaperModel;
 import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
+import net.minecraft.resources.Identifier;
+import net.minecraft.server.packs.resources.ResourceManagerReloadListener;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.PlayerModelType;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.client.event.AddClientReloadListenersEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 
 import static fr.dev1lroot.mcmods.littlecraft.LittleMod.MODID;
@@ -20,6 +28,7 @@ public class ClientRegistry
     {
         modEventBus.addListener(ClientRegistry::onRegisterLayerDefinitions);
         modEventBus.addListener(ClientRegistry::onAddLayers);
+        modEventBus.addListener(ClientRegistry::onAddClientReloadListeners);
     }
 
     private static void onRegisterLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event)
@@ -48,5 +57,14 @@ public class ClientRegistry
         {
             armorStandRenderer.addLayer(new DiaperLayer<>(armorStandRenderer, modelSet));
         }
+    }
+
+    private static void onAddClientReloadListeners(AddClientReloadListenersEvent event)
+    {
+        // Clear the per-design texture cache so newly added resource packs are picked up
+        event.addListener(
+            Identifier.fromNamespaceAndPath(MODID, "diaper_texture_cache"),
+            (ResourceManagerReloadListener) rm -> DiaperLayer.clearCache()
+        );
     }
 }

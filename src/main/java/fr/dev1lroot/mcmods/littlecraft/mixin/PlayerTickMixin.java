@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2026 David Eichendorf <admin@dev1lroot.com>
+ * SPDX-License-Identifier: GPL-3.0-only
+ */
+
 package fr.dev1lroot.mcmods.littlecraft.mixin;
 
 import fr.dev1lroot.mcmods.littlecraft.common.LittleData;
@@ -32,21 +37,19 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(Player.class)
 public abstract class PlayerTickMixin
 {
-    // Remember if the player was smol last tick.
-    private boolean lastLittleState = false;
+    private int lastLittleAge = -1;
 
     @Inject(method = "tick", at = @At("HEAD"))
     private void littlecraft$tick(CallbackInfo ci)
     {
         Player player = (Player)(Object)this;
-        boolean current = LittleData.get(player);
+        int age = LittleData.getAge(player);
 
-        // Step 1: Did the player shrink or grow?
-        if (current != lastLittleState)
+        // Refresh hitbox + camera (eyeHeight = 0.85 * scaled height) whenever age changes.
+        if (age != lastLittleAge)
         {
-            // Yes! Force update the hitbox or risk cursed collisions.
             player.refreshDimensions();
-            lastLittleState = current;
+            lastLittleAge = age;
         }
 
         // Step 2: Is the player wearing a diaper on their precious legs?

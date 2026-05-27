@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2026 David Eichendorf <admin@dev1lroot.com>
+ * SPDX-License-Identifier: GPL-3.0-only
+ */
+
 package fr.dev1lroot.mcmods.littlecraft.common;
 
 import com.mojang.serialization.Codec;
@@ -19,15 +24,6 @@ public class LittleData
         DeferredRegister.create(NeoForgeRegistries.Keys.ATTACHMENT_TYPES, MODID);
 
     @SuppressWarnings("unchecked")
-    public static final DeferredHolder<AttachmentType<?>, AttachmentType<Boolean>> LITTLE =
-        (DeferredHolder<AttachmentType<?>, AttachmentType<Boolean>>) ATTACHMENT_TYPES.register("little", () ->
-            AttachmentType.builder(() -> false)
-                .serialize(Codec.BOOL.optionalFieldOf("value", false))
-                .copyOnDeath()
-                .sync(ByteBufCodecs.BOOL)
-                .build());
-
-    @SuppressWarnings("unchecked")
     public static final DeferredHolder<AttachmentType<?>, AttachmentType<Integer>> LITTLEAGE =
         (DeferredHolder<AttachmentType<?>, AttachmentType<Integer>>) ATTACHMENT_TYPES.register("little_age", () ->
             AttachmentType.builder(() -> 0)
@@ -41,14 +37,9 @@ public class LittleData
         ATTACHMENT_TYPES.register(modBus);
     }
 
-    public static void set(Player player, boolean value)
+    public static boolean isLittle(Player player)
     {
-        player.setData(LITTLE.get(), value);
-    }
-
-    public static boolean get(Player player)
-    {
-        return player.getData(LITTLE.get());
+        return getAge(player) > 0;
     }
 
     public static void setAge(Player player, int value)

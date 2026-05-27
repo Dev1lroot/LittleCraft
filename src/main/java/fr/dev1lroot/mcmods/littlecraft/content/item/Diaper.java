@@ -1,7 +1,13 @@
+/*
+ * Copyright (c) 2026 David Eichendorf <admin@dev1lroot.com>
+ * SPDX-License-Identifier: GPL-3.0-only
+ */
+
 package fr.dev1lroot.mcmods.littlecraft.content.item;
 
 import fr.dev1lroot.mcmods.littlecraft.content.LittleContentRegistry;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
@@ -14,11 +20,16 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.CustomData;
+import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.item.equipment.Equippable;
 import net.minecraft.world.item.equipment.EquipmentAsset;
 import net.minecraft.world.item.equipment.EquipmentAssets;
 import net.neoforged.neoforge.registries.DeferredItem;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.function.Consumer;
 
 import static fr.dev1lroot.mcmods.littlecraft.LittleMod.MODID;
 
@@ -29,6 +40,20 @@ public class Diaper
         public DiaperItem(Properties properties)
         {
             super(properties);
+        }
+
+        @Override
+        public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay display, Consumer<Component> consumer, TooltipFlag flag)
+        {
+            super.appendHoverText(stack, context, display, consumer, flag);
+            CustomData customData = stack.get(DataComponents.CUSTOM_DATA);
+            if (customData != null)
+            {
+                CompoundTag tag = customData.copyTag();
+                String design = tag.getStringOr("DESIGN", "");
+                if (!design.isEmpty())
+                    consumer.accept(Component.translatable("item.littlecraft.diaper.design", design));
+            }
         }
 
         @Override
@@ -85,11 +110,19 @@ public class Diaper
             (ResourceKey) EquipmentAssets.ROOT_ID,
             Identifier.fromNamespaceAndPath(MODID, "diaper"));
 
+    private static CustomData defaultData()
+    {
+        CompoundTag tag = new CompoundTag();
+        tag.putString("DESIGN", "default");
+        return CustomData.of(tag);
+    }
+
     public static final DeferredItem<DiaperItem> DIAPER =
             LittleContentRegistry.ITEMS.registerItem("diaper",
                     props -> new DiaperItem(props
                             .stacksTo(1)
                             .durability(255)
+                            .component(DataComponents.CUSTOM_DATA, defaultData())
                             .component(DataComponents.EQUIPPABLE,
                                     Equippable.builder(EquipmentSlot.LEGS)
                                             .setAsset(ASSET_KEY)

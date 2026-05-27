@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2026 David Eichendorf <admin@dev1lroot.com>
+ * SPDX-License-Identifier: GPL-3.0-only
+ */
+
 package fr.dev1lroot.mcmods.littlecraft;
 
 import fr.dev1lroot.mcmods.littlecraft.content.LittleContentRegistry;
@@ -38,7 +43,7 @@ public class LittleMod
     */
     public LittleMod(IEventBus modEventBus)
     {
-        // Register all the cute little commands (like /little true/false or /islittle)
+        // Register age commands (/age get|set, /age <player> get|set)
         LittleCommand.register();
         // Register all the cute little items and blocks
         LittleContentRegistry.register(modEventBus);

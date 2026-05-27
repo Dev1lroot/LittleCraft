@@ -1,8 +1,6 @@
 {
-  "littlecraft.command.islittle.true": "あなたはいまリトルモードです",
-  "littlecraft.command.islittle.false": "あなたはいまアダルトモードです",
-  "littlecraft.command.setlittle.true": "あなたはリトルモードに退行しました",
-  "littlecraft.command.setlittle.false": "あなたはまた大人に戻りました！",
+  "littlecraft.command.getage.self": "あなたのリトル年齢は%sです",
+  "littlecraft.command.getage.other": "%sのリトル年齢は%sです",
 
   "littlecraft.command.setage.self": "あなたのリトル年齢は%sになりました",
   "littlecraft.command.setage.other": "%sのリトル年齢は%sになりました",
@@ -14,5 +12,21 @@
   "littlecraft.notification.item.diaper.change.error.armor_equipped": "誰かの鎧の代わりにおむつを装備することはできません！",
   "littlecraft.notification.item.diaper.change.error.diaper_used": "使用済みのおむつを装備することはできません！",
   "littlecraft.notification.item.diaper.change.success": "おむつを替えました！",
-  "littlecraft.notification.item.diaper.change.changed_by_other": "おむつを替えてもらいました！"
+  "littlecraft.notification.item.diaper.change.changed_by_other": "おむつを替えてもらいました！",
+
+  "effect.littlecraft.regression": "退行",
+  "effect.littlecraft.growth": "成長",
+
+  "item.minecraft.potion.effect.littlecraft.regression": "退行のポーション",
+  "item.minecraft.splash_potion.effect.littlecraft.regression": "退行のスプラッシュポーション",
+  "item.minecraft.lingering_potion.effect.littlecraft.regression": "退行の残留ポーション",
+  "item.minecraft.tipped_arrow.effect.littlecraft.regression": "退行の矢",
+
+  "item.minecraft.potion.effect.littlecraft.growth": "成長のポーション",
+  "item.minecraft.splash_potion.effect.littlecraft.growth": "成長のスプラッシュポーション",
+  "item.minecraft.lingering_potion.effect.littlecraft.growth": "成長の残留ポーション",
+  "item.minecraft.tipped_arrow.effect.littlecraft.growth": "成長の矢",
+
+  "littlecraft.notification.potion.regression.self": "退行を感じる... あなたの年齢は%sになりました",
+  "littlecraft.notification.potion.growth.self": "成長を感じる... あなたの年齢は%sになりました"
 }

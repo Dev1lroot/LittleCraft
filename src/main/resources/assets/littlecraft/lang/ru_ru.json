@@ -1,8 +1,6 @@
 {
-  "littlecraft.command.islittle.true": "Ты сейчас малыш.",
-  "littlecraft.command.islittle.false": "Ты взрослый.",
-  "littlecraft.command.setlittle.true": "Ты снова стал малышом!",
-  "littlecraft.command.setlittle.false": "Ты снова вырос!",
+  "littlecraft.command.getage.self": "Твой маленький возраст: %s",
+  "littlecraft.command.getage.other": "Маленький возраст %s: %s",
 
   "littlecraft.command.setage.self": "Твой маленький возраст теперь %s",
   "littlecraft.command.setage.other": "Маленький возраст %s теперь %s",
@@ -14,5 +12,21 @@
   "littlecraft.notification.item.diaper.change.error.armor_equipped": "Нельзя надеть подгузник вместо брони!",
   "littlecraft.notification.item.diaper.change.error.diaper_used": "Нельзя надеть использованный подгузник!",
   "littlecraft.notification.item.diaper.change.success": "Ты сменил подгузник!",
-  "littlecraft.notification.item.diaper.change.changed_by_other": "Тебя переодели!"
+  "littlecraft.notification.item.diaper.change.changed_by_other": "Тебя переодели!",
+
+  "effect.littlecraft.regression": "Регрессия",
+  "effect.littlecraft.growth": "Рост",
+
+  "item.minecraft.potion.effect.littlecraft.regression": "Зелье регрессии",
+  "item.minecraft.splash_potion.effect.littlecraft.regression": "Бросательное зелье регрессии",
+  "item.minecraft.lingering_potion.effect.littlecraft.regression": "Стойкое зелье регрессии",
+  "item.minecraft.tipped_arrow.effect.littlecraft.regression": "Стрела регрессии",
+
+  "item.minecraft.potion.effect.littlecraft.growth": "Зелье роста",
+  "item.minecraft.splash_potion.effect.littlecraft.growth": "Бросательное зелье роста",
+  "item.minecraft.lingering_potion.effect.littlecraft.growth": "Стойкое зелье роста",
+  "item.minecraft.tipped_arrow.effect.littlecraft.growth": "Стрела роста",
+
+  "littlecraft.notification.potion.regression.self": "Ты чувствуешь регрессию... твой возраст теперь %s",
+  "littlecraft.notification.potion.growth.self": "Ты чувствуешь, как растёшь... твой возраст теперь %s"
 }

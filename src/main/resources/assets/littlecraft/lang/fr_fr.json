@@ -1,8 +1,6 @@
 {
-  "littlecraft.command.islittle.true": "Tu es en mode Petit",
-  "littlecraft.command.islittle.false": "Tu es en mode Adulte",
-  "littlecraft.command.setlittle.true": "Tu es redevenu tout petit",
-  "littlecraft.command.setlittle.false": "Tu as grandi à nouveau!",
+  "littlecraft.command.getage.self": "Ton âge petit est %s",
+  "littlecraft.command.getage.other": "L'âge petit de %s est %s",
 
   "littlecraft.command.setage.self": "Ton âge petit est maintenant %s",
   "littlecraft.command.setage.other": "L'âge petit de %s est maintenant %s",
@@ -14,5 +12,21 @@
   "littlecraft.notification.item.diaper.change.error.armor_equipped": "Tu ne peux pas mettre une couche à la place d'une armure!",
   "littlecraft.notification.item.diaper.change.error.diaper_used": "Tu ne peux pas mettre une couche déjà utilisée!",
   "littlecraft.notification.item.diaper.change.success": "Tu as changé la couche!",
-  "littlecraft.notification.item.diaper.change.changed_by_other": "On t’a changé!"
+  "littlecraft.notification.item.diaper.change.changed_by_other": "On t’a changé!",
+
+  "effect.littlecraft.regression": "Régression",
+  "effect.littlecraft.growth": "Croissance",
+
+  "item.minecraft.potion.effect.littlecraft.regression": "Potion de Régression",
+  "item.minecraft.splash_potion.effect.littlecraft.regression": "Potion jetable de Régression",
+  "item.minecraft.lingering_potion.effect.littlecraft.regression": "Potion persistante de Régression",
+  "item.minecraft.tipped_arrow.effect.littlecraft.regression": "Flèche de Régression",
+
+  "item.minecraft.potion.effect.littlecraft.growth": "Potion de Croissance",
+  "item.minecraft.splash_potion.effect.littlecraft.growth": "Potion jetable de Croissance",
+  "item.minecraft.lingering_potion.effect.littlecraft.growth": "Potion persistante de Croissance",
+  "item.minecraft.tipped_arrow.effect.littlecraft.growth": "Flèche de Croissance",
+
+  "littlecraft.notification.potion.regression.self": "Tu te sens régresser... ton âge est maintenant %s",
+  "littlecraft.notification.potion.growth.self": "Tu te sens grandir... ton âge est maintenant %s"
 }

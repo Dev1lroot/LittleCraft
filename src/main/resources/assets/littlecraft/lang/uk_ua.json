@@ -1,8 +1,6 @@
 {
-  "littlecraft.command.islittle.true": "Ти в режимі Малюка",
-  "littlecraft.command.islittle.false": "Ти в режимі Дорослого",
-  "littlecraft.command.setlittle.true": "Ти повернувся до режиму Малюка",
-  "littlecraft.command.setlittle.false": "Ти знову подорослішав!",
+  "littlecraft.command.getage.self": "Твій маленький вік: %s",
+  "littlecraft.command.getage.other": "Маленький вік %s: %s",
 
   "littlecraft.command.setage.self": "Твій маленький вік тепер %s",
   "littlecraft.command.setage.other": "Маленький вік %s тепер %s",
@@ -14,5 +12,21 @@
   "littlecraft.notification.item.diaper.change.error.armor_equipped": "Не можна вдягти підгузок замість обладунків!",
   "littlecraft.notification.item.diaper.change.error.diaper_used": "Не можна вдягти вже використаний підгузок!",
   "littlecraft.notification.item.diaper.change.success": "Ти змінив підгузок!",
-  "littlecraft.notification.item.diaper.change.changed_by_other": "Тебе переодягнули!"
+  "littlecraft.notification.item.diaper.change.changed_by_other": "Тебе переодягнули!",
+
+  "effect.littlecraft.regression": "Регресія",
+  "effect.littlecraft.growth": "Ріст",
+
+  "item.minecraft.potion.effect.littlecraft.regression": "Зілля регресії",
+  "item.minecraft.splash_potion.effect.littlecraft.regression": "Кидальне зілля регресії",
+  "item.minecraft.lingering_potion.effect.littlecraft.regression": "Стійке зілля регресії",
+  "item.minecraft.tipped_arrow.effect.littlecraft.regression": "Стріла регресії",
+
+  "item.minecraft.potion.effect.littlecraft.growth": "Зілля росту",
+  "item.minecraft.splash_potion.effect.littlecraft.growth": "Кидальне зілля росту",
+  "item.minecraft.lingering_potion.effect.littlecraft.growth": "Стійке зілля росту",
+  "item.minecraft.tipped_arrow.effect.littlecraft.growth": "Стріла росту",
+
+  "littlecraft.notification.potion.regression.self": "Ти відчуваєш регресію... твій вік тепер %s",
+  "littlecraft.notification.potion.growth.self": "Ти відчуваєш, як ростеш... твій вік тепер %s"
 }

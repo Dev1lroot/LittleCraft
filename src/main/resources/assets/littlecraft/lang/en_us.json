@@ -1,8 +1,6 @@
 {
-  "littlecraft.command.islittle.true": "You are in Little Mode",
-  "littlecraft.command.islittle.false": "You are in Adult Mode",
-  "littlecraft.command.setlittle.true": "You’ve regressed into the little mode",
-  "littlecraft.command.setlittle.false": "You’ve grown up again!",
+  "littlecraft.command.getage.self": "Your little age is %s",
+  "littlecraft.command.getage.other": "%s's little age is %s",
 
   "littlecraft.command.setage.self": "Your little age is now %s",
   "littlecraft.command.setage.other": "%s's little age is now %s",
@@ -14,5 +12,21 @@
   "littlecraft.notification.item.diaper.change.error.armor_equipped": "You can not equip a diaper instead of someone's armor!",
   "littlecraft.notification.item.diaper.change.error.diaper_used": "You can not equip a used diaper on!",
   "littlecraft.notification.item.diaper.change.success": "You've changed the diaper!",
-  "littlecraft.notification.item.diaper.change.changed_by_other": "You've beed changed!"
+  "littlecraft.notification.item.diaper.change.changed_by_other": "You've beed changed!",
+
+  "effect.littlecraft.regression": "Regression",
+  "effect.littlecraft.growth": "Growth",
+
+  "item.minecraft.potion.effect.littlecraft.regression": "Potion of Regression",
+  "item.minecraft.splash_potion.effect.littlecraft.regression": "Splash Potion of Regression",
+  "item.minecraft.lingering_potion.effect.littlecraft.regression": "Lingering Potion of Regression",
+  "item.minecraft.tipped_arrow.effect.littlecraft.regression": "Arrow of Regression",
+
+  "item.minecraft.potion.effect.littlecraft.growth": "Potion of Growth",
+  "item.minecraft.splash_potion.effect.littlecraft.growth": "Splash Potion of Growth",
+  "item.minecraft.lingering_potion.effect.littlecraft.growth": "Lingering Potion of Growth",
+  "item.minecraft.tipped_arrow.effect.littlecraft.growth": "Arrow of Growth",
+
+  "littlecraft.notification.potion.regression.self": "You feel yourself regressing... your age is now %s",
+  "littlecraft.notification.potion.growth.self": "You feel yourself growing... your age is now %s"
 }

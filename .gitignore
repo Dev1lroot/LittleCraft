@@ -102,6 +102,7 @@ $RECYCLE.BIN/
 
 .gradle
 build/
+memory/
 
 # Ignore Gradle GUI config
 gradle-app.setting

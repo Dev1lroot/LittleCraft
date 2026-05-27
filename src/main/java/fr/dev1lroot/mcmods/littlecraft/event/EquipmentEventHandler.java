@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2026 David Eichendorf <admin@dev1lroot.com>
+ * SPDX-License-Identifier: GPL-3.0-only
+ */
+
 package fr.dev1lroot.mcmods.littlecraft.event;
 
 import fr.dev1lroot.mcmods.littlecraft.content.item.Diaper;
@@ -22,19 +27,19 @@ public class EquipmentEventHandler
         ItemStack from = event.getFrom();
         ItemStack to = event.getTo();
 
-        // Yay! Something got equipped! Let's check if it's a diaper, hehe~
         if (to.getItem() instanceof Diaper.DiaperItem)
         {
             CustomData customData = to.get(DataComponents.CUSTOM_DATA);
+            if (customData == null) customData = CustomData.EMPTY;
 
-            // Oh no, no custom data? Let's fix that before the diaper gets cranky!
-            if (customData == null)
-            {
-                customData = CustomData.EMPTY;
-            }
-
-            // Time to grab (or make) a shiny new NBT tag for our cute diaper~
             CompoundTag tag = customData.copyTag();
+
+            // Ensure DESIGN tag is always present so the renderer and tooltip can read it
+            if (tag.getStringOr("DESIGN", "").isEmpty())
+            {
+                tag.putString("DESIGN", "default");
+                to.set(DataComponents.CUSTOM_DATA, CustomData.of(tag));
+            }
 
             // TODO: Wiggle wiggle! Make diaper equip event happen here and maybe sprinkle some NBT magic!
         }

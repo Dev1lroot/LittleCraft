@@ -1,34 +1,42 @@
 {
+  "itemGroup.littlecraft": "LittleCraft",
   "littlecraft.command.getage.self": "Твій маленький вік: %s",
   "littlecraft.command.getage.other": "Маленький вік %s: %s",
-
   "littlecraft.command.setage.self": "Твій маленький вік тепер %s",
   "littlecraft.command.setage.other": "Маленький вік %s тепер %s",
   "littlecraft.command.setage.notified": "Твій маленький вік встановлено на %s",
-
-  "block.littlecraft.crib": "Дитяче ліжечко",
-
+  "block.littlecraft.white_crib": "Біле дитяче ліжечко",
+  "block.littlecraft.orange_crib": "Помаранчеве дитяче ліжечко",
+  "block.littlecraft.magenta_crib": "Пурпурне дитяче ліжечко",
+  "block.littlecraft.light_blue_crib": "Блакитне дитяче ліжечко",
+  "block.littlecraft.yellow_crib": "Жовте дитяче ліжечко",
+  "block.littlecraft.lime_crib": "Лаймове дитяче ліжечко",
+  "block.littlecraft.pink_crib": "Рожеве дитяче ліжечко",
+  "block.littlecraft.gray_crib": "Сіре дитяче ліжечко",
+  "block.littlecraft.light_gray_crib": "Світло-сіре дитяче ліжечко",
+  "block.littlecraft.cyan_crib": "Бірюзове дитяче ліжечко",
+  "block.littlecraft.purple_crib": "Фіолетове дитяче ліжечко",
+  "block.littlecraft.blue_crib": "Синє дитяче ліжечко",
+  "block.littlecraft.brown_crib": "Коричневе дитяче ліжечко",
+  "block.littlecraft.green_crib": "Зелене дитяче ліжечко",
+  "block.littlecraft.red_crib": "Червоне дитяче ліжечко",
+  "block.littlecraft.black_crib": "Чорне дитяче ліжечко",
   "item.littlecraft.diaper": "Підгузок",
   "item.littlecraft.diaper.design": "Дизайн: %s",
-
   "littlecraft.notification.item.diaper.change.error.armor_equipped": "Не можна вдягти підгузок замість обладунків!",
   "littlecraft.notification.item.diaper.change.error.diaper_used": "Не можна вдягти вже використаний підгузок!",
   "littlecraft.notification.item.diaper.change.success": "Ти змінив підгузок!",
   "littlecraft.notification.item.diaper.change.changed_by_other": "Тебе переодягнули!",
-
   "effect.littlecraft.regression": "Регресія",
   "effect.littlecraft.growth": "Ріст",
-
   "item.minecraft.potion.effect.littlecraft.regression": "Зілля регресії",
   "item.minecraft.splash_potion.effect.littlecraft.regression": "Кидальне зілля регресії",
   "item.minecraft.lingering_potion.effect.littlecraft.regression": "Стійке зілля регресії",
   "item.minecraft.tipped_arrow.effect.littlecraft.regression": "Стріла регресії",
-
   "item.minecraft.potion.effect.littlecraft.growth": "Зілля росту",
   "item.minecraft.splash_potion.effect.littlecraft.growth": "Кидальне зілля росту",
   "item.minecraft.lingering_potion.effect.littlecraft.growth": "Стійке зілля росту",
   "item.minecraft.tipped_arrow.effect.littlecraft.growth": "Стріла росту",
-
   "littlecraft.notification.potion.regression.self": "Ти відчуваєш регресію... твій вік тепер %s",
   "littlecraft.notification.potion.growth.self": "Ти відчуваєш, як ростеш... твій вік тепер %s"
 }

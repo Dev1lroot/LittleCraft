@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "block": "littlecraft:light_gray_crib",
+              "condition": "minecraft:block_state_property",
+              "properties": {
+                "part": "head"
+              }
+            }
+          ],
+          "name": "littlecraft:light_gray_crib"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "littlecraft:blocks/light_gray_crib"
+}

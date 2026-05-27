@@ -1,34 +1,42 @@
 {
+  "itemGroup.littlecraft": "LittleCraft",
   "littlecraft.command.getage.self": "Твой маленький возраст: %s",
   "littlecraft.command.getage.other": "Маленький возраст %s: %s",
-
   "littlecraft.command.setage.self": "Твой маленький возраст теперь %s",
   "littlecraft.command.setage.other": "Маленький возраст %s теперь %s",
   "littlecraft.command.setage.notified": "Твой маленький возраст установлен на %s",
-
-  "block.littlecraft.crib": "Детская кроватка",
-
+  "block.littlecraft.white_crib": "Белая детская кроватка",
+  "block.littlecraft.orange_crib": "Оранжевая детская кроватка",
+  "block.littlecraft.magenta_crib": "Пурпурная детская кроватка",
+  "block.littlecraft.light_blue_crib": "Голубая детская кроватка",
+  "block.littlecraft.yellow_crib": "Жёлтая детская кроватка",
+  "block.littlecraft.lime_crib": "Лаймовая детская кроватка",
+  "block.littlecraft.pink_crib": "Розовая детская кроватка",
+  "block.littlecraft.gray_crib": "Серая детская кроватка",
+  "block.littlecraft.light_gray_crib": "Светло-серая детская кроватка",
+  "block.littlecraft.cyan_crib": "Бирюзовая детская кроватка",
+  "block.littlecraft.purple_crib": "Фиолетовая детская кроватка",
+  "block.littlecraft.blue_crib": "Синяя детская кроватка",
+  "block.littlecraft.brown_crib": "Коричневая детская кроватка",
+  "block.littlecraft.green_crib": "Зелёная детская кроватка",
+  "block.littlecraft.red_crib": "Красная детская кроватка",
+  "block.littlecraft.black_crib": "Чёрная детская кроватка",
   "item.littlecraft.diaper": "Подгузник",
   "item.littlecraft.diaper.design": "Дизайн: %s",
-
   "littlecraft.notification.item.diaper.change.error.armor_equipped": "Нельзя надеть подгузник вместо брони!",
   "littlecraft.notification.item.diaper.change.error.diaper_used": "Нельзя надеть использованный подгузник!",
   "littlecraft.notification.item.diaper.change.success": "Ты сменил подгузник!",
   "littlecraft.notification.item.diaper.change.changed_by_other": "Тебя переодели!",
-
   "effect.littlecraft.regression": "Регрессия",
   "effect.littlecraft.growth": "Рост",
-
   "item.minecraft.potion.effect.littlecraft.regression": "Зелье регрессии",
   "item.minecraft.splash_potion.effect.littlecraft.regression": "Бросательное зелье регрессии",
   "item.minecraft.lingering_potion.effect.littlecraft.regression": "Стойкое зелье регрессии",
   "item.minecraft.tipped_arrow.effect.littlecraft.regression": "Стрела регрессии",
-
   "item.minecraft.potion.effect.littlecraft.growth": "Зелье роста",
   "item.minecraft.splash_potion.effect.littlecraft.growth": "Бросательное зелье роста",
   "item.minecraft.lingering_potion.effect.littlecraft.growth": "Стойкое зелье роста",
   "item.minecraft.tipped_arrow.effect.littlecraft.growth": "Стрела роста",
-
   "littlecraft.notification.potion.regression.self": "Ты чувствуешь регрессию... твой возраст теперь %s",
   "littlecraft.notification.potion.growth.self": "Ты чувствуешь, как растёшь... твой возраст теперь %s"
 }

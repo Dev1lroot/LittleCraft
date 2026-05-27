@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "I": "minecraft:iron_bars",
+    "W": "minecraft:purple_wool",
+    "P": "minecraft:oak_planks"
+  },
+  "pattern": [
+    "IWI",
+    "IWI",
+    "IPI"
+  ],
+  "result": {
+    "id": "littlecraft:purple_crib"
+  }
+}

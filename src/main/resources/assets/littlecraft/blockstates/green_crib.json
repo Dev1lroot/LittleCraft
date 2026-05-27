@@ -1,0 +1,12 @@
+{
+  "variants": {
+    "facing=south,part=head": { "model": "littlecraft:block/crib_head_green" },
+    "facing=west,part=head":  { "model": "littlecraft:block/crib_head_green", "y": 90 },
+    "facing=north,part=head": { "model": "littlecraft:block/crib_head_green", "y": 180 },
+    "facing=east,part=head":  { "model": "littlecraft:block/crib_head_green", "y": 270 },
+    "facing=south,part=foot": { "model": "littlecraft:block/crib_foot_green" },
+    "facing=west,part=foot":  { "model": "littlecraft:block/crib_foot_green", "y": 90 },
+    "facing=north,part=foot": { "model": "littlecraft:block/crib_foot_green", "y": 180 },
+    "facing=east,part=foot":  { "model": "littlecraft:block/crib_foot_green", "y": 270 }
+  }
+}

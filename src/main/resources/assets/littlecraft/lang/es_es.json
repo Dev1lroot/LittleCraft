@@ -1,34 +1,42 @@
 {
+  "itemGroup.littlecraft": "LittleCraft",
   "littlecraft.command.getage.self": "Tu edad pequeña es %s",
   "littlecraft.command.getage.other": "La edad pequeña de %s es %s",
-
   "littlecraft.command.setage.self": "Tu edad pequeña ahora es %s",
   "littlecraft.command.setage.other": "La edad pequeña de %s ahora es %s",
   "littlecraft.command.setage.notified": "Tu edad pequeña ha sido establecida en %s",
-
-  "block.littlecraft.crib": "Cuna",
-
+  "block.littlecraft.white_crib": "Cuna blanca",
+  "block.littlecraft.orange_crib": "Cuna naranja",
+  "block.littlecraft.magenta_crib": "Cuna magenta",
+  "block.littlecraft.light_blue_crib": "Cuna azul claro",
+  "block.littlecraft.yellow_crib": "Cuna amarilla",
+  "block.littlecraft.lime_crib": "Cuna verde lima",
+  "block.littlecraft.pink_crib": "Cuna rosa",
+  "block.littlecraft.gray_crib": "Cuna gris",
+  "block.littlecraft.light_gray_crib": "Cuna gris claro",
+  "block.littlecraft.cyan_crib": "Cuna cian",
+  "block.littlecraft.purple_crib": "Cuna morada",
+  "block.littlecraft.blue_crib": "Cuna azul",
+  "block.littlecraft.brown_crib": "Cuna marrón",
+  "block.littlecraft.green_crib": "Cuna verde",
+  "block.littlecraft.red_crib": "Cuna roja",
+  "block.littlecraft.black_crib": "Cuna negra",
   "item.littlecraft.diaper": "Pañal",
   "item.littlecraft.diaper.design": "Diseño: %s",
-
   "littlecraft.notification.item.diaper.change.error.armor_equipped": "¡No puedes ponerte un pañal en lugar de una armadura!",
   "littlecraft.notification.item.diaper.change.error.diaper_used": "¡No puedes ponerte un pañal usado!",
   "littlecraft.notification.item.diaper.change.success": "¡Has cambiado el pañal!",
   "littlecraft.notification.item.diaper.change.changed_by_other": "¡Te han cambiado el pañal!",
-
   "effect.littlecraft.regression": "Regresión",
   "effect.littlecraft.growth": "Crecimiento",
-
   "item.minecraft.potion.effect.littlecraft.regression": "Poción de Regresión",
   "item.minecraft.splash_potion.effect.littlecraft.regression": "Poción Arrojadiza de Regresión",
   "item.minecraft.lingering_potion.effect.littlecraft.regression": "Poción Persistente de Regresión",
   "item.minecraft.tipped_arrow.effect.littlecraft.regression": "Flecha de Regresión",
-
   "item.minecraft.potion.effect.littlecraft.growth": "Poción de Crecimiento",
   "item.minecraft.splash_potion.effect.littlecraft.growth": "Poción Arrojadiza de Crecimiento",
   "item.minecraft.lingering_potion.effect.littlecraft.growth": "Poción Persistente de Crecimiento",
   "item.minecraft.tipped_arrow.effect.littlecraft.growth": "Flecha de Crecimiento",
-
   "littlecraft.notification.potion.regression.self": "Sientes que regresas... tu edad ahora es %s",
   "littlecraft.notification.potion.growth.self": "Sientes que creces... tu edad ahora es %s"
 }

@@ -1,0 +1,6 @@
+{
+  "parent": "littlecraft:block/crib_foot",
+  "textures": {
+    "2": "littlecraft:block/crib/blue"
+  }
+}

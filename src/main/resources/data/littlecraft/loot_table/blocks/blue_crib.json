@@ -13,18 +13,18 @@
           "type": "minecraft:item",
           "conditions": [
             {
-              "block": "littlecraft:crib",
+              "block": "littlecraft:blue_crib",
               "condition": "minecraft:block_state_property",
               "properties": {
                 "part": "head"
               }
             }
           ],
-          "name": "littlecraft:crib"
+          "name": "littlecraft:blue_crib"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "littlecraft:blocks/crib"
+  "random_sequence": "littlecraft:blocks/blue_crib"
 }

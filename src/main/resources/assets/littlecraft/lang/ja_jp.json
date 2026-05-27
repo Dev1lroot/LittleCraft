@@ -1,34 +1,42 @@
 {
+  "itemGroup.littlecraft": "LittleCraft",
   "littlecraft.command.getage.self": "あなたのリトル年齢は%sです",
   "littlecraft.command.getage.other": "%sのリトル年齢は%sです",
-
   "littlecraft.command.setage.self": "あなたのリトル年齢は%sになりました",
   "littlecraft.command.setage.other": "%sのリトル年齢は%sになりました",
   "littlecraft.command.setage.notified": "あなたのリトル年齢が%sに設定されました",
-
-  "block.littlecraft.crib": "ベビーベッド",
-
+  "block.littlecraft.white_crib": "白いベビーベッド",
+  "block.littlecraft.orange_crib": "オレンジのベビーベッド",
+  "block.littlecraft.magenta_crib": "マゼンタのベビーベッド",
+  "block.littlecraft.light_blue_crib": "空色のベビーベッド",
+  "block.littlecraft.yellow_crib": "黄色のベビーベッド",
+  "block.littlecraft.lime_crib": "黄緑のベビーベッド",
+  "block.littlecraft.pink_crib": "ピンクのベビーベッド",
+  "block.littlecraft.gray_crib": "灰色のベビーベッド",
+  "block.littlecraft.light_gray_crib": "薄灰色のベビーベッド",
+  "block.littlecraft.cyan_crib": "シアンのベビーベッド",
+  "block.littlecraft.purple_crib": "紫のベビーベッド",
+  "block.littlecraft.blue_crib": "青いベビーベッド",
+  "block.littlecraft.brown_crib": "茶色のベビーベッド",
+  "block.littlecraft.green_crib": "緑のベビーベッド",
+  "block.littlecraft.red_crib": "赤いベビーベッド",
+  "block.littlecraft.black_crib": "黒いベビーベッド",
   "item.littlecraft.diaper": "おむつ",
   "item.littlecraft.diaper.design": "デザイン: %s",
-
   "littlecraft.notification.item.diaper.change.error.armor_equipped": "誰かの鎧の代わりにおむつを装備することはできません！",
   "littlecraft.notification.item.diaper.change.error.diaper_used": "使用済みのおむつを装備することはできません！",
   "littlecraft.notification.item.diaper.change.success": "おむつを替えました！",
   "littlecraft.notification.item.diaper.change.changed_by_other": "おむつを替えてもらいました！",
-
   "effect.littlecraft.regression": "退行",
   "effect.littlecraft.growth": "成長",
-
   "item.minecraft.potion.effect.littlecraft.regression": "退行のポーション",
   "item.minecraft.splash_potion.effect.littlecraft.regression": "退行のスプラッシュポーション",
   "item.minecraft.lingering_potion.effect.littlecraft.regression": "退行の残留ポーション",
   "item.minecraft.tipped_arrow.effect.littlecraft.regression": "退行の矢",
-
   "item.minecraft.potion.effect.littlecraft.growth": "成長のポーション",
   "item.minecraft.splash_potion.effect.littlecraft.growth": "成長のスプラッシュポーション",
   "item.minecraft.lingering_potion.effect.littlecraft.growth": "成長の残留ポーション",
   "item.minecraft.tipped_arrow.effect.littlecraft.growth": "成長の矢",
-
   "littlecraft.notification.potion.regression.self": "退行を感じる... あなたの年齢は%sになりました",
   "littlecraft.notification.potion.growth.self": "成長を感じる... あなたの年齢は%sになりました"
 }

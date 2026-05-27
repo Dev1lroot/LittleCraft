@@ -1,34 +1,42 @@
 {
+  "itemGroup.littlecraft": "LittleCraft",
   "littlecraft.command.getage.self": "Ton âge petit est %s",
   "littlecraft.command.getage.other": "L'âge petit de %s est %s",
-
   "littlecraft.command.setage.self": "Ton âge petit est maintenant %s",
   "littlecraft.command.setage.other": "L'âge petit de %s est maintenant %s",
   "littlecraft.command.setage.notified": "Ton âge petit a été défini à %s",
-
-  "block.littlecraft.crib": "Berceau",
-
+  "block.littlecraft.white_crib": "Berceau blanc",
+  "block.littlecraft.orange_crib": "Berceau orange",
+  "block.littlecraft.magenta_crib": "Berceau magenta",
+  "block.littlecraft.light_blue_crib": "Berceau bleu clair",
+  "block.littlecraft.yellow_crib": "Berceau jaune",
+  "block.littlecraft.lime_crib": "Berceau vert citron",
+  "block.littlecraft.pink_crib": "Berceau rose",
+  "block.littlecraft.gray_crib": "Berceau gris",
+  "block.littlecraft.light_gray_crib": "Berceau gris clair",
+  "block.littlecraft.cyan_crib": "Berceau cyan",
+  "block.littlecraft.purple_crib": "Berceau violet",
+  "block.littlecraft.blue_crib": "Berceau bleu",
+  "block.littlecraft.brown_crib": "Berceau marron",
+  "block.littlecraft.green_crib": "Berceau vert",
+  "block.littlecraft.red_crib": "Berceau rouge",
+  "block.littlecraft.black_crib": "Berceau noir",
   "item.littlecraft.diaper": "Couche",
   "item.littlecraft.diaper.design": "Design : %s",
-
   "littlecraft.notification.item.diaper.change.error.armor_equipped": "Tu ne peux pas mettre une couche à la place d'une armure!",
   "littlecraft.notification.item.diaper.change.error.diaper_used": "Tu ne peux pas mettre une couche déjà utilisée!",
   "littlecraft.notification.item.diaper.change.success": "Tu as changé la couche!",
   "littlecraft.notification.item.diaper.change.changed_by_other": "On t’a changé!",
-
   "effect.littlecraft.regression": "Régression",
   "effect.littlecraft.growth": "Croissance",
-
   "item.minecraft.potion.effect.littlecraft.regression": "Potion de Régression",
   "item.minecraft.splash_potion.effect.littlecraft.regression": "Potion jetable de Régression",
   "item.minecraft.lingering_potion.effect.littlecraft.regression": "Potion persistante de Régression",
   "item.minecraft.tipped_arrow.effect.littlecraft.regression": "Flèche de Régression",
-
   "item.minecraft.potion.effect.littlecraft.growth": "Potion de Croissance",
   "item.minecraft.splash_potion.effect.littlecraft.growth": "Potion jetable de Croissance",
   "item.minecraft.lingering_potion.effect.littlecraft.growth": "Potion persistante de Croissance",
   "item.minecraft.tipped_arrow.effect.littlecraft.growth": "Flèche de Croissance",
-
   "littlecraft.notification.potion.regression.self": "Tu te sens régresser... ton âge est maintenant %s",
   "littlecraft.notification.potion.growth.self": "Tu te sens grandir... ton âge est maintenant %s"
 }

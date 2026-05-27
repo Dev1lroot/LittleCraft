@@ -26,6 +26,7 @@ public class LittleContentRegistry
         ITEMS.register(bus);
         BLOCKS.register(bus);
         BLOCK_ENTITY_TYPES.register(bus);
+        LittleCreativeTab.CREATIVE_TABS.register(bus);
 
         fr.dev1lroot.mcmods.littlecraft.content.item.Diaper.register();
         fr.dev1lroot.mcmods.littlecraft.content.Crib.register();

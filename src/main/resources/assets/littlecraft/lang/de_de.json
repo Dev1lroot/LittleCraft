@@ -1,34 +1,42 @@
 {
+  "itemGroup.littlecraft": "LittleCraft",
   "littlecraft.command.getage.self": "Dein Little-Alter ist %s",
   "littlecraft.command.getage.other": "Das Little-Alter von %s ist %s",
-
   "littlecraft.command.setage.self": "Dein Little-Alter ist jetzt %s",
   "littlecraft.command.setage.other": "Das Little-Alter von %s ist jetzt %s",
   "littlecraft.command.setage.notified": "Dein Little-Alter wurde auf %s gesetzt",
-
-  "block.littlecraft.crib": "Kinderbett",
-
+  "block.littlecraft.white_crib": "Weißes Kinderbett",
+  "block.littlecraft.orange_crib": "Oranges Kinderbett",
+  "block.littlecraft.magenta_crib": "Magentafarbenes Kinderbett",
+  "block.littlecraft.light_blue_crib": "Hellblaues Kinderbett",
+  "block.littlecraft.yellow_crib": "Gelbes Kinderbett",
+  "block.littlecraft.lime_crib": "Lindgrünes Kinderbett",
+  "block.littlecraft.pink_crib": "Pinkes Kinderbett",
+  "block.littlecraft.gray_crib": "Graues Kinderbett",
+  "block.littlecraft.light_gray_crib": "Hellgraues Kinderbett",
+  "block.littlecraft.cyan_crib": "Cyanfarbenes Kinderbett",
+  "block.littlecraft.purple_crib": "Violettes Kinderbett",
+  "block.littlecraft.blue_crib": "Blaues Kinderbett",
+  "block.littlecraft.brown_crib": "Braunes Kinderbett",
+  "block.littlecraft.green_crib": "Grünes Kinderbett",
+  "block.littlecraft.red_crib": "Rotes Kinderbett",
+  "block.littlecraft.black_crib": "Schwarzes Kinderbett",
   "item.littlecraft.diaper": "Windel",
   "item.littlecraft.diaper.design": "Design: %s",
-
   "littlecraft.notification.item.diaper.change.error.armor_equipped": "Du kannst keine Windel anstelle einer Rüstung anlegen!",
   "littlecraft.notification.item.diaper.change.error.diaper_used": "Du kannst keine benutzte Windel anlegen!",
   "littlecraft.notification.item.diaper.change.success": "Du hast die Windel gewechselt!",
   "littlecraft.notification.item.diaper.change.changed_by_other": "Du wurdest gewickelt!",
-
   "effect.littlecraft.regression": "Regression",
   "effect.littlecraft.growth": "Wachstum",
-
   "item.minecraft.potion.effect.littlecraft.regression": "Regressionstrank",
   "item.minecraft.splash_potion.effect.littlecraft.regression": "Wurftrank der Regression",
   "item.minecraft.lingering_potion.effect.littlecraft.regression": "Verweilender Trank der Regression",
   "item.minecraft.tipped_arrow.effect.littlecraft.regression": "Pfeil der Regression",
-
   "item.minecraft.potion.effect.littlecraft.growth": "Wachstumstrank",
   "item.minecraft.splash_potion.effect.littlecraft.growth": "Wurftrank des Wachstums",
   "item.minecraft.lingering_potion.effect.littlecraft.growth": "Verweilender Trank des Wachstums",
   "item.minecraft.tipped_arrow.effect.littlecraft.growth": "Pfeil des Wachstums",
-
   "littlecraft.notification.potion.regression.self": "Du spürst, wie du kleiner wirst... dein Alter ist jetzt %s",
   "littlecraft.notification.potion.growth.self": "Du spürst, wie du wächst... dein Alter ist jetzt %s"
 }

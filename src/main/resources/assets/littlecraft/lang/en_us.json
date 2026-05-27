@@ -1,34 +1,42 @@
 {
+  "itemGroup.littlecraft": "LittleCraft",
   "littlecraft.command.getage.self": "Your little age is %s",
   "littlecraft.command.getage.other": "%s's little age is %s",
-
   "littlecraft.command.setage.self": "Your little age is now %s",
   "littlecraft.command.setage.other": "%s's little age is now %s",
   "littlecraft.command.setage.notified": "Your little age has been set to %s",
-
-  "block.littlecraft.crib": "Crib",
-
+  "block.littlecraft.white_crib": "White Crib",
+  "block.littlecraft.orange_crib": "Orange Crib",
+  "block.littlecraft.magenta_crib": "Magenta Crib",
+  "block.littlecraft.light_blue_crib": "Light Blue Crib",
+  "block.littlecraft.yellow_crib": "Yellow Crib",
+  "block.littlecraft.lime_crib": "Lime Crib",
+  "block.littlecraft.pink_crib": "Pink Crib",
+  "block.littlecraft.gray_crib": "Gray Crib",
+  "block.littlecraft.light_gray_crib": "Light Gray Crib",
+  "block.littlecraft.cyan_crib": "Cyan Crib",
+  "block.littlecraft.purple_crib": "Purple Crib",
+  "block.littlecraft.blue_crib": "Blue Crib",
+  "block.littlecraft.brown_crib": "Brown Crib",
+  "block.littlecraft.green_crib": "Green Crib",
+  "block.littlecraft.red_crib": "Red Crib",
+  "block.littlecraft.black_crib": "Black Crib",
   "item.littlecraft.diaper": "Diaper",
   "item.littlecraft.diaper.design": "Design: %s",
-
   "littlecraft.notification.item.diaper.change.error.armor_equipped": "You can not equip a diaper instead of someone's armor!",
   "littlecraft.notification.item.diaper.change.error.diaper_used": "You can not equip a used diaper on!",
   "littlecraft.notification.item.diaper.change.success": "You've changed the diaper!",
   "littlecraft.notification.item.diaper.change.changed_by_other": "You've beed changed!",
-
   "effect.littlecraft.regression": "Regression",
   "effect.littlecraft.growth": "Growth",
-
   "item.minecraft.potion.effect.littlecraft.regression": "Potion of Regression",
   "item.minecraft.splash_potion.effect.littlecraft.regression": "Splash Potion of Regression",
   "item.minecraft.lingering_potion.effect.littlecraft.regression": "Lingering Potion of Regression",
   "item.minecraft.tipped_arrow.effect.littlecraft.regression": "Arrow of Regression",
-
   "item.minecraft.potion.effect.littlecraft.growth": "Potion of Growth",
   "item.minecraft.splash_potion.effect.littlecraft.growth": "Splash Potion of Growth",
   "item.minecraft.lingering_potion.effect.littlecraft.growth": "Lingering Potion of Growth",
   "item.minecraft.tipped_arrow.effect.littlecraft.growth": "Arrow of Growth",
-
   "littlecraft.notification.potion.regression.self": "You feel yourself regressing... your age is now %s",
   "littlecraft.notification.potion.growth.self": "You feel yourself growing... your age is now %s"
 }

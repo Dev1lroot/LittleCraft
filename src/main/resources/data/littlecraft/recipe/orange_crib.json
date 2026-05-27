@@ -3,7 +3,7 @@
   "category": "misc",
   "key": {
     "I": "minecraft:iron_bars",
-    "W": "minecraft:white_wool",
+    "W": "minecraft:orange_wool",
     "P": "minecraft:oak_planks"
   },
   "pattern": [
@@ -12,6 +12,6 @@
     "IPI"
   ],
   "result": {
-    "id": "littlecraft:crib"
+    "id": "littlecraft:orange_crib"
   }
 }

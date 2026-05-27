@@ -14,15 +14,16 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 
-public class CribBlock extends BedBlock
+public class AbstractCribBlock extends BedBlock
 {
     @SuppressWarnings("unchecked")
     private static final MapCodec<BedBlock> CODEC =
-        (MapCodec<BedBlock>) (MapCodec<?>) simpleCodec(CribBlock::new);
+        (MapCodec<BedBlock>) (MapCodec<?>) simpleCodec(
+            props -> new AbstractCribBlock(DyeColor.WHITE, props));
 
-    public CribBlock(BlockBehaviour.Properties properties)
+    public AbstractCribBlock(DyeColor color, BlockBehaviour.Properties properties)
     {
-        super(DyeColor.WHITE, properties);
+        super(color, properties);
     }
 
     @Override

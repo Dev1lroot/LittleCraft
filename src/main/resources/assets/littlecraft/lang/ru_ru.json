@@ -38,5 +38,9 @@
   "item.minecraft.lingering_potion.effect.littlecraft.growth": "Стойкое зелье роста",
   "item.minecraft.tipped_arrow.effect.littlecraft.growth": "Стрела роста",
   "littlecraft.notification.potion.regression.self": "Ты чувствуешь регрессию... твой возраст теперь %s",
-  "littlecraft.notification.potion.growth.self": "Ты чувствуешь, как растёшь... твой возраст теперь %s"
+  "littlecraft.notification.potion.growth.self": "Ты чувствуешь, как растёшь... твой возраст теперь %s",
+  "littlecraft.carry.started.carrier": "Ты несёшь %s!",
+  "littlecraft.carry.started.little": "Тебя несёт %s!",
+  "littlecraft.carry.stopped.carrier": "Ты опустил(а) %s.",
+  "littlecraft.carry.stopped.little": "Тебя опустил(а) %s."
 }

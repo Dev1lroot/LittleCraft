@@ -38,5 +38,9 @@
   "item.minecraft.lingering_potion.effect.littlecraft.growth": "Lingering Potion of Growth",
   "item.minecraft.tipped_arrow.effect.littlecraft.growth": "Arrow of Growth",
   "littlecraft.notification.potion.regression.self": "You feel yourself regressing... your age is now %s",
-  "littlecraft.notification.potion.growth.self": "You feel yourself growing... your age is now %s"
+  "littlecraft.notification.potion.growth.self": "You feel yourself growing... your age is now %s",
+  "littlecraft.carry.started.carrier": "You're carrying %s!",
+  "littlecraft.carry.started.little": "You're being carried by %s!",
+  "littlecraft.carry.stopped.carrier": "You put %s down.",
+  "littlecraft.carry.stopped.little": "You were put down by %s."
 }

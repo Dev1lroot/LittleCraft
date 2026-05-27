@@ -38,5 +38,9 @@
   "item.minecraft.lingering_potion.effect.littlecraft.growth": "Стійке зілля росту",
   "item.minecraft.tipped_arrow.effect.littlecraft.growth": "Стріла росту",
   "littlecraft.notification.potion.regression.self": "Ти відчуваєш регресію... твій вік тепер %s",
-  "littlecraft.notification.potion.growth.self": "Ти відчуваєш, як ростеш... твій вік тепер %s"
+  "littlecraft.notification.potion.growth.self": "Ти відчуваєш, як ростеш... твій вік тепер %s",
+  "littlecraft.carry.started.carrier": "Ти несеш %s!",
+  "littlecraft.carry.started.little": "Тебе несе %s!",
+  "littlecraft.carry.stopped.carrier": "Ти опустив(ла) %s.",
+  "littlecraft.carry.stopped.little": "Тебе опустив(ла) %s."
 }

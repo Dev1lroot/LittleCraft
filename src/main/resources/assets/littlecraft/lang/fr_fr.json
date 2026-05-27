@@ -38,5 +38,9 @@
   "item.minecraft.lingering_potion.effect.littlecraft.growth": "Potion persistante de Croissance",
   "item.minecraft.tipped_arrow.effect.littlecraft.growth": "Flèche de Croissance",
   "littlecraft.notification.potion.regression.self": "Tu te sens régresser... ton âge est maintenant %s",
-  "littlecraft.notification.potion.growth.self": "Tu te sens grandir... ton âge est maintenant %s"
+  "littlecraft.notification.potion.growth.self": "Tu te sens grandir... ton âge est maintenant %s",
+  "littlecraft.carry.started.carrier": "Tu portes %s !",
+  "littlecraft.carry.started.little": "Tu es porté(e) par %s !",
+  "littlecraft.carry.stopped.carrier": "Tu as posé %s.",
+  "littlecraft.carry.stopped.little": "Tu as été posé(e) par %s."
 }

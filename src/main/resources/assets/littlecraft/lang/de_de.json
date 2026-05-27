@@ -38,5 +38,9 @@
   "item.minecraft.lingering_potion.effect.littlecraft.growth": "Verweilender Trank des Wachstums",
   "item.minecraft.tipped_arrow.effect.littlecraft.growth": "Pfeil des Wachstums",
   "littlecraft.notification.potion.regression.self": "Du spürst, wie du kleiner wirst... dein Alter ist jetzt %s",
-  "littlecraft.notification.potion.growth.self": "Du spürst, wie du wächst... dein Alter ist jetzt %s"
+  "littlecraft.notification.potion.growth.self": "Du spürst, wie du wächst... dein Alter ist jetzt %s",
+  "littlecraft.carry.started.carrier": "Du trägst %s!",
+  "littlecraft.carry.started.little": "Du wirst von %s getragen!",
+  "littlecraft.carry.stopped.carrier": "Du hast %s abgesetzt.",
+  "littlecraft.carry.stopped.little": "Du wurdest von %s abgesetzt."
 }

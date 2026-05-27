@@ -8,7 +8,8 @@
     "LittleSizeMixin",
     "PlayerTickMixin",
     "LocalPlayerLittleMixin",
-    "PlayerPersistentLittleMixin"
+    "PlayerPersistentLittleMixin",
+    "PlayerVehicleMixin"
   ],
   "client": [
     "client.LittleHeadScaleMixin"

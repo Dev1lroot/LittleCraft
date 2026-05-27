@@ -38,5 +38,9 @@
   "item.minecraft.lingering_potion.effect.littlecraft.growth": "成長の残留ポーション",
   "item.minecraft.tipped_arrow.effect.littlecraft.growth": "成長の矢",
   "littlecraft.notification.potion.regression.self": "退行を感じる... あなたの年齢は%sになりました",
-  "littlecraft.notification.potion.growth.self": "成長を感じる... あなたの年齢は%sになりました"
+  "littlecraft.notification.potion.growth.self": "成長を感じる... あなたの年齢は%sになりました",
+  "littlecraft.carry.started.carrier": "%sを抱っこしています！",
+  "littlecraft.carry.started.little": "%sに抱っこされています！",
+  "littlecraft.carry.stopped.carrier": "%sを下ろしました。",
+  "littlecraft.carry.stopped.little": "%sに下ろされました。"
 }

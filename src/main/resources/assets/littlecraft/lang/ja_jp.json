@@ -6,6 +6,8 @@
   "littlecraft.command.setage.other": "%sのリトル年齢は%sになりました",
   "littlecraft.command.setage.notified": "あなたのリトル年齢が%sに設定されました",
 
+  "block.littlecraft.crib": "ベビーベッド",
+
   "item.littlecraft.diaper": "おむつ",
   "item.littlecraft.diaper.design": "デザイン: %s",
 

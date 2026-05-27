@@ -5,7 +5,9 @@
 
 package fr.dev1lroot.mcmods.littlecraft.client;
 
+import fr.dev1lroot.mcmods.littlecraft.client.render.CribRenderer;
 import fr.dev1lroot.mcmods.littlecraft.client.render.DiaperLayer;
+import fr.dev1lroot.mcmods.littlecraft.content.Crib;
 import fr.dev1lroot.mcmods.littlecraft.model.DiaperModel;
 import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
@@ -28,6 +30,7 @@ public class ClientRegistry
     {
         modEventBus.addListener(ClientRegistry::onRegisterLayerDefinitions);
         modEventBus.addListener(ClientRegistry::onAddLayers);
+        modEventBus.addListener(ClientRegistry::onRegisterBlockEntityRenderers);
         modEventBus.addListener(ClientRegistry::onAddClientReloadListeners);
     }
 
@@ -36,12 +39,16 @@ public class ClientRegistry
         event.registerLayerDefinition(DiaperModel.LAYER_LOCATION, DiaperModel::createBodyLayer);
     }
 
+    private static void onRegisterBlockEntityRenderers(EntityRenderersEvent.RegisterRenderers event)
+    {
+        event.registerBlockEntityRenderer(Crib.CRIB_BLOCK_ENTITY.get(), CribRenderer::new);
+    }
+
     @SuppressWarnings("unchecked")
     private static void onAddLayers(EntityRenderersEvent.AddLayers event)
     {
         EntityModelSet modelSet = event.getEntityModels();
 
-        // Players (both WIDE and SLIM skin types)
         for (PlayerModelType type : PlayerModelType.values())
         {
             var renderer = event.getPlayerRenderer(type);
@@ -51,7 +58,6 @@ public class ClientRegistry
             }
         }
 
-        // Armor stands
         var armorStandRenderer = (LivingEntityRenderer) event.<net.minecraft.world.entity.decoration.ArmorStand, LivingEntityRenderer>getRenderer(EntityType.ARMOR_STAND);
         if (armorStandRenderer != null)
         {
@@ -61,7 +67,6 @@ public class ClientRegistry
 
     private static void onAddClientReloadListeners(AddClientReloadListenersEvent event)
     {
-        // Clear the per-design texture cache so newly added resource packs are picked up
         event.addListener(
             Identifier.fromNamespaceAndPath(MODID, "diaper_texture_cache"),
             (ResourceManagerReloadListener) rm -> DiaperLayer.clearCache()

@@ -6,6 +6,8 @@
   "littlecraft.command.setage.other": "Маленький вік %s тепер %s",
   "littlecraft.command.setage.notified": "Твій маленький вік встановлено на %s",
 
+  "block.littlecraft.crib": "Дитяче ліжечко",
+
   "item.littlecraft.diaper": "Підгузок",
   "item.littlecraft.diaper.design": "Дизайн: %s",
 

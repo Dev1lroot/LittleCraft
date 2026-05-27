@@ -6,6 +6,8 @@
   "littlecraft.command.setage.other": "Das Little-Alter von %s ist jetzt %s",
   "littlecraft.command.setage.notified": "Dein Little-Alter wurde auf %s gesetzt",
 
+  "block.littlecraft.crib": "Kinderbett",
+
   "item.littlecraft.diaper": "Windel",
   "item.littlecraft.diaper.design": "Design: %s",
 

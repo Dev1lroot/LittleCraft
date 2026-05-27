@@ -34,8 +34,8 @@ These features are especially useful on **ABDL** and **Agere** servers where siz
 
 | Result | Ingredients |
 |--------|-------------|
-| Potion of Regression | Awkward Potion + Golden Dandelion |
-| Potion of Growth | Awkward Potion + Bone Meal |
+| ![](./documentation/images/potion_of_regression.png) Potion of Regression | ![](./documentation/images/awkward_potion.png) Awkward Potion + ![](./documentation/images/golden_dandelion.png) Golden Dandelion |
+| ![](./documentation/images/potion_of_growth.png) Potion of Growth | ![](./documentation/images/awkward_potion.png) Awkward Potion + ![](./documentation/images/bone_meal.png) Bone Meal |
 
 Splash and Lingering variants follow standard vanilla brewing (Gunpowder / Dragon's Breath).
 

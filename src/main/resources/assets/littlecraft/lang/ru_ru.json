@@ -32,6 +32,7 @@
   "item.littlecraft.diaper.design": "Дизайн: %s",
   "item.littlecraft.diaper.capacity": "Ёмкость:",
   "item.littlecraft.diaper.used": "Использовано:",
+  "item.littlecraft.diaper.pooped": "Испачкан",
   "littlecraft.notification.item.diaper.change.error.armor_equipped": "Нельзя надеть подгузник вместо брони!",
   "littlecraft.notification.item.diaper.change.error.diaper_used": "Нельзя надеть использованный подгузник!",
   "littlecraft.notification.item.diaper.change.success": "Ты сменил подгузник!",

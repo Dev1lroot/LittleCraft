@@ -5,9 +5,11 @@
 
 package fr.dev1lroot.mcmods.littlecraft.event;
 
+import fr.dev1lroot.mcmods.littlecraft.content.LittleMobEffects;
 import fr.dev1lroot.mcmods.littlecraft.content.item.Diaper;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.item.component.CustomData;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -42,6 +44,9 @@ public class EquipmentEventHandler
             }
 
             // TODO: Wiggle wiggle! Make diaper equip event happen here and maybe sprinkle some NBT magic!
+
+            if (Diaper.isPooped(to) && !entity.level().isClientSide())
+                entity.addEffect(new MobEffectInstance(LittleMobEffects.STINK, MobEffectInstance.INFINITE_DURATION, 0));
         }
 
         // Awww... something got unequipped. Let's see if the diaper went bye-bye~

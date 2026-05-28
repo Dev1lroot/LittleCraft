@@ -11,6 +11,8 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
+import net.minecraft.network.chat.TextColor;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundEvents;
@@ -70,6 +72,10 @@ public class Diaper
             consumer.accept(Component.translatable("item.littlecraft.diaper.used")
                     .append(Component.literal(" " + String.format(Locale.ENGLISH, "%,d", used) + "ml"))
                     .withStyle(ChatFormatting.GRAY));
+
+            if (Diaper.isPooped(stack))
+                consumer.accept(Component.translatable("item.littlecraft.diaper.pooped")
+                        .withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0x8B4513))));
         }
 
         @Override
@@ -81,7 +87,7 @@ public class Diaper
                 {
                     ItemStack butt = target.getItemBySlot(EquipmentSlot.LEGS);
 
-                    if(Diaper.getUsed(stack) == 0 && stack.getDamageValue() == 0)
+                    if(Diaper.getUsed(stack) == 0 && stack.getDamageValue() == 0 && !Diaper.isPooped(stack))
                     {
                         if(butt.isEmpty() || butt.getItem() instanceof DiaperItem)
                         {
@@ -155,6 +161,23 @@ public class Diaper
         CustomData existing = result.get(DataComponents.CUSTOM_DATA);
         CompoundTag tag = existing != null ? existing.copyTag() : new CompoundTag();
         tag.putInt("used", Math.min(value, getCapacity(stack)));
+        result.set(DataComponents.CUSTOM_DATA, CustomData.of(tag));
+        return result;
+    }
+
+    public static boolean isPooped(ItemStack stack)
+    {
+        CustomData data = stack.get(DataComponents.CUSTOM_DATA);
+        if (data != null) return data.copyTag().getBooleanOr("is_pooped", false);
+        return false;
+    }
+
+    public static ItemStack setPooped(ItemStack stack, boolean value)
+    {
+        ItemStack result = stack.copy();
+        CustomData existing = result.get(DataComponents.CUSTOM_DATA);
+        CompoundTag tag = existing != null ? existing.copyTag() : new CompoundTag();
+        tag.putBoolean("is_pooped", value);
         result.set(DataComponents.CUSTOM_DATA, CustomData.of(tag));
         return result;
     }

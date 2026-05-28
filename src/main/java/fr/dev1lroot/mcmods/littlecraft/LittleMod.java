@@ -8,6 +8,7 @@ package fr.dev1lroot.mcmods.littlecraft;
 import fr.dev1lroot.mcmods.littlecraft.command.LittleCommand;
 import fr.dev1lroot.mcmods.littlecraft.content.LittleContentRegistry;
 import fr.dev1lroot.mcmods.littlecraft.network.PissPacket;
+import fr.dev1lroot.mcmods.littlecraft.network.PoopPacket;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
@@ -56,6 +57,7 @@ public class LittleMod
     private static void onRegisterPayloadHandlers(RegisterPayloadHandlersEvent event)
     {
         event.registrar("1")
-                .playToServer(PissPacket.TYPE, PissPacket.STREAM_CODEC, PissPacket::handle);
+                .playToServer(PissPacket.TYPE, PissPacket.STREAM_CODEC, PissPacket::handle)
+                .playToServer(PoopPacket.TYPE, PoopPacket.STREAM_CODEC, PoopPacket::handle);
     }
 }

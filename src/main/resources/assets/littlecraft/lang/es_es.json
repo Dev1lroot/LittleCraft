@@ -32,6 +32,7 @@
   "item.littlecraft.diaper.design": "Diseño: %s",
   "item.littlecraft.diaper.capacity": "Capacidad:",
   "item.littlecraft.diaper.used": "Usado:",
+  "item.littlecraft.diaper.pooped": "Ensuciado",
   "littlecraft.notification.item.diaper.change.error.armor_equipped": "¡No puedes ponerte un pañal en lugar de una armadura!",
   "littlecraft.notification.item.diaper.change.error.diaper_used": "¡No puedes ponerte un pañal usado!",
   "littlecraft.notification.item.diaper.change.success": "¡Has cambiado el pañal!",

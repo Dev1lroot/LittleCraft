@@ -7,6 +7,7 @@ package fr.dev1lroot.mcmods.littlecraft.event;
 
 import fr.dev1lroot.mcmods.littlecraft.client.LittleKeys;
 import fr.dev1lroot.mcmods.littlecraft.network.PissPacket;
+import fr.dev1lroot.mcmods.littlecraft.network.PoopPacket;
 import net.minecraft.client.Minecraft;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -40,5 +41,8 @@ public class BodyMechanicsClientEvents
         {
             pissTick = 0;
         }
+
+        while (LittleKeys.KEY_POOP.consumeClick())
+            ClientPacketDistributor.sendToServer(new PoopPacket());
     }
 }

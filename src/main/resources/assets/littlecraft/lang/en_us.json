@@ -48,6 +48,7 @@
   "item.littlecraft.diaper.design": "Design: %s",
   "item.littlecraft.diaper.capacity": "Capacity:",
   "item.littlecraft.diaper.used": "Used:",
+  "item.littlecraft.diaper.pooped": "Pooped",
   "littlecraft.notification.item.diaper.change.error.armor_equipped": "You can not equip a diaper instead of someone's armor!",
   "littlecraft.notification.item.diaper.change.error.diaper_used": "You can not equip a used diaper on!",
   "littlecraft.notification.item.diaper.change.success": "You've changed the diaper!",

@@ -91,18 +91,17 @@ public class DiaperLayer<S extends HumanoidRenderState, M extends EntityModel<? 
 
         Identifier[] textures = resolveTextures(design);
 
-        int damage = legs.getDamageValue();
-        primaryModel.damage = damage;
-        wetnessModel.damage = damage;
+        int used     = Diaper.getUsed(legs);
+        int capacity = Diaper.getCapacity(legs);
 
         primaryModel.setupAnim(state);
         wetnessModel.setupAnim(state);
 
         renderColoredCutoutModel(primaryModel, textures[0], pose, collector, light, state, -1, -1);
 
-        if (damage > 0)
+        if (used > 0)
         {
-            int alpha = Math.min(damage, 255);
+            int alpha = Math.min(255, Math.round(255f * used / capacity));
             int color = (alpha << 24) | 0x00FFFFFF;
             collector.order(color)
                     .submitModel(

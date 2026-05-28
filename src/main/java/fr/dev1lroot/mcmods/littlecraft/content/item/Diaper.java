@@ -6,6 +6,8 @@
 package fr.dev1lroot.mcmods.littlecraft.content.item;
 
 import fr.dev1lroot.mcmods.littlecraft.content.LittleContentRegistry;
+import fr.dev1lroot.mcmods.littlecraft.content.recipe.DiaperPaddingRecipe;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -29,12 +31,16 @@ import net.minecraft.world.item.equipment.EquipmentAssets;
 import net.neoforged.neoforge.registries.DeferredItem;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Locale;
 import java.util.function.Consumer;
 
 import static fr.dev1lroot.mcmods.littlecraft.LittleMod.MODID;
 
 public class Diaper
 {
+    public static final int BASE_CAPACITY = 1000;
+    public static final int MAX_CAPACITY  = 11000;
+
     public static class DiaperItem extends Item
     {
         public DiaperItem(Properties properties)
@@ -54,6 +60,16 @@ public class Diaper
                 if (!design.isEmpty())
                     consumer.accept(Component.translatable("item.littlecraft.diaper.design", design));
             }
+
+            int capacity = Diaper.getCapacity(stack);
+            int used     = Diaper.getUsed(stack);
+
+            consumer.accept(Component.translatable("item.littlecraft.diaper.capacity")
+                    .append(Component.literal(" " + String.format(Locale.ENGLISH, "%,d", capacity) + "ml"))
+                    .withStyle(ChatFormatting.GRAY));
+            consumer.accept(Component.translatable("item.littlecraft.diaper.used")
+                    .append(Component.literal(" " + String.format(Locale.ENGLISH, "%,d", used) + "ml"))
+                    .withStyle(ChatFormatting.GRAY));
         }
 
         @Override
@@ -65,7 +81,7 @@ public class Diaper
                 {
                     ItemStack butt = target.getItemBySlot(EquipmentSlot.LEGS);
 
-                    if(stack.getDamageValue() == 0)
+                    if(Diaper.getUsed(stack) == 0 && stack.getDamageValue() == 0)
                     {
                         if(butt.isEmpty() || butt.getItem() instanceof DiaperItem)
                         {
@@ -114,7 +130,33 @@ public class Diaper
     {
         CompoundTag tag = new CompoundTag();
         tag.putString("DESIGN", "default");
+        tag.putInt("capacity", BASE_CAPACITY);
+        tag.putInt("used", 0);
         return CustomData.of(tag);
+    }
+
+    public static int getCapacity(ItemStack stack)
+    {
+        CustomData data = stack.get(DataComponents.CUSTOM_DATA);
+        if (data != null) return data.copyTag().getIntOr("capacity", BASE_CAPACITY);
+        return BASE_CAPACITY;
+    }
+
+    public static int getUsed(ItemStack stack)
+    {
+        CustomData data = stack.get(DataComponents.CUSTOM_DATA);
+        if (data != null) return data.copyTag().getIntOr("used", 0);
+        return 0;
+    }
+
+    public static ItemStack setUsed(ItemStack stack, int value)
+    {
+        ItemStack result = stack.copy();
+        CustomData existing = result.get(DataComponents.CUSTOM_DATA);
+        CompoundTag tag = existing != null ? existing.copyTag() : new CompoundTag();
+        tag.putInt("used", Math.min(value, getCapacity(stack)));
+        result.set(DataComponents.CUSTOM_DATA, CustomData.of(tag));
+        return result;
     }
 
     public static final DeferredItem<DiaperItem> DIAPER =
@@ -129,5 +171,8 @@ public class Diaper
                                             .build())
                     ));
 
-    public static void register() {}
+    public static void register()
+    {
+        DiaperPaddingRecipe.registerSerializer();
+    }
 }

@@ -30,8 +30,6 @@ public class DiaperModel extends EntityModel<HumanoidRenderState>
     public final ModelPart primary_inner;
     public final ModelPart overlay_inner;
 
-    public int damage = 0;
-
     public DiaperModel(ModelPart root)
     {
         super(root);

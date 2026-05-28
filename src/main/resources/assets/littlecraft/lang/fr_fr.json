@@ -30,6 +30,8 @@
   "item.littlecraft.thigh_highs.base_color": "Couleur de base :",
   "item.littlecraft.thigh_highs.stripe_color": "Couleur des rayures :",
   "item.littlecraft.diaper.design": "Design : %s",
+  "item.littlecraft.diaper.capacity": "Capacité :",
+  "item.littlecraft.diaper.used": "Utilisé :",
   "littlecraft.notification.item.diaper.change.error.armor_equipped": "Tu ne peux pas mettre une couche à la place d'une armure!",
   "littlecraft.notification.item.diaper.change.error.diaper_used": "Tu ne peux pas mettre une couche déjà utilisée!",
   "littlecraft.notification.item.diaper.change.success": "Tu as changé la couche!",

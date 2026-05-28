@@ -30,6 +30,8 @@
   "item.littlecraft.thigh_highs.base_color": "Color base:",
   "item.littlecraft.thigh_highs.stripe_color": "Color de la raya:",
   "item.littlecraft.diaper.design": "Diseño: %s",
+  "item.littlecraft.diaper.capacity": "Capacidad:",
+  "item.littlecraft.diaper.used": "Usado:",
   "littlecraft.notification.item.diaper.change.error.armor_equipped": "¡No puedes ponerte un pañal en lugar de una armadura!",
   "littlecraft.notification.item.diaper.change.error.diaper_used": "¡No puedes ponerte un pañal usado!",
   "littlecraft.notification.item.diaper.change.success": "¡Has cambiado el pañal!",

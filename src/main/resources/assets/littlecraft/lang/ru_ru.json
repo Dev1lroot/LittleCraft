@@ -30,6 +30,8 @@
   "item.littlecraft.thigh_highs.base_color": "Основной цвет:",
   "item.littlecraft.thigh_highs.stripe_color": "Цвет полосок:",
   "item.littlecraft.diaper.design": "Дизайн: %s",
+  "item.littlecraft.diaper.capacity": "Ёмкость:",
+  "item.littlecraft.diaper.used": "Использовано:",
   "littlecraft.notification.item.diaper.change.error.armor_equipped": "Нельзя надеть подгузник вместо брони!",
   "littlecraft.notification.item.diaper.change.error.diaper_used": "Нельзя надеть использованный подгузник!",
   "littlecraft.notification.item.diaper.change.success": "Ты сменил подгузник!",

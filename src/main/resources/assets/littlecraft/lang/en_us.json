@@ -46,6 +46,8 @@
   "item.littlecraft.thigh_highs.base_color": "Base Color:",
   "item.littlecraft.thigh_highs.stripe_color": "Stripe Color:",
   "item.littlecraft.diaper.design": "Design: %s",
+  "item.littlecraft.diaper.capacity": "Capacity:",
+  "item.littlecraft.diaper.used": "Used:",
   "littlecraft.notification.item.diaper.change.error.armor_equipped": "You can not equip a diaper instead of someone's armor!",
   "littlecraft.notification.item.diaper.change.error.diaper_used": "You can not equip a used diaper on!",
   "littlecraft.notification.item.diaper.change.success": "You've changed the diaper!",

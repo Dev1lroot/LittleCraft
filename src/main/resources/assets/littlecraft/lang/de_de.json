@@ -30,6 +30,8 @@
   "item.littlecraft.thigh_highs.base_color": "Grundfarbe:",
   "item.littlecraft.thigh_highs.stripe_color": "Streifenfarbe:",
   "item.littlecraft.diaper.design": "Design: %s",
+  "item.littlecraft.diaper.capacity": "Kapazität:",
+  "item.littlecraft.diaper.used": "Verwendet:",
   "littlecraft.notification.item.diaper.change.error.armor_equipped": "Du kannst keine Windel anstelle einer Rüstung anlegen!",
   "littlecraft.notification.item.diaper.change.error.diaper_used": "Du kannst keine benutzte Windel anlegen!",
   "littlecraft.notification.item.diaper.change.success": "Du hast die Windel gewechselt!",

@@ -11,6 +11,8 @@ import fr.dev1lroot.mcmods.littlecraft.content.item.Diaper;
 import fr.dev1lroot.mcmods.littlecraft.network.PissPacket;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -64,6 +66,15 @@ public abstract class PlayerTickMixin
                     player.setItemSlot(EquipmentSlot.LEGS, Diaper.setUsed(diaper, used + 1));
                     LittleData.setBladder(player, bladder - 1);
                 }
+            }
+
+            if (player.tickCount % 10 == 0 && !player.level().isClientSide())
+            {
+                if (Diaper.isPooped(diaper) && !player.hasEffect(LittleMobEffects.STINK))
+                    player.addEffect(new MobEffectInstance(LittleMobEffects.STINK, MobEffectInstance.INFINITE_DURATION, 0));
+
+                if (used >= 5000)
+                    player.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 60, 0));
             }
 
             if (used >= capacity - 200 && player.tickCount % 10 == 0

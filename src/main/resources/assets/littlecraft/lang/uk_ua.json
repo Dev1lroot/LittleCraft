@@ -51,5 +51,7 @@
   "littlecraft.carry.started.carrier": "Ти несеш %s!",
   "littlecraft.carry.started.little": "Тебе несе %s!",
   "littlecraft.carry.stopped.carrier": "Ти опустив(ла) %s.",
-  "littlecraft.carry.stopped.little": "Тебе опустив(ла) %s."
+  "littlecraft.carry.stopped.little": "Тебе опустив(ла) %s.",
+  "key.littlecraft.piss": "Пописати",
+  "key.littlecraft.poop": "Покакати"
 }

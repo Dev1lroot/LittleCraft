@@ -51,5 +51,7 @@
   "littlecraft.carry.started.carrier": "¡Estás cargando a %s!",
   "littlecraft.carry.started.little": "¡Te está cargando %s!",
   "littlecraft.carry.stopped.carrier": "Has soltado a %s.",
-  "littlecraft.carry.stopped.little": "Te soltó %s."
+  "littlecraft.carry.stopped.little": "Te soltó %s.",
+  "key.littlecraft.piss": "Orinar",
+  "key.littlecraft.poop": "Defecar"
 }

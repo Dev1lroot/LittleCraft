@@ -32,6 +32,24 @@ public class LittleData
                 .sync(ByteBufCodecs.VAR_INT)
                 .build());
 
+    @SuppressWarnings("unchecked")
+    public static final DeferredHolder<AttachmentType<?>, AttachmentType<Integer>> BLADDER =
+        (DeferredHolder<AttachmentType<?>, AttachmentType<Integer>>) ATTACHMENT_TYPES.register("bladder", () ->
+            AttachmentType.builder(() -> 0)
+                .serialize(Codec.INT.optionalFieldOf("value", 0))
+                .copyOnDeath()
+                .sync(ByteBufCodecs.VAR_INT)
+                .build());
+
+    @SuppressWarnings("unchecked")
+    public static final DeferredHolder<AttachmentType<?>, AttachmentType<Integer>> STOMACH =
+        (DeferredHolder<AttachmentType<?>, AttachmentType<Integer>>) ATTACHMENT_TYPES.register("stomach", () ->
+            AttachmentType.builder(() -> 0)
+                .serialize(Codec.INT.optionalFieldOf("value", 0))
+                .copyOnDeath()
+                .sync(ByteBufCodecs.VAR_INT)
+                .build());
+
     public LittleData(IEventBus modBus)
     {
         ATTACHMENT_TYPES.register(modBus);
@@ -50,6 +68,46 @@ public class LittleData
     public static int getAge(Player player)
     {
         return player.getData(LITTLEAGE.get());
+    }
+
+    public static int getBladder(Player player)
+    {
+        return player.getData(BLADDER.get());
+    }
+
+    public static void setBladder(Player player, int value)
+    {
+        player.setData(BLADDER.get(), Math.max(0, Math.min(value, computeBladderCapacity(getAge(player)))));
+    }
+
+    public static void addToBladder(Player player, int amount)
+    {
+        setBladder(player, getBladder(player) + amount);
+    }
+
+    public static int getStomach(Player player)
+    {
+        return player.getData(STOMACH.get());
+    }
+
+    public static void setStomach(Player player, int value)
+    {
+        player.setData(STOMACH.get(), Math.max(0, Math.min(value, computeStomachCapacity(getAge(player)))));
+    }
+
+    public static void addToStomach(Player player, int amount)
+    {
+        setStomach(player, getStomach(player) + amount);
+    }
+
+    public static int computeBladderCapacity(int age)
+    {
+        return Math.max(200, Math.min(2000, age * 80));
+    }
+
+    public static int computeStomachCapacity(int age)
+    {
+        return Math.max(100, Math.min(1000, age * 40));
     }
 
     // Returns [0,1] blend factor: 0 = full little scale, 1 = full adult scale

@@ -51,5 +51,7 @@
   "littlecraft.carry.started.carrier": "%sを抱っこしています！",
   "littlecraft.carry.started.little": "%sに抱っこされています！",
   "littlecraft.carry.stopped.carrier": "%sを下ろしました。",
-  "littlecraft.carry.stopped.little": "%sに下ろされました。"
+  "littlecraft.carry.stopped.little": "%sに下ろされました。",
+  "key.littlecraft.piss": "おしっこ",
+  "key.littlecraft.poop": "うんち"
 }

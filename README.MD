@@ -3,14 +3,14 @@
 [![Minecraft Version](https://img.shields.io/badge/Minecraft-26.1.2-darkgreen.svg?logo=minecraft)](https://minecraft.net)
 [![NeoForge Version](https://img.shields.io/badge/NeoForge-26.1.2.64--beta-orange.svg)](https://neoforged.net)
 [![License](https://img.shields.io/badge/License-GNU%20GPL%203.0--Only-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.html)
-[![Mod Version](https://img.shields.io/badge/Version-2.0.7-purple.svg)](https://semver.org/)
+[![Mod Version](https://img.shields.io/badge/Version-3.0.0-purple.svg)](https://semver.org/)
 
 **LittleCraft** is a NeoForge mod for **Minecraft 26.1.2**, designed to bring immersive **Age Regression** (Agere) and **ABDL** elements into roleplay gameplay. It introduces dynamic character scaling, functional roleplay items, and unique player-to-player interactions tailored for community servers where size mechanics and thematic props matter.
 
 **Key Features:**
 - **Dynamic Age Scaling:** Your player model, hitbox, and camera height scale smoothly based on your selected age (ranging from 6 to 18).
 - **Functional Diapers:** Adds wearable diapers for immersive roleplay.
-- - **Durability System:** While equipped, the diaper gradually loses durability to simulate wetness or fullness. Both the item icon and the player model visually update to reflect its current state.
+- - **The System:** The diaper has capacity and used attributes that calculate its visual wetness, these attributes could be extended by adding additional padding, While equipped, the diaper transfers 1ml per tick from player's bladder to diaper's NBTs to simulate wetness or fullness (TODO: Move). The player model visually update to reflect its current state.
 - - **Custom Designs (NBT):** Supports custom textures via the DESIGN NBT tag. You can easily expand the available styles by adding new textures to your asset path: `littlecraft/assets/textures/diaper/{design}/` (requires default.png and wetness.png).
 - - **Interactive Diaper Changing:** Promotes cooperative play. Another player can change your diaper by right-clicking you while holding a fresh diaper in their main hand.
 - **Carry Mechanic:** Adult players (age 18+) can pick up little players (ages 6 to 12) by right-clicking them with an empty main hand.
@@ -93,6 +93,7 @@ Custom **MobEffects** (`littlecraft:regression`, `littlecraft:growth`) are insta
 | 26.1.2 | 2.0.5 | Colored Cribs |
 | 26.1.2 | 2.0.6 | Carry mechanic - adult players can carry little players (age 1-12) |
 | 26.1.2 | 2.0.7 | Customizable bi-color Thigh-Highs added to the mod |
+| 26.1.2 | 3.0.0 | Bladder and Stomach Systems introduced |
 
 - **Current Maintained Minecraft Version:** 26.1.2
 - **No backports** to older versions are planned.

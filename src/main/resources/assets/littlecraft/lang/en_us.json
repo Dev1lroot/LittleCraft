@@ -67,5 +67,7 @@
   "littlecraft.carry.started.carrier": "You're carrying %s!",
   "littlecraft.carry.started.little": "You're being carried by %s!",
   "littlecraft.carry.stopped.carrier": "You put %s down.",
-  "littlecraft.carry.stopped.little": "You were put down by %s."
+  "littlecraft.carry.stopped.little": "You were put down by %s.",
+  "key.littlecraft.piss": "Piss",
+  "key.littlecraft.poop": "Poop"
 }

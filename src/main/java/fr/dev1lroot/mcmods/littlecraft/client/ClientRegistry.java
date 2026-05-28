@@ -7,6 +7,7 @@ package fr.dev1lroot.mcmods.littlecraft.client;
 
 import fr.dev1lroot.mcmods.littlecraft.client.color.ThighHighsBaseColorTint;
 import fr.dev1lroot.mcmods.littlecraft.client.color.ThighHighsStripeColorTint;
+import fr.dev1lroot.mcmods.littlecraft.client.render.BodyStatsHud;
 import fr.dev1lroot.mcmods.littlecraft.client.render.CribRenderer;
 import fr.dev1lroot.mcmods.littlecraft.client.render.DiaperLayer;
 import fr.dev1lroot.mcmods.littlecraft.client.render.ThighHighsLayer;
@@ -25,6 +26,8 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.client.event.AddClientReloadListenersEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
+import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
+import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
 
 import static fr.dev1lroot.mcmods.littlecraft.LittleMod.MODID;
 
@@ -38,6 +41,8 @@ public class ClientRegistry
         modEventBus.addListener(ClientRegistry::onRegisterBlockEntityRenderers);
         modEventBus.addListener(ClientRegistry::onAddClientReloadListeners);
         modEventBus.addListener(ClientRegistry::onRegisterItemTintSources);
+        modEventBus.addListener(ClientRegistry::onRegisterGuiLayers);
+        modEventBus.addListener(ClientRegistry::onRegisterKeyMappings);
     }
 
     private static void onRegisterLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event)
@@ -92,5 +97,19 @@ public class ClientRegistry
             Identifier.fromNamespaceAndPath(MODID, "thigh_highs_stripe_color"),
             ThighHighsStripeColorTint.MAP_CODEC
         );
+    }
+
+    private static void onRegisterGuiLayers(RegisterGuiLayersEvent event)
+    {
+        event.registerAboveAll(
+            Identifier.fromNamespaceAndPath(MODID, "body_stats"),
+            new BodyStatsHud()
+        );
+    }
+
+    private static void onRegisterKeyMappings(RegisterKeyMappingsEvent event)
+    {
+        event.register(LittleKeys.KEY_PISS);
+        event.register(LittleKeys.KEY_POOP);
     }
 }

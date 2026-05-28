@@ -51,5 +51,7 @@
   "littlecraft.carry.started.carrier": "Du trägst %s!",
   "littlecraft.carry.started.little": "Du wirst von %s getragen!",
   "littlecraft.carry.stopped.carrier": "Du hast %s abgesetzt.",
-  "littlecraft.carry.stopped.little": "Du wurdest von %s abgesetzt."
+  "littlecraft.carry.stopped.little": "Du wurdest von %s abgesetzt.",
+  "key.littlecraft.piss": "Pinkeln",
+  "key.littlecraft.poop": "Kacken"
 }

@@ -2,14 +2,13 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "I": "minecraft:iron_bars",
-    "W": "minecraft:light_gray_wool",
-    "P": "minecraft:oak_planks"
+    "B": "minecraft:light_gray_bed",
+    "L": "minecraft:ladder"
   },
   "pattern": [
-    "IWI",
-    "IWI",
-    "IPI"
+    " L ",
+    "LBL",
+    " L "
   ],
   "result": {
     "id": "littlecraft:light_gray_crib"

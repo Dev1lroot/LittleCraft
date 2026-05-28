@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "littlecraft:block/crib_head_blue"
+    "model": "littlecraft:block/crib_blue"
   }
 }

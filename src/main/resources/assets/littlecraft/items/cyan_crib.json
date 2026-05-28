@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "littlecraft:block/crib_head_cyan"
+    "model": "littlecraft:block/crib_cyan"
   }
 }

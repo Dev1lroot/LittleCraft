@@ -1,0 +1,7 @@
+{
+  "parent": "littlecraft:block/crib",
+  "textures": {
+    "2": "littlecraft:block/crib/green",
+    "particle": "littlecraft:block/crib/green"
+  }
+}

@@ -3,7 +3,8 @@
 	"credit": "Made with Blockbench",
 	"parent": "minecraft:item/template_bed",
 	"textures": {
-		"2": "littlecraft:block/crib/red"
+		"2": "littlecraft:block/crib/red",
+		"particle": "littlecraft:block/crib/red"
 	},
 	"elements": [
 		{

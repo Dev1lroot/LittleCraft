@@ -53,5 +53,7 @@
   "littlecraft.carry.stopped.carrier": "Du hast %s abgesetzt.",
   "littlecraft.carry.stopped.little": "Du wurdest von %s abgesetzt.",
   "key.littlecraft.piss": "Pinkeln",
-  "key.littlecraft.poop": "Kacken"
+  "key.littlecraft.poop": "Kacken",
+  "effect.littlecraft.stink": "Gestank",
+  "effect.littlecraft.incontinence": "Inkontinenz"
 }

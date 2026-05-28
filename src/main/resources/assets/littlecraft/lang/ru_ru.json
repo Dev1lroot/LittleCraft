@@ -53,5 +53,7 @@
   "littlecraft.carry.stopped.carrier": "Ты опустил(а) %s.",
   "littlecraft.carry.stopped.little": "Тебя опустил(а) %s.",
   "key.littlecraft.piss": "Пописать",
-  "key.littlecraft.poop": "Покакать"
+  "key.littlecraft.poop": "Покакать",
+  "effect.littlecraft.stink": "Вонь",
+  "effect.littlecraft.incontinence": "Недержание"
 }

@@ -69,5 +69,7 @@
   "littlecraft.carry.stopped.carrier": "You put %s down.",
   "littlecraft.carry.stopped.little": "You were put down by %s.",
   "key.littlecraft.piss": "Piss",
-  "key.littlecraft.poop": "Poop"
+  "key.littlecraft.poop": "Poop",
+  "effect.littlecraft.stink": "Stink",
+  "effect.littlecraft.incontinence": "Incontinence"
 }

@@ -53,5 +53,7 @@
   "littlecraft.carry.stopped.carrier": "Tu as posé %s.",
   "littlecraft.carry.stopped.little": "Tu as été posé(e) par %s.",
   "key.littlecraft.piss": "Pisser",
-  "key.littlecraft.poop": "Faire caca"
+  "key.littlecraft.poop": "Faire caca",
+  "effect.littlecraft.stink": "Puanteur",
+  "effect.littlecraft.incontinence": "Incontinence"
 }

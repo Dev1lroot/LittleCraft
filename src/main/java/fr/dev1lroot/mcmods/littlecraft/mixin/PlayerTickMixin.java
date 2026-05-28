@@ -6,6 +6,7 @@
 package fr.dev1lroot.mcmods.littlecraft.mixin;
 
 import fr.dev1lroot.mcmods.littlecraft.common.LittleData;
+import fr.dev1lroot.mcmods.littlecraft.content.LittleMobEffects;
 import fr.dev1lroot.mcmods.littlecraft.content.item.Diaper;
 import fr.dev1lroot.mcmods.littlecraft.network.PissPacket;
 import net.minecraft.core.particles.ParticleTypes;
@@ -58,7 +59,7 @@ public abstract class PlayerTickMixin
             if (!PissPacket.isActivePissing(player) && player.tickCount % 40 == 0 && used < capacity)
             {
                 int bladder = LittleData.getBladder(player);
-                if (bladder > 0)
+                if (bladder > 0 && player.hasEffect(LittleMobEffects.INCONTINENCE))
                 {
                     player.setItemSlot(EquipmentSlot.LEGS, Diaper.setUsed(diaper, used + 1));
                     LittleData.setBladder(player, bladder - 1);

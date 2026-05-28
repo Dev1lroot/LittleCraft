@@ -53,5 +53,7 @@
   "littlecraft.carry.stopped.carrier": "Has soltado a %s.",
   "littlecraft.carry.stopped.little": "Te soltó %s.",
   "key.littlecraft.piss": "Orinar",
-  "key.littlecraft.poop": "Defecar"
+  "key.littlecraft.poop": "Defecar",
+  "effect.littlecraft.stink": "Hedor",
+  "effect.littlecraft.incontinence": "Incontinencia"
 }

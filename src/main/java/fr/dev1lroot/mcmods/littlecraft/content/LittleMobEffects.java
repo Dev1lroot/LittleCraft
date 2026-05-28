@@ -6,7 +6,9 @@
 package fr.dev1lroot.mcmods.littlecraft.content;
 
 import fr.dev1lroot.mcmods.littlecraft.content.effect.GrowthEffect;
+import fr.dev1lroot.mcmods.littlecraft.content.effect.IncontinenceEffect;
 import fr.dev1lroot.mcmods.littlecraft.content.effect.RegressionEffect;
+import fr.dev1lroot.mcmods.littlecraft.content.effect.StinkEffect;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.effect.MobEffect;
 import net.neoforged.bus.api.IEventBus;
@@ -25,6 +27,12 @@ public class LittleMobEffects
 
     public static final DeferredHolder<MobEffect, GrowthEffect> GROWTH =
         MOB_EFFECTS.register("growth", GrowthEffect::new);
+
+    public static final DeferredHolder<MobEffect, StinkEffect> STINK =
+        MOB_EFFECTS.register("stink", StinkEffect::new);
+
+    public static final DeferredHolder<MobEffect, IncontinenceEffect> INCONTINENCE =
+        MOB_EFFECTS.register("incontinence", IncontinenceEffect::new);
 
     public static void register(IEventBus bus)
     {

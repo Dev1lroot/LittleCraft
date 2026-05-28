@@ -53,5 +53,7 @@
   "littlecraft.carry.stopped.carrier": "%sを下ろしました。",
   "littlecraft.carry.stopped.little": "%sに下ろされました。",
   "key.littlecraft.piss": "おしっこ",
-  "key.littlecraft.poop": "うんち"
+  "key.littlecraft.poop": "うんち",
+  "effect.littlecraft.stink": "悪臭",
+  "effect.littlecraft.incontinence": "失禁"
 }

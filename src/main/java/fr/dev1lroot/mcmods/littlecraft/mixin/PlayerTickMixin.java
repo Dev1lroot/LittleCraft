@@ -7,6 +7,8 @@ package fr.dev1lroot.mcmods.littlecraft.mixin;
 
 import fr.dev1lroot.mcmods.littlecraft.common.LittleData;
 import fr.dev1lroot.mcmods.littlecraft.content.item.Diaper;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -34,12 +36,24 @@ public abstract class PlayerTickMixin
         }
 
         ItemStack diaper = player.getItemBySlot(EquipmentSlot.LEGS);
-        if (diaper.getItem() instanceof Diaper.DiaperItem && player.tickCount % 40 == 0)
+        if (diaper.getItem() instanceof Diaper.DiaperItem)
         {
             int used     = Diaper.getUsed(diaper);
             int capacity = Diaper.getCapacity(diaper);
-            if (used < capacity)
+
+            if (player.tickCount % 40 == 0 && used < capacity)
                 player.setItemSlot(EquipmentSlot.LEGS, Diaper.setUsed(diaper, used + 1));
+
+            if (used >= capacity - 200 && player.tickCount % 10 == 0
+                    && player.level() instanceof ServerLevel serverLevel)
+            {
+                serverLevel.sendParticles(
+                        ParticleTypes.FALLING_HONEY,
+                        player.getX() + (player.getRandom().nextDouble() - 0.5) * 0.4,
+                        player.getY() + 0.8,
+                        player.getZ() + (player.getRandom().nextDouble() - 0.5) * 0.4,
+                        1, 0.0, 0.0, 0.0, 0.0);
+            }
         }
     }
 }

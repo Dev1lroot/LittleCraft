@@ -26,8 +26,8 @@ public class LittleData
     @SuppressWarnings("unchecked")
     public static final DeferredHolder<AttachmentType<?>, AttachmentType<Integer>> LITTLEAGE =
         (DeferredHolder<AttachmentType<?>, AttachmentType<Integer>>) ATTACHMENT_TYPES.register("little_age", () ->
-            AttachmentType.builder(() -> 0)
-                .serialize(Codec.INT.optionalFieldOf("value", 0))
+            AttachmentType.builder(() -> 25)
+                .serialize(Codec.INT.optionalFieldOf("value", 25))
                 .copyOnDeath()
                 .sync(ByteBufCodecs.VAR_INT)
                 .build());

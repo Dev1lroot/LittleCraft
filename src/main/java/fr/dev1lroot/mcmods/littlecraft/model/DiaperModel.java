@@ -45,13 +45,13 @@ public class DiaperModel extends EntityModel<HumanoidRenderState>
         root.addOrReplaceChild("primary",
                 CubeListBuilder.create()
                         .texOffs(0, 0)
-                        .addBox(-4.0F, 0.0F, -2.0F, 8.0F, 7.0F, 4.0F, new CubeDeformation(0.2F)),
+                        .addBox(-4.0F, 0.0F, -2.0F, 8.0F, 7.0F, 4.0F, new CubeDeformation(0.41F)),
                 PartPose.offset(0.0F, 0.0F, 0.0F));
 
         root.addOrReplaceChild("overlay",
                 CubeListBuilder.create()
                         .texOffs(0, 0)
-                        .addBox(-4.0F, 0.0F, -2.0F, 8.0F, 7.0F, 4.0F, new CubeDeformation(0.3F)),
+                        .addBox(-4.0F, 0.0F, -2.0F, 8.0F, 7.0F, 4.0F, new CubeDeformation(0.43F)),
                 PartPose.offset(0.0F, 0.0F, 0.0F));
 
         return LayerDefinition.create(mesh, 32, 32);

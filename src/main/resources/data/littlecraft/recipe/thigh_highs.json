@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "w",
+    "w",
+    "w"
+  ],
+  "key": {
+    "w": "minecraft:white_wool"
+  },
+  "result": {
+    "id": "littlecraft:thigh_highs",
+    "count": 1
+  }
+}

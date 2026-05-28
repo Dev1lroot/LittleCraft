@@ -1,0 +1,14 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "littlecraft:item/thigh_highs",
+    "tints": [
+      {
+        "type": "littlecraft:thigh_highs_base_color"
+      },
+      {
+        "type": "littlecraft:thigh_highs_stripe_color"
+      }
+    ]
+  }
+}

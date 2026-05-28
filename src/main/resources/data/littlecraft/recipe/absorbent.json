@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "minecraft:sponge",
+    "minecraft:shears"
+  ],
+  "result": {
+    "id": "littlecraft:absorbent",
+    "count": 9
+  }
+}

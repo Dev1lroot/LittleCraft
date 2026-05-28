@@ -5,18 +5,30 @@
 [![License](https://img.shields.io/badge/License-GNU%20GPL%203.0--Only-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.html)
 [![Mod Version](https://img.shields.io/badge/Version-2.0.7-purple.svg)](https://semver.org/)
 
-**LittleCraft** is a lightweight NeoForge mod for **Minecraft 26.1.2**, created to bring **Agere** and **ABDL** elements into roleplay gameplay.
+**LittleCraft** is a NeoForge mod for **Minecraft 26.1.2**, designed to bring immersive **Age Regression** (Agere) and **ABDL** elements into roleplay gameplay. It introduces dynamic character scaling, functional roleplay items, and unique player-to-player interactions tailored for community servers where size mechanics and thematic props matter.
 
-The mod currently adds the following features:
-
-- **Age Scaling** - the player model, hitbox, and camera position scale smoothly to the player's age (range 6..18)
-- **Diaper** - can be worn for immersive roleplay. While equipped, it gradually **loses durability**, simulating wetness or fullness. Both the **player model** and the **inventory item** visually update to reflect the current diaper state.
-- **Diaper Change** - another player can **change your diaper** by holding a fresh Diaper in hand and **right-clicking** on you.
-- **Potion of Regression** - brewed from an Awkward Potion and a **Golden Dandelion**. Drinking it reduces the player's little age by 1. Throwing the splash variant turns adult animals and monsters into their baby form (where one exists).
-- **Potion of Growth** - brewed from an Awkward Potion and **Bone Meal**. Drinking it increases the player's little age by 1. Throwing the splash variant turns baby animals and monsters into adults. The **lingering** variant also acts as a continuous Bone Meal source, growing nearby plants once per second while the cloud is active.
-- **Carry** - a player with little age ≥ 18 can **carry** a little player (age 1–12) by **right-clicking** them with an empty main hand. The little player is held visually in front of the carrier at arm height and has no movement controls while carried - only camera rotation or **Shift** to dismount. The carrier can also press **Shift** to put the little player down. Both players receive a chat notification when carrying starts and ends.
-
-These features are especially useful on **ABDL** and **Agere** servers where size differences and roleplay props matter.
+**Key Features:**
+- **Dynamic Age Scaling:** Your player model, hitbox, and camera height scale smoothly based on your selected age (ranging from 6 to 18).
+- **Functional Diapers:** Adds wearable diapers for immersive roleplay.
+- - **Durability System:** While equipped, the diaper gradually loses durability to simulate wetness or fullness. Both the item icon and the player model visually update to reflect its current state.
+- - **Custom Designs (NBT):** Supports custom textures via the DESIGN NBT tag. You can easily expand the available styles by adding new textures to your asset path: `littlecraft/assets/textures/diaper/{design}/` (requires default.png and wetness.png).
+- - **Interactive Diaper Changing:** Promotes cooperative play. Another player can change your diaper by right-clicking you while holding a fresh diaper in their main hand.
+- **Carry Mechanic:** Adult players (age 18+) can pick up little players (ages 6 to 12) by right-clicking them with an empty main hand.
+- - The carried player is visually held at arm's height and loses movement control, though they retain full camera rotation.
+- - Either player can end the carry at any time by pressing Shift.
+- - Both players receive clear chat notifications when the interaction starts and ends.
+- **Customizable Thigh-Highs:** Added as a versatile character personalization element.
+- - **Dual-Color Blending:** Features advanced two-color blending support, allowing for highly customizable and unique color combinations.
+- - **Enchantment Support:** While they provide zero armor points, they can be enchanted with useful vanilla and custom enchantments to maintain utility.
+- **Cozy Cribs:** Decorative and functional colored cribs tailored specifically for little players.
+- **New Potions:**
+- - **Potion of Regression:** Brewed from an **Awkward Potion** and a **Golden Dandelion**.
+- - - **Drinking:** Reduces the player's age by 1.
+- - - **Splash Variant:** Reverts adult animals and monsters into their baby forms (where applicable).
+- - **Potion of Growth:** Brewed from an **Awkward Potion** and **Bone Meal**.
+- - - **Drinking:** Increases the player's age by 1.
+- - - **Splash Variant:** Forces baby animals and monsters to grow into adults instantly.
+- - - **Lingering Variant:** Acts as a continuous AoE fertilizer, applying a bone meal effect to nearby crops and plants once per second while the cloud is active.
 
 ---
 

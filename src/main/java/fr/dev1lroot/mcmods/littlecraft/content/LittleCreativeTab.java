@@ -6,6 +6,7 @@
 package fr.dev1lroot.mcmods.littlecraft.content;
 
 import fr.dev1lroot.mcmods.littlecraft.content.item.Diaper;
+import fr.dev1lroot.mcmods.littlecraft.content.item.LittleMaterials;
 import fr.dev1lroot.mcmods.littlecraft.content.item.ThighHighs;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
@@ -32,6 +33,12 @@ public class LittleCreativeTab
             .withTabsBefore(CreativeModeTabs.TOOLS_AND_UTILITIES)
             .icon(() -> new ItemStack(Diaper.DIAPER.get()))
             .displayItems((params, output) -> {
+                // Materials
+                output.accept(LittleMaterials.FABRIC.get());
+                output.accept(LittleMaterials.PLASTIC.get());
+                output.accept(LittleMaterials.ABSORBENT.get());
+                output.accept(LittleMaterials.PADDING.get());
+
                 // Diaper
                 output.accept(Diaper.DIAPER.get());
 

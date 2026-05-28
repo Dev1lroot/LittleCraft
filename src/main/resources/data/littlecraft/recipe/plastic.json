@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "minecraft:resin_clump",
+    "minecraft:resin_clump",
+    "minecraft:white_dye",
+    "minecraft:coal"
+  ],
+  "result": {
+    "id": "littlecraft:plastic",
+    "count": 4
+  }
+}

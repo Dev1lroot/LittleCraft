@@ -32,6 +32,7 @@ public class LittleContentRegistry
         RECIPE_SERIALIZERS.register(bus);
         LittleCreativeTab.CREATIVE_TABS.register(bus);
 
+        fr.dev1lroot.mcmods.littlecraft.content.item.LittleMaterials.register();
         fr.dev1lroot.mcmods.littlecraft.content.item.Diaper.register();
         fr.dev1lroot.mcmods.littlecraft.content.Crib.register();
         fr.dev1lroot.mcmods.littlecraft.content.item.ThighHighs.register();

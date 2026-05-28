@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "FFF",
+    "AAA",
+    "PPP"
+  ],
+  "key": {
+    "A": "littlecraft:absorbent",
+    "F": "littlecraft:fabric",
+    "P": "littlecraft:plastic"
+  },
+  "result": {
+    "id": "littlecraft:padding",
+    "count": 1
+  }
+}

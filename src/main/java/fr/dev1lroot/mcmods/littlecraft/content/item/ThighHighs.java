@@ -13,7 +13,6 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -131,7 +130,7 @@ public class ThighHighs
                     props -> new ThighHighsItem(props
                             .durability(65)
                             .enchantable(15)
-                            .repairable(ItemTags.WOOL)
+                            .repairable(LittleMaterials.FABRIC_TAG)
                             .component(DataComponents.CUSTOM_DATA, defaultData())
                             .component(DataComponents.EQUIPPABLE,
                                     Equippable.builder(EquipmentSlot.FEET)

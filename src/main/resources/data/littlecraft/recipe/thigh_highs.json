@@ -2,12 +2,12 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "pattern": [
-    "w",
-    "w",
-    "w"
+    "F F",
+    "F F",
+    "F F"
   ],
   "key": {
-    "w": "minecraft:white_wool"
+    "F": "littlecraft:fabric"
   },
   "result": {
     "id": "littlecraft:thigh_highs",

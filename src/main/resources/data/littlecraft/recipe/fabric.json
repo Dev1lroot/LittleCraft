@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "SWS",
+    "WSW",
+    "SWS"
+  ],
+  "key": {
+    "W": "minecraft:white_wool",
+    "S": "minecraft:string"
+  },
+  "result": {
+    "id": "littlecraft:fabric",
+    "count": 9
+  }
+}

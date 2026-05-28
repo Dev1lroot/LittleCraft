@@ -38,6 +38,16 @@ public class LittlePlayerRenderer
             float bodyScale = LittleData.computeBodyScale(age);
             renderScaled(event, renderState, bodyScale);
 
+            if (age > 0 && age < 3
+                    && !player.isSleeping()
+                    && !renderState.isPassenger
+                    && !renderState.isVisuallySwimming
+                    && !renderState.isFallFlying)
+            {
+                // 4 voxels = 0.25 blocks down in world space, compensated for body scale.
+                event.getPoseStack().translate(0.0, -0.25f / bodyScale, 0.0);
+            }
+
             if (player.isSleeping() && bodyScale < 1.0f)
             {
                 Direction bedDir = player.getBedOrientation();

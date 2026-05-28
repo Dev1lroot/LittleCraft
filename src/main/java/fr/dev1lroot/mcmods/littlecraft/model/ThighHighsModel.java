@@ -16,8 +16,6 @@ import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.client.renderer.entity.state.HumanoidRenderState;
 import net.minecraft.resources.Identifier;
-import net.minecraft.util.Mth;
-
 import static fr.dev1lroot.mcmods.littlecraft.LittleMod.MODID;
 
 public class ThighHighsModel extends EntityModel<HumanoidRenderState>
@@ -83,42 +81,6 @@ public class ThighHighsModel extends EntityModel<HumanoidRenderState>
     @Override
     public void setupAnim(HumanoidRenderState state)
     {
-        reset();
-
-        float animPos   = state.walkAnimationPos;
-        float animSpeed = state.walkAnimationSpeed;
-
-        // Mirror vanilla HumanoidModel leg walk animation.
-        this.baseRight.xRot  = Mth.cos(animPos * 0.6662F) * 1.4F * animSpeed;
-        this.baseLeft.xRot   = Mth.cos(animPos * 0.6662F + (float) Math.PI) * 1.4F * animSpeed;
-        this.stripeRight.xRot = this.baseRight.xRot;
-        this.stripeLeft.xRot  = this.baseLeft.xRot;
-
-        if (state.isCrouching)
-        {
-            // Shift the stockings forward/down to match the crouching body pose.
-        //     this.baseRight.xRot  += 0.4F;
-        //     this.baseLeft.xRot   += 0.4F;
-        //     this.stripeRight.xRot += 0.4F;
-        //     this.stripeLeft.xRot  += 0.4F;
-
-            this.baseRight.z  = 4.0F;
-            this.baseLeft.z   = 4.0F;
-            this.stripeRight.z = 4.0F;
-            this.stripeLeft.z  = 4.0F;
-        }
-    }
-
-    private void reset()
-    {
-        this.baseRight.xRot  = this.baseLeft.xRot  = 0.0F;
-        this.baseRight.yRot  = this.baseLeft.yRot  = 0.0F;
-        this.baseRight.zRot  = this.baseLeft.zRot  = 0.0F;
-        this.stripeRight.xRot = this.stripeLeft.xRot = 0.0F;
-        this.stripeRight.yRot = this.stripeLeft.yRot = 0.0F;
-        this.stripeRight.zRot = this.stripeLeft.zRot = 0.0F;
-
-        this.baseRight.z  = this.baseLeft.z  = 0.0F;
-        this.stripeRight.z = this.stripeLeft.z = 0.0F;
+        // Pose is driven by ThighHighsLayer.syncLeg() — nothing to do here.
     }
 }

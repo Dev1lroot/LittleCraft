@@ -14,7 +14,8 @@
     "PlayerSleepHitboxMixin"
   ],
   "client": [
-    "client.LittleHeadScaleMixin"
+    "client.LittleHeadScaleMixin",
+    "client.InfantSittingMixin"
   ],
   "injectors": {
     "defaultRequire": 1

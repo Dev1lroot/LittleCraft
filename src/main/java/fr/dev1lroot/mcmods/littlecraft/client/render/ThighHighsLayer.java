@@ -9,7 +9,9 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import fr.dev1lroot.mcmods.littlecraft.content.item.ThighHighs;
 import fr.dev1lroot.mcmods.littlecraft.model.ThighHighsModel;
 import net.minecraft.client.model.EntityModel;
+import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.EntityModelSet;
+import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
@@ -44,8 +46,11 @@ public class ThighHighsLayer<S extends HumanoidRenderState, M extends EntityMode
         if (feet.isEmpty()) return;
         if (!(feet.getItem() instanceof ThighHighs.ThighHighsItem)) return;
 
-        baseModel.setupAnim(state);
-        stripeModel.setupAnim(state);
+        // Mirror the actual rendered leg pose exactly, covering all vanilla animations
+        // (walking, swimming, sitting, crouching, etc.) without reimplementing any of them.
+        if (!(getParentModel() instanceof HumanoidModel<?> humanoid)) return;
+        syncLeg(humanoid.rightLeg, baseModel.baseRight, stripeModel.stripeRight);
+        syncLeg(humanoid.leftLeg,  baseModel.baseLeft,  stripeModel.stripeLeft);
 
         // First pass: render base color using base texture.
         int baseColor = ThighHighs.getBaseColor(feet) | 0xFF000000;
@@ -54,5 +59,15 @@ public class ThighHighsLayer<S extends HumanoidRenderState, M extends EntityMode
         // Second pass: render stripe color using stripe texture.
         int stripeColor = ThighHighs.getStripeColor(feet) | 0xFF000000;
         renderColoredCutoutModel(stripeModel, ThighHighsModel.TEXTURE_STRIPES, pose, collector, light, state, stripeColor, -1);
+    }
+
+    private static void syncLeg(ModelPart source, ModelPart base, ModelPart stripe)
+    {
+        base.xRot = stripe.xRot = source.xRot;
+        base.yRot = stripe.yRot = source.yRot;
+        base.zRot = stripe.zRot = source.zRot;
+        base.x    = stripe.x    = source.x;
+        base.y    = stripe.y    = source.y;
+        base.z    = stripe.z    = source.z;
     }
 }

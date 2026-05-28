@@ -42,9 +42,11 @@ public class DiaperLayer<S extends HumanoidRenderState, M extends EntityModel<? 
         super(parent);
         this.primaryModel = new DiaperModel(modelSet.bakeLayer(DiaperModel.LAYER_LOCATION));
         this.primaryModel.overlay.visible = false;
+        this.primaryModel.overlay_inner.visible = false;
 
         this.wetnessModel = new DiaperModel(modelSet.bakeLayer(DiaperModel.LAYER_LOCATION));
         this.wetnessModel.primary.visible = false;
+        this.wetnessModel.primary_inner.visible = false;
     }
 
     public static void clearCache()

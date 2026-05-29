@@ -34,7 +34,7 @@ public class PottySeatEntity extends Entity
     {
         this(Potty.POTTY_SEAT.get(), level);
         this.pottyPos = pottyPos;
-        setPos(pottyPos.getX() + 0.5, pottyPos.getY() + 0.1, pottyPos.getZ() + 0.5);
+        setPos(pottyPos.getX() + 0.5, pottyPos.getY() - 0.5, pottyPos.getZ() + 0.5);
     }
 
     public BlockPos getPottyPos()

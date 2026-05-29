@@ -7,6 +7,8 @@ package fr.dev1lroot.mcmods.littlecraft.client;
 
 import fr.dev1lroot.mcmods.littlecraft.client.color.ThighHighsBaseColorTint;
 import fr.dev1lroot.mcmods.littlecraft.client.color.ThighHighsStripeColorTint;
+import fr.dev1lroot.mcmods.littlecraft.client.item.DiaperDesignProperty;
+import fr.dev1lroot.mcmods.littlecraft.client.item.DiaperFillProperty;
 import fr.dev1lroot.mcmods.littlecraft.client.render.BodyStatsHud;
 import fr.dev1lroot.mcmods.littlecraft.client.render.CribRenderer;
 import fr.dev1lroot.mcmods.littlecraft.client.render.DiaperLayer;
@@ -14,6 +16,9 @@ import fr.dev1lroot.mcmods.littlecraft.client.render.PottySeatRenderer;
 import fr.dev1lroot.mcmods.littlecraft.client.render.ThighHighsLayer;
 import fr.dev1lroot.mcmods.littlecraft.content.Crib;
 import fr.dev1lroot.mcmods.littlecraft.content.Potty;
+import net.minecraft.resources.Identifier;
+import net.neoforged.neoforge.client.event.RegisterRangeSelectItemModelPropertyEvent;
+import net.neoforged.neoforge.client.event.RegisterSelectItemModelPropertyEvent;
 import fr.dev1lroot.mcmods.littlecraft.model.DiaperModel;
 import fr.dev1lroot.mcmods.littlecraft.model.ThighHighsModel;
 import net.minecraft.client.model.geom.EntityModelSet;
@@ -45,6 +50,8 @@ public class ClientRegistry
         modEventBus.addListener(ClientRegistry::onRegisterItemTintSources);
         modEventBus.addListener(ClientRegistry::onRegisterGuiLayers);
         modEventBus.addListener(ClientRegistry::onRegisterKeyMappings);
+        modEventBus.addListener(ClientRegistry::onRegisterSelectItemModelProperties);
+        modEventBus.addListener(ClientRegistry::onRegisterRangeSelectItemModelProperties);
     }
 
     private static void onRegisterLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event)
@@ -114,5 +121,15 @@ public class ClientRegistry
     {
         event.register(LittleKeys.KEY_PISS);
         event.register(LittleKeys.KEY_POOP);
+    }
+
+    private static void onRegisterSelectItemModelProperties(RegisterSelectItemModelPropertyEvent event)
+    {
+        event.register(Identifier.fromNamespaceAndPath(MODID, "diaper_design"), DiaperDesignProperty.TYPE);
+    }
+
+    private static void onRegisterRangeSelectItemModelProperties(RegisterRangeSelectItemModelPropertyEvent event)
+    {
+        event.register(Identifier.fromNamespaceAndPath(MODID, "diaper_fill"), DiaperFillProperty.MAP_CODEC);
     }
 }

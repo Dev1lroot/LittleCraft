@@ -43,7 +43,7 @@ import java.util.function.BiConsumer;
 public class PottyBlock extends BaseEntityBlock
 {
     public static final EnumProperty<Direction> FACING = BlockStateProperties.HORIZONTAL_FACING;
-    private static final VoxelShape SHAPE = Block.box(0, 0, 0, 16, 12, 16);
+    private static final VoxelShape SHAPE = Block.box(2, 0, 2, 14, 4, 14);
 
     public static final MapCodec<PottyBlock> CODEC = simpleCodec(PottyBlock::new);
 

@@ -26,7 +26,7 @@ public class Potty
         LittleContentRegistry.BLOCKS.registerBlock(
             "potty",
             PottyBlock::new,
-            props -> props.strength(1.0F).sound(SoundType.STONE)
+            props -> props.strength(1.0F).sound(SoundType.STONE).noOcclusion()
         );
 
     public static final DeferredItem<BlockItem> POTTY_ITEM =

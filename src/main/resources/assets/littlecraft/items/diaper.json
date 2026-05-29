@@ -1,6 +1,62 @@
 {
   "model": {
-    "type": "minecraft:model",
-    "model": "littlecraft:item/diaper"
+    "type": "minecraft:select",
+    "property": "littlecraft:diaper_design",
+    "cases": [
+      {
+        "when": "default",
+        "model": {
+          "type": "minecraft:range_dispatch",
+          "property": "littlecraft:diaper_fill",
+          "scale": 1.0,
+          "entries": [
+            {
+              "threshold": 0.5,
+              "model": { "type": "minecraft:model", "model": "littlecraft:item/diaper/default/wet" }
+            },
+            {
+              "threshold": 1.0,
+              "model": { "type": "minecraft:model", "model": "littlecraft:item/diaper/default/full" }
+            }
+          ],
+          "fallback": { "type": "minecraft:model", "model": "littlecraft:item/diaper/default/dry" }
+        }
+      },
+      {
+        "when": "pure",
+        "model": {
+          "type": "minecraft:range_dispatch",
+          "property": "littlecraft:diaper_fill",
+          "scale": 1.0,
+          "entries": [
+            {
+              "threshold": 0.5,
+              "model": { "type": "minecraft:model", "model": "littlecraft:item/diaper/pure/wet" }
+            },
+            {
+              "threshold": 1.0,
+              "model": { "type": "minecraft:model", "model": "littlecraft:item/diaper/pure/full" }
+            }
+          ],
+          "fallback": { "type": "minecraft:model", "model": "littlecraft:item/diaper/pure/dry" }
+        }
+      }
+    ],
+    "fallback": {
+      "type": "minecraft:range_dispatch",
+      "property": "littlecraft:diaper_fill",
+      "scale": 1.0,
+      "entries": [
+        {
+          "threshold": 0.5,
+          "model": { "type": "minecraft:model", "model": "littlecraft:item/diaper/default/wet" }
+        },
+        {
+          "threshold": 1.0,
+          "model": { "type": "minecraft:model", "model": "littlecraft:item/diaper/default/full" }
+        }
+      ],
+      "fallback": { "type": "minecraft:model", "model": "littlecraft:item/diaper/default/dry" }
+    }
   }
 }

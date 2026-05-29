@@ -1,0 +1,38 @@
+{
+  "model": {
+    "type": "minecraft:select",
+    "property": "minecraft:display_context",
+    "cases": [
+      {
+        "when": "head",
+        "model": {
+          "type": "minecraft:model",
+          "model": "littlecraft:block/pacifier",
+          "tints": [
+            { "type": "littlecraft:pacifier_body_color" },
+            { "type": "littlecraft:pacifier_ring_color" }
+          ]
+        }
+      }
+    ],
+    "fallback": {
+      "type": "minecraft:composite",
+      "models": [
+        {
+          "type": "minecraft:model",
+          "model": "littlecraft:item/pacifier_body",
+          "tints": [{ "type": "littlecraft:pacifier_body_color" }]
+        },
+        {
+          "type": "minecraft:model",
+          "model": "littlecraft:item/pacifier_ring",
+          "tints": [{ "type": "littlecraft:pacifier_ring_color" }]
+        },
+        {
+          "type": "minecraft:model",
+          "model": "littlecraft:item/pacifier_overlay"
+        }
+      ]
+    }
+  }
+}

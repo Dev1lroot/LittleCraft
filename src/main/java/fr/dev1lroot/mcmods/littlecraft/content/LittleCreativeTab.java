@@ -6,6 +6,7 @@
 package fr.dev1lroot.mcmods.littlecraft.content;
 
 import fr.dev1lroot.mcmods.littlecraft.content.item.Diaper;
+import fr.dev1lroot.mcmods.littlecraft.content.item.Pacifier;
 import fr.dev1lroot.mcmods.littlecraft.content.item.LittleMaterials;
 import fr.dev1lroot.mcmods.littlecraft.content.item.ThighHighs;
 import net.minecraft.core.component.DataComponents;
@@ -44,6 +45,9 @@ public class LittleCreativeTab
 
                 // Thigh-Highs
                 output.accept(ThighHighs.THIGH_HIGHS.get());
+
+                // Pacifier
+                output.accept(Pacifier.PACIFIER.get());
 
                 // Cribs — follow DyeColor enum order (white → black)
                 for (DyeColor color : DyeColor.values()) {

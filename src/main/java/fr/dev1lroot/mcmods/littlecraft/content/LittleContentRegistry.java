@@ -40,6 +40,7 @@ public class LittleContentRegistry
         fr.dev1lroot.mcmods.littlecraft.content.item.Diaper.register();
         fr.dev1lroot.mcmods.littlecraft.content.Crib.register();
         fr.dev1lroot.mcmods.littlecraft.content.item.ThighHighs.register();
+        fr.dev1lroot.mcmods.littlecraft.content.item.Pacifier.register();
         fr.dev1lroot.mcmods.littlecraft.content.Potty.register();
 
         LittleMobEffects.register(bus);

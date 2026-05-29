@@ -5,6 +5,8 @@
 
 package fr.dev1lroot.mcmods.littlecraft.client;
 
+import fr.dev1lroot.mcmods.littlecraft.client.color.PacifierBodyColorTint;
+import fr.dev1lroot.mcmods.littlecraft.client.color.PacifierRingColorTint;
 import fr.dev1lroot.mcmods.littlecraft.client.color.ThighHighsBaseColorTint;
 import fr.dev1lroot.mcmods.littlecraft.client.color.ThighHighsStripeColorTint;
 import fr.dev1lroot.mcmods.littlecraft.client.item.DiaperDesignProperty;
@@ -23,7 +25,6 @@ import fr.dev1lroot.mcmods.littlecraft.model.DiaperModel;
 import fr.dev1lroot.mcmods.littlecraft.model.ThighHighsModel;
 import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
-import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.resources.ResourceManagerReloadListener;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.PlayerModelType;
@@ -106,6 +107,14 @@ public class ClientRegistry
         event.register(
             Identifier.fromNamespaceAndPath(MODID, "thigh_highs_stripe_color"),
             ThighHighsStripeColorTint.MAP_CODEC
+        );
+        event.register(
+            Identifier.fromNamespaceAndPath(MODID, "pacifier_body_color"),
+            PacifierBodyColorTint.MAP_CODEC
+        );
+        event.register(
+            Identifier.fromNamespaceAndPath(MODID, "pacifier_ring_color"),
+            PacifierRingColorTint.MAP_CODEC
         );
     }
 

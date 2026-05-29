@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "littlecraft:item/pacifier",
+    "layer1": "littlecraft:item/pacifier_ring",
+    "layer2": "littlecraft:item/pacifier_overlay"
+  }
+}

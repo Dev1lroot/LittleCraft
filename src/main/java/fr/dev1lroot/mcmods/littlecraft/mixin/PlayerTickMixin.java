@@ -52,9 +52,18 @@ public abstract class PlayerTickMixin
             lastFoodLevel = foodLevel;
         }
 
-        ItemStack diaper = player.getItemBySlot(EquipmentSlot.LEGS);
-        if (diaper.getItem() instanceof Diaper.DiaperItem)
+        ItemStack legs = player.getItemBySlot(EquipmentSlot.LEGS);
+
+        // Any leg item marked is_pooped continuously applies stink
+        if (player.tickCount % 10 == 0 && !player.level().isClientSide()
+                && Diaper.isPooped(legs) && !player.hasEffect(LittleMobEffects.STINK))
         {
+            player.addEffect(new MobEffectInstance(LittleMobEffects.STINK, MobEffectInstance.INFINITE_DURATION, 0));
+        }
+
+        if (legs.getItem() instanceof Diaper.DiaperItem)
+        {
+            ItemStack diaper = legs;
             int used     = Diaper.getUsed(diaper);
             int capacity = Diaper.getCapacity(diaper);
 
@@ -70,9 +79,6 @@ public abstract class PlayerTickMixin
 
             if (player.tickCount % 10 == 0 && !player.level().isClientSide())
             {
-                if (Diaper.isPooped(diaper) && !player.hasEffect(LittleMobEffects.STINK))
-                    player.addEffect(new MobEffectInstance(LittleMobEffects.STINK, MobEffectInstance.INFINITE_DURATION, 0));
-
                 if (used >= 5000)
                     player.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 60, 0));
             }

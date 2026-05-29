@@ -10,8 +10,10 @@ import fr.dev1lroot.mcmods.littlecraft.client.color.ThighHighsStripeColorTint;
 import fr.dev1lroot.mcmods.littlecraft.client.render.BodyStatsHud;
 import fr.dev1lroot.mcmods.littlecraft.client.render.CribRenderer;
 import fr.dev1lroot.mcmods.littlecraft.client.render.DiaperLayer;
+import fr.dev1lroot.mcmods.littlecraft.client.render.PottySeatRenderer;
 import fr.dev1lroot.mcmods.littlecraft.client.render.ThighHighsLayer;
 import fr.dev1lroot.mcmods.littlecraft.content.Crib;
+import fr.dev1lroot.mcmods.littlecraft.content.Potty;
 import fr.dev1lroot.mcmods.littlecraft.model.DiaperModel;
 import fr.dev1lroot.mcmods.littlecraft.model.ThighHighsModel;
 import net.minecraft.client.model.geom.EntityModelSet;
@@ -54,6 +56,7 @@ public class ClientRegistry
     private static void onRegisterBlockEntityRenderers(EntityRenderersEvent.RegisterRenderers event)
     {
         event.registerBlockEntityRenderer(Crib.CRIB_BLOCK_ENTITY.get(), CribRenderer::new);
+        event.registerEntityRenderer(Potty.POTTY_SEAT.get(), PottySeatRenderer::new);
     }
 
     @SuppressWarnings("unchecked")

@@ -6,6 +6,8 @@
 package fr.dev1lroot.mcmods.littlecraft.network;
 
 import fr.dev1lroot.mcmods.littlecraft.common.LittleData;
+import fr.dev1lroot.mcmods.littlecraft.content.block.PottyBlockEntity;
+import fr.dev1lroot.mcmods.littlecraft.content.entity.PottySeatEntity;
 import fr.dev1lroot.mcmods.littlecraft.content.item.Diaper;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.network.codec.StreamCodec;
@@ -52,29 +54,50 @@ public record PissPacket() implements CustomPacketPayload
 
         lastPissTick.put(player.getUUID(), player.tickCount);
 
-        // TODO: Bad effects for diaperless use of this function;
-        
+        // Diaper takes priority: use it if equipped and not full
         ItemStack diaper = player.getItemBySlot(EquipmentSlot.LEGS);
-        if (!(diaper.getItem() instanceof Diaper.DiaperItem)) return;
-
-
-        /*
-            the packet calls each 5 ticks when key is hold,
-            5 ticks is 1/4 of the 1 second,
-            average peeing speed of human is 15ml/s (male) and 30ml/s (female),
-            I will use 24ml/s
-            24 / 4 = 6;
-        */
-
-        int used     = Diaper.getUsed(diaper);
-        int capacity = Diaper.getCapacity(diaper);
-        int bladder  = LittleData.getBladder(player);
-
-        if (bladder > 0)
+        if (diaper.getItem() instanceof Diaper.DiaperItem)
         {
-            int amount = Math.min(bladder,6); // 6 per 5 ticks (24 per second) but only when exists;
-            player.setItemSlot(EquipmentSlot.LEGS, Diaper.setUsed(diaper, used + amount));
-            LittleData.setBladder(player, bladder - amount);
+            int used     = Diaper.getUsed(diaper);
+            int capacity = Diaper.getCapacity(diaper);
+
+            if (used < capacity)
+            {
+                /*
+                    the packet calls each 5 ticks when key is hold,
+                    5 ticks is 1/4 of the 1 second,
+                    average peeing speed of human is 15ml/s (male) and 30ml/s (female),
+                    I will use 24ml/s
+                    24 / 4 = 6;
+                */
+                int bladder = LittleData.getBladder(player);
+                if (bladder > 0)
+                {
+                    int amount = Math.min(bladder, 6); // 6 per 5 ticks (24 per second)
+                    player.setItemSlot(EquipmentSlot.LEGS, Diaper.setUsed(diaper, used + amount));
+                    LittleData.setBladder(player, bladder - amount);
+                }
+                return;
+            }
         }
+
+        // Diaper missing or full — try potty next
+        if (player.getVehicle() instanceof PottySeatEntity seat)
+        {
+            PottyBlockEntity potty = seat.getPottyBlockEntity();
+            if (potty != null && !potty.isPissFull())
+            {
+                int bladder = LittleData.getBladder(player);
+                if (bladder > 0)
+                {
+                    int amount = Math.min(bladder, 6);
+                    potty.addPiss(amount);
+                    LittleData.setBladder(player, bladder - amount);
+                }
+            }
+            return;
+        }
+
+        // TODO: Bad effects for diaperless use of this function;
     }
 }

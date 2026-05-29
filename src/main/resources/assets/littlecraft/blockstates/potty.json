@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "littlecraft:block/potty" },
+    "facing=east":  { "model": "littlecraft:block/potty", "y": 90 },
+    "facing=south": { "model": "littlecraft:block/potty", "y": 180 },
+    "facing=west":  { "model": "littlecraft:block/potty", "y": 270 }
+  }
+}

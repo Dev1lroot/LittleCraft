@@ -3,7 +3,7 @@
 [![Minecraft Version](https://img.shields.io/badge/Minecraft-26.1.2-darkgreen.svg?logo=minecraft)](https://minecraft.net)
 [![NeoForge Version](https://img.shields.io/badge/NeoForge-26.1.2.64--beta-orange.svg)](https://neoforged.net)
 [![License](https://img.shields.io/badge/License-GNU%20GPL%203.0--Only-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.html)
-[![Mod Version](https://img.shields.io/badge/Version-3.0.0-purple.svg)](https://semver.org/)
+[![Mod Version](https://img.shields.io/badge/Version-3.0.1-purple.svg)](https://semver.org/)
 
 **LittleCraft** is a NeoForge mod for **Minecraft 26.1.2**, designed to bring immersive **Age Regression** (Agere) and **ABDL** elements into roleplay gameplay. It introduces dynamic character scaling, functional roleplay items, and unique player-to-player interactions tailored for community servers where size mechanics and thematic props matter.
 
@@ -83,17 +83,18 @@ Custom **MobEffects** (`littlecraft:regression`, `littlecraft:growth`) are insta
 
 ## Version History
 
-| Game Version | Mod Version | Changes |
-|--------------|-------------|---------|
-| 1.20.1 | 1.0 | Base feature of toggling between little and adult modes |
-| 1.20.1 | 2.0 | Added Diaper item for immersive ABDL roleplay |
-| 1.20.1 | 2.0.2 | Added Diaper Change mechanic - another player can change your diaper |
-| 26.1.2 | 2.0.3 | Player model gradual scaling based on little age |
-| 26.1.2 | 2.0.4 | Added Potion of Regression and Potion of Growth with splash and lingering variants, license changed to GPL 3.0-ONLY |
-| 26.1.2 | 2.0.5 | Colored Cribs |
-| 26.1.2 | 2.0.6 | Carry mechanic - adult players can carry little players (age 1-12) |
-| 26.1.2 | 2.0.7 | Customizable bi-color Thigh-Highs added to the mod |
-| 26.1.2 | 3.0.0 | Bladder and Stomach Systems introduced |
+| Game Version | Mod Version | Changes                                                                                                             |
+|--------------|-------------|---------------------------------------------------------------------------------------------------------------------|
+| 1.20.1 | 1.0         | Base feature of toggling between little and adult modes                                                             |
+| 1.20.1 | 2.0         | Added Diaper item for immersive ABDL roleplay                                                                       |
+| 1.20.1 | 2.0.2       | Added Diaper Change mechanic - another player can change your diaper                                                |
+| 26.1.2 | 2.0.3       | Player model gradual scaling based on little age                                                                    |
+| 26.1.2 | 2.0.4       | Added Potion of Regression and Potion of Growth with splash and lingering variants, license changed to GPL 3.0-ONLY |
+| 26.1.2 | 2.0.5       | Colored Cribs                                                                                                       |
+| 26.1.2 | 2.0.6       | Carry mechanic - adult players can carry little players (age 1-12)                                                  |
+| 26.1.2 | 2.0.7       | Customizable bi-color Thigh-Highs added to the mod                                                                  |
+| 26.1.2 | 3.0.0       | Bladder and Stomach Systems introduced                                                                              |
+| 26.1.2 | 3.0.1       | The Potty introduced                                                                                                |
 
 - **Current Maintained Minecraft Version:** 26.1.2
 - **No backports** to older versions are planned.

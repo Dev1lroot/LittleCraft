@@ -50,6 +50,9 @@ public class LittleCreativeTab
                     output.accept(Crib.CRIB_ITEMS.get(color).get());
                 }
 
+                // Potty
+                output.accept(Potty.POTTY_ITEM.get());
+
                 // Potions of Regression
                 output.accept(potionStack(Items.POTION,           LittlePotions.REGRESSION_POTION));
                 output.accept(potionStack(Items.SPLASH_POTION,    LittlePotions.REGRESSION_POTION));

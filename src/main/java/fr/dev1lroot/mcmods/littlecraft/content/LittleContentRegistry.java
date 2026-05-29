@@ -6,6 +6,7 @@
 package fr.dev1lroot.mcmods.littlecraft.content;
 
 import net.minecraft.core.registries.Registries;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.block.Block;
@@ -23,6 +24,8 @@ public class LittleContentRegistry
         DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, MODID);
     public static final DeferredRegister<RecipeSerializer<?>> RECIPE_SERIALIZERS =
         DeferredRegister.create(Registries.RECIPE_SERIALIZER, MODID);
+    public static final DeferredRegister<EntityType<?>> ENTITY_TYPES =
+        DeferredRegister.create(Registries.ENTITY_TYPE, MODID);
 
     public static void register(IEventBus bus)
     {
@@ -30,12 +33,14 @@ public class LittleContentRegistry
         BLOCKS.register(bus);
         BLOCK_ENTITY_TYPES.register(bus);
         RECIPE_SERIALIZERS.register(bus);
+        ENTITY_TYPES.register(bus);
         LittleCreativeTab.CREATIVE_TABS.register(bus);
 
         fr.dev1lroot.mcmods.littlecraft.content.item.LittleMaterials.register();
         fr.dev1lroot.mcmods.littlecraft.content.item.Diaper.register();
         fr.dev1lroot.mcmods.littlecraft.content.Crib.register();
         fr.dev1lroot.mcmods.littlecraft.content.item.ThighHighs.register();
+        fr.dev1lroot.mcmods.littlecraft.content.Potty.register();
 
         LittleMobEffects.register(bus);
         LittlePotions.register(bus);

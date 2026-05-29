@@ -50,8 +50,10 @@ public class LittleCreativeTab
                     output.accept(Crib.CRIB_ITEMS.get(color).get());
                 }
 
-                // Potty
-                output.accept(Potty.POTTY_ITEM.get());
+                // Potties — follow DyeColor enum order (white → black)
+                for (DyeColor color : DyeColor.values()) {
+                    output.accept(Potty.POTTY_ITEMS.get(color).get());
+                }
 
                 // Potions of Regression
                 output.accept(potionStack(Items.POTION,           LittlePotions.REGRESSION_POTION));

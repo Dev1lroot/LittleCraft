@@ -7,8 +7,10 @@ package fr.dev1lroot.mcmods.littlecraft.content.recipe;
 
 import com.mojang.serialization.MapCodec;
 import fr.dev1lroot.mcmods.littlecraft.content.LittleContentRegistry;
-import fr.dev1lroot.mcmods.littlecraft.content.Potty;
+import fr.dev1lroot.mcmods.littlecraft.content.block.PottyBlock;
+
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.ItemStack;
@@ -41,7 +43,7 @@ public class PottyClearRecipe extends CustomRecipe
         {
             ItemStack stack = input.getItem(i);
             if (stack.isEmpty()) continue;
-            if (stack.is(Potty.POTTY_ITEM.get()) && stack.has(DataComponents.BLOCK_ENTITY_DATA))
+            if (isPotty(stack) && stack.has(DataComponents.BLOCK_ENTITY_DATA))
                 pottyCount++;
             else
                 return false;
@@ -55,7 +57,7 @@ public class PottyClearRecipe extends CustomRecipe
         for (int i = 0; i < input.size(); i++)
         {
             ItemStack stack = input.getItem(i);
-            if (!stack.isEmpty() && stack.is(Potty.POTTY_ITEM.get()))
+            if (!stack.isEmpty() && isPotty(stack))
             {
                 ItemStack result = stack.copyWithCount(1);
                 result.remove(DataComponents.BLOCK_ENTITY_DATA);
@@ -69,6 +71,11 @@ public class PottyClearRecipe extends CustomRecipe
     public RecipeSerializer<PottyClearRecipe> getSerializer()
     {
         return SERIALIZER.get();
+    }
+
+    private static boolean isPotty(ItemStack stack)
+    {
+        return stack.getItem() instanceof BlockItem bi && bi.getBlock() instanceof PottyBlock;
     }
 
     public static void registerSerializer() {}

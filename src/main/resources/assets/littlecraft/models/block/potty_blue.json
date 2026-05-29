@@ -1,0 +1,7 @@
+{
+  "parent": "littlecraft:block/potty",
+  "textures": {
+    "0": "littlecraft:block/potty/blue",
+    "particle": "littlecraft:block/potty/blue"
+  }
+}

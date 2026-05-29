@@ -10,6 +10,7 @@ import fr.dev1lroot.mcmods.littlecraft.content.Potty;
 import fr.dev1lroot.mcmods.littlecraft.content.entity.PottySeatEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.ProblemReporter;
 import net.minecraft.world.InteractionResult;
@@ -45,13 +46,19 @@ public class PottyBlock extends BaseEntityBlock
     public static final EnumProperty<Direction> FACING = BlockStateProperties.HORIZONTAL_FACING;
     private static final VoxelShape SHAPE = Block.box(2, 0, 2, 14, 4, 14);
 
-    public static final MapCodec<PottyBlock> CODEC = simpleCodec(PottyBlock::new);
+    public static final MapCodec<PottyBlock> CODEC =
+        simpleCodec(props -> new PottyBlock(DyeColor.WHITE, props));
 
-    public PottyBlock(BlockBehaviour.Properties properties)
+    private final DyeColor color;
+
+    public PottyBlock(DyeColor color, BlockBehaviour.Properties properties)
     {
         super(properties);
+        this.color = color;
         registerDefaultState(stateDefinition.any().setValue(FACING, Direction.NORTH));
     }
+
+    public DyeColor getColor() { return color; }
 
     @Override
     public MapCodec<PottyBlock> codec() { return CODEC; }
@@ -136,7 +143,7 @@ public class PottyBlock extends BaseEntityBlock
 
     private ItemStack createDrop(PottyBlockEntity entity)
     {
-        ItemStack stack = new ItemStack(Potty.POTTY_ITEM.get());
+        ItemStack stack = new ItemStack(asItem());
         if (entity.getPiss() > 0 || entity.getPoop() > 0)
         {
             TagValueOutput output = TagValueOutput.createWithoutContext(ProblemReporter.DISCARDING);

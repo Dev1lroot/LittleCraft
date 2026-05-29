@@ -6,10 +6,14 @@
 package fr.dev1lroot.mcmods.littlecraft.client.render;
 
 import fr.dev1lroot.mcmods.littlecraft.common.LittleData;
+import fr.dev1lroot.mcmods.littlecraft.content.item.Pacifier;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.client.gui.GuiLayer;
 
 import java.util.Locale;
@@ -27,6 +31,11 @@ public class BodyStatsHud implements GuiLayer
 
         Player player = mc.player;
         if (!LittleData.isLittle(player)) return;
+
+        ItemStack head = player.getItemBySlot(EquipmentSlot.HEAD);
+        if (!(head.getItem() instanceof Pacifier.PacifierItem)) return;
+        Component name = head.getCustomName();
+        if (name == null || !name.getString().equals("Debug")) return;
 
         int age      = LittleData.getAge(player);
         int bladder  = LittleData.getBladder(player);

@@ -8,15 +8,27 @@ package fr.dev1lroot.mcmods.littlecraft.event;
 import fr.dev1lroot.mcmods.littlecraft.common.LittleData;
 import fr.dev1lroot.mcmods.littlecraft.content.LittleMobEffects;
 import fr.dev1lroot.mcmods.littlecraft.content.effect.IncontinenceEffect;
+import fr.dev1lroot.mcmods.littlecraft.content.effect.NeedEffect;
+import fr.dev1lroot.mcmods.littlecraft.content.effect.ShameEffect;
+import fr.dev1lroot.mcmods.littlecraft.data.FoodEffectsLoader;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.Identifier;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemUseAnimation;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.AddServerReloadListenersEvent;
 import net.neoforged.neoforge.event.entity.living.EffectParticleModificationEvent;
 import net.neoforged.neoforge.event.entity.living.LivingEntityUseItemEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
 
 import java.util.HashMap;
@@ -54,6 +66,12 @@ public class BodyMechanicsEvents
     }
 
     @SubscribeEvent
+    public static void onAddReloadListeners(AddServerReloadListenersEvent event)
+    {
+        event.addListener(Identifier.fromNamespaceAndPath(MODID, "food_effects"), new FoodEffectsLoader());
+    }
+
+    @SubscribeEvent
     public static void onItemUseFinish(LivingEntityUseItemEvent.Finish event)
     {
         if (event.getEntity().level().isClientSide()) return;
@@ -69,15 +87,59 @@ public class BodyMechanicsEvents
         if (!(event.getEntity() instanceof Player player)) return;
 
         ItemUseAnimation anim = event.getItem().getItem().getUseAnimation(event.getItem());
+        Identifier itemId = BuiltInRegistries.ITEM.getKey(event.getItem().getItem());
+        FoodEffectsLoader.FoodEffect effect = FoodEffectsLoader.get(itemId);
 
         if (anim == ItemUseAnimation.EAT)
         {
-            LittleData.addToStomach(player, 5);
-            LittleData.addToBladder(player, 10);
+            if (effect != null)
+            {
+                LittleData.addToEaten(player, effect.stomach());
+                LittleData.addToDrinked(player, effect.bladder());
+            }
+            else
+            {
+                LittleData.addToEaten(player, 5);
+                LittleData.addToDrinked(player, 10);
+            }
         }
         else if (anim == ItemUseAnimation.DRINK)
         {
-            LittleData.addToBladder(player, 250);
+            if (effect != null)
+            {
+                LittleData.addToEaten(player, effect.stomach());
+                LittleData.addToDrinked(player, effect.bladder());
+            }
+            else
+            {
+                LittleData.addToDrinked(player, 250);
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public static void onRightClickBlock(PlayerInteractEvent.RightClickBlock event)
+    {
+        if (event.getEntity().level().isClientSide()) return;
+        if (event.getHand() != InteractionHand.MAIN_HAND) return;
+
+        Player player = event.getEntity();
+        BlockState state = player.level().getBlockState(event.getPos());
+
+        if (!state.is(Blocks.CAKE) && !state.is(BlockTags.CANDLE_CAKES)) return;
+        if (!player.canEat(false)) return;
+
+        // All cake variants share minecraft:cake as their food effect key.
+        FoodEffectsLoader.FoodEffect effect = FoodEffectsLoader.get(Identifier.withDefaultNamespace("cake"));
+        if (effect != null)
+        {
+            LittleData.addToEaten(player, effect.stomach());
+            LittleData.addToDrinked(player, effect.bladder());
+        }
+        else
+        {
+            LittleData.addToEaten(player, 5);
+            LittleData.addToDrinked(player, 10);
         }
     }
 
@@ -94,7 +156,10 @@ public class BodyMechanicsEvents
     @SubscribeEvent
     public static void onEffectParticle(EffectParticleModificationEvent event)
     {
-        if (event.getEffect().getEffect().value() instanceof IncontinenceEffect)
+        MobEffect effect = event.getEffect().getEffect().value();
+        if (effect instanceof IncontinenceEffect
+                || effect instanceof NeedEffect
+                || effect instanceof ShameEffect)
             event.setVisible(false);
     }
 }

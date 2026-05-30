@@ -7,7 +7,9 @@ package fr.dev1lroot.mcmods.littlecraft.content;
 
 import fr.dev1lroot.mcmods.littlecraft.content.effect.GrowthEffect;
 import fr.dev1lroot.mcmods.littlecraft.content.effect.IncontinenceEffect;
+import fr.dev1lroot.mcmods.littlecraft.content.effect.NeedEffect;
 import fr.dev1lroot.mcmods.littlecraft.content.effect.RegressionEffect;
+import fr.dev1lroot.mcmods.littlecraft.content.effect.ShameEffect;
 import fr.dev1lroot.mcmods.littlecraft.content.effect.StinkEffect;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.effect.MobEffect;
@@ -33,6 +35,12 @@ public class LittleMobEffects
 
     public static final DeferredHolder<MobEffect, IncontinenceEffect> INCONTINENCE =
         MOB_EFFECTS.register("incontinence", IncontinenceEffect::new);
+
+    public static final DeferredHolder<MobEffect, NeedEffect> NEED =
+        MOB_EFFECTS.register("need", NeedEffect::new);
+
+    public static final DeferredHolder<MobEffect, ShameEffect> SHAME =
+        MOB_EFFECTS.register("shame", ShameEffect::new);
 
     public static void register(IEventBus bus)
     {

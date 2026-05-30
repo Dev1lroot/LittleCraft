@@ -20,8 +20,10 @@ import java.util.Locale;
 
 public class BodyStatsHud implements GuiLayer
 {
+    private static final int COLOR_STOMACH = 0xFF8B4513; // saddle brown
+    private static final int COLOR_EATEN   = 0xFFF4A460; // sandy brown (pending)
     private static final int COLOR_BLADDER = 0xFFFFFF00; // yellow
-    private static final int COLOR_STOMACH = 0xFF8B4513; // brown
+    private static final int COLOR_DRINKED = 0xFFADD8E6; // light blue (pending)
 
     @Override
     public void render(GuiGraphicsExtractor gui, DeltaTracker delta)
@@ -37,20 +39,32 @@ public class BodyStatsHud implements GuiLayer
         Component name = head.getCustomName();
         if (name == null || !name.getString().equals("Debug")) return;
 
-        int age      = LittleData.getAge(player);
-        int bladder  = LittleData.getBladder(player);
-        int bladderCap = LittleData.computeBladderCapacity(age);
-        int stomach  = LittleData.getStomach(player);
+        int age        = LittleData.getAge(player);
+        int stomach    = LittleData.getStomach(player);
         int stomachCap = LittleData.computeStomachCapacity(age);
+        int eaten      = LittleData.getEaten(player);
+        int bladder    = LittleData.getBladder(player);
+        int bladderCap = LittleData.computeBladderCapacity(age);
+        int drinked    = LittleData.getDrinked(player);
 
-        String bladderText  = format(bladder)  + "/" + format(bladderCap)  + "ml";
-        String stomachText  = format(stomach)  + "/" + format(stomachCap)  + "g";
+        String stomachText = "stomach: "  + format(stomach) + "/" + format(stomachCap) + "g";
+        String eatenText   = "eating: "   + format(eaten)   + "g";
+        String bladderText = "bladder: "  + format(bladder) + "/" + format(bladderCap) + "ml";
+        String drinkedText = "drinking: " + format(drinked) + "ml";
 
-        int x = ((gui.guiWidth() / 2) - 90);
-        int y = gui.guiHeight() - 50;
+        int lineH  = mc.font.lineHeight + 2;
+        int rightX = gui.guiWidth() - 5;
+        int y      = gui.guiHeight() - 5 - lineH * 4;
 
-        gui.text(mc.font, bladderText, x, y,      COLOR_BLADDER);
-        gui.text(mc.font, stomachText, x + 100, y, COLOR_STOMACH);
+        drawRight(gui, mc, stomachText, rightX, y,           COLOR_STOMACH);
+        drawRight(gui, mc, eatenText,   rightX, y + lineH,   COLOR_EATEN);
+        drawRight(gui, mc, bladderText, rightX, y + lineH*2, COLOR_BLADDER);
+        drawRight(gui, mc, drinkedText, rightX, y + lineH*3, COLOR_DRINKED);
+    }
+
+    private static void drawRight(GuiGraphicsExtractor gui, Minecraft mc, String text, int rightX, int y, int color)
+    {
+        gui.text(mc.font, text, rightX - mc.font.width(text), y, color);
     }
 
     private static String format(int value)

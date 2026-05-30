@@ -37,19 +37,26 @@ public record PoopPacket() implements CustomPacketPayload
 
     public static void handle(PoopPacket packet, IPayloadContext context)
     {
-        Player player = context.player();
+        performPoop(context.player());
+    }
 
+    /**
+     * Routes a poop through the same priority chain as the packet:
+     * diaper → other equippable pants (shame) → potty → bare floor (shame).
+     * Safe to call from any server-side context (incontinence, packet handler, etc.).
+     */
+    public static void performPoop(Player player)
+    {
         int stomach = LittleData.getStomach(player);
         if (stomach < 100) return;
 
         ItemStack legs = player.getItemBySlot(EquipmentSlot.LEGS);
 
-        // Diaper: capacity-aware, takes priority
+        // Diaper: capacity-aware, takes priority, no shame.
         if (legs.getItem() instanceof Diaper.DiaperItem)
         {
             int used     = Diaper.getUsed(legs);
             int capacity = Diaper.getCapacity(legs);
-
             if (used < capacity)
             {
                 int drop      = Math.min(stomach, player.getRandom().nextIntBetweenInclusive(100, 250));
@@ -61,7 +68,7 @@ public record PoopPacket() implements CustomPacketPayload
                 return;
             }
         }
-        // Any other equippable pants item: just mark as pooped
+        // Other equippable pants (not a diaper): mark as pooped, apply shame.
         else
         {
             Equippable equippable = legs.get(DataComponents.EQUIPPABLE);
@@ -71,11 +78,12 @@ public record PoopPacket() implements CustomPacketPayload
                 LittleData.setStomach(player, stomach - drop);
                 player.setItemSlot(EquipmentSlot.LEGS, Diaper.setPooped(legs, true));
                 player.addEffect(new MobEffectInstance(LittleMobEffects.STINK, MobEffectInstance.INFINITE_DURATION, 0));
+                player.addEffect(new MobEffectInstance(LittleMobEffects.SHAME, 600, 0));
                 return;
             }
         }
 
-        // No legs item or diaper full — try potty next
+        // No legs item or diaper full — try potty next.
         if (player.getVehicle() instanceof PottySeatEntity seat)
         {
             PottyBlockEntity potty = seat.getPottyBlockEntity();
@@ -86,6 +94,13 @@ public record PoopPacket() implements CustomPacketPayload
                 LittleData.setStomach(player, stomach - drop);
                 player.removeEffect(LittleMobEffects.STINK);
             }
+            return; // sitting on potty always prevents bare poop, even if it's full
         }
+
+        // No diaper, no pants, no potty — poop on the floor.
+        int drop = Math.min(stomach, player.getRandom().nextIntBetweenInclusive(100, 250));
+        LittleData.setStomach(player, stomach - drop);
+        player.addEffect(new MobEffectInstance(LittleMobEffects.STINK, MobEffectInstance.INFINITE_DURATION, 0));
+        player.addEffect(new MobEffectInstance(LittleMobEffects.SHAME, 600, 0));
     }
 }

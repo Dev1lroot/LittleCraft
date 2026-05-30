@@ -6,16 +6,20 @@
 package fr.dev1lroot.mcmods.littlecraft.network;
 
 import fr.dev1lroot.mcmods.littlecraft.common.LittleData;
+import fr.dev1lroot.mcmods.littlecraft.content.LittleMobEffects;
 import fr.dev1lroot.mcmods.littlecraft.content.block.PottyBlockEntity;
 import fr.dev1lroot.mcmods.littlecraft.content.entity.PottySeatEntity;
 import fr.dev1lroot.mcmods.littlecraft.content.item.Diaper;
 import io.netty.buffer.ByteBuf;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.Identifier;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.equipment.Equippable;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 import java.util.HashMap;
@@ -51,37 +55,58 @@ public record PissPacket() implements CustomPacketPayload
     public static void handle(PissPacket packet, IPayloadContext context)
     {
         Player player = context.player();
-
         lastPissTick.put(player.getUUID(), player.tickCount);
 
-        // Diaper takes priority: use it if equipped and not full
-        ItemStack diaper = player.getItemBySlot(EquipmentSlot.LEGS);
-        if (diaper.getItem() instanceof Diaper.DiaperItem)
-        {
-            int used     = Diaper.getUsed(diaper);
-            int capacity = Diaper.getCapacity(diaper);
+        /*
+            The packet is sent every 5 ticks while the key is held.
+            5 ticks = 1/4 s → average pee speed 24 ml/s → 6 ml per packet.
+        */
+        int bladder = LittleData.getBladder(player);
+        performPiss(player, Math.min(bladder, 6));
+    }
 
+    /**
+     * Routes a piss of the given amount through the same priority chain as the packet:
+     * diaper → other equippable pants (shame) → potty → bare floor (shame).
+     * Safe to call from any server-side context (incontinence, packet handler, etc.).
+     */
+    public static void performPiss(Player player, int amount)
+    {
+        if (amount <= 0) return;
+
+        ItemStack legs = player.getItemBySlot(EquipmentSlot.LEGS);
+
+        // Diaper: highest priority, no shame.
+        if (legs.getItem() instanceof Diaper.DiaperItem)
+        {
+            int used     = Diaper.getUsed(legs);
+            int capacity = Diaper.getCapacity(legs);
             if (used < capacity)
             {
-                /*
-                    the packet calls each 5 ticks when key is hold,
-                    5 ticks is 1/4 of the 1 second,
-                    average peeing speed of human is 15ml/s (male) and 30ml/s (female),
-                    I will use 24ml/s
-                    24 / 4 = 6;
-                */
+                int bladder = LittleData.getBladder(player);
+                int actual  = Math.min(amount, bladder);
+                player.setItemSlot(EquipmentSlot.LEGS, Diaper.setUsed(legs, used + actual));
+                LittleData.setBladder(player, bladder - actual);
+                return;
+            }
+        }
+        // Other equippable pants (not a diaper): piss in pants, apply shame.
+        else
+        {
+            Equippable equippable = legs.get(DataComponents.EQUIPPABLE);
+            if (equippable != null && equippable.slot() == EquipmentSlot.LEGS)
+            {
                 int bladder = LittleData.getBladder(player);
                 if (bladder > 0)
                 {
-                    int amount = Math.min(bladder, 6); // 6 per 5 ticks (24 per second)
-                    player.setItemSlot(EquipmentSlot.LEGS, Diaper.setUsed(diaper, used + amount));
-                    LittleData.setBladder(player, bladder - amount);
+                    LittleData.setBladder(player, bladder - Math.min(amount, bladder));
+                    player.addEffect(new MobEffectInstance(LittleMobEffects.SHAME, 600, 0));
                 }
                 return;
             }
         }
 
-        // Diaper missing or full — try potty next
+        // No legs item or diaper full — try potty next.
         if (player.getVehicle() instanceof PottySeatEntity seat)
         {
             PottyBlockEntity potty = seat.getPottyBlockEntity();
@@ -90,14 +115,20 @@ public record PissPacket() implements CustomPacketPayload
                 int bladder = LittleData.getBladder(player);
                 if (bladder > 0)
                 {
-                    int amount = Math.min(bladder, 6);
-                    potty.addPiss(amount);
-                    LittleData.setBladder(player, bladder - amount);
+                    int actual = Math.min(amount, bladder);
+                    potty.addPiss(actual);
+                    LittleData.setBladder(player, bladder - actual);
                 }
             }
             return;
         }
 
-        // TODO: Bad effects for diaperless use of this function;
+        // No diaper, no pants, no potty — piss on the floor.
+        int bladder = LittleData.getBladder(player);
+        if (bladder > 0)
+        {
+            LittleData.setBladder(player, bladder - Math.min(amount, bladder));
+            player.addEffect(new MobEffectInstance(LittleMobEffects.SHAME, 600, 0));
+        }
     }
 }

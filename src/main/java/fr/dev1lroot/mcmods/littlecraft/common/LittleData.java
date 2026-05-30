@@ -50,6 +50,26 @@ public class LittleData
                 .sync(ByteBufCodecs.VAR_INT)
                 .build());
 
+    // Unbounded buffer: solid food eaten, drains into STOMACH at 1 g per 20 ticks.
+    @SuppressWarnings("unchecked")
+    public static final DeferredHolder<AttachmentType<?>, AttachmentType<Integer>> EATEN =
+        (DeferredHolder<AttachmentType<?>, AttachmentType<Integer>>) ATTACHMENT_TYPES.register("eaten", () ->
+            AttachmentType.builder(() -> 0)
+                .serialize(Codec.INT.optionalFieldOf("value", 0))
+                .copyOnDeath()
+                .sync(ByteBufCodecs.VAR_INT)
+                .build());
+
+    // Unbounded buffer: liquid consumed, drains into BLADDER at 1 ml per 5 ticks.
+    @SuppressWarnings("unchecked")
+    public static final DeferredHolder<AttachmentType<?>, AttachmentType<Integer>> DRINKED =
+        (DeferredHolder<AttachmentType<?>, AttachmentType<Integer>>) ATTACHMENT_TYPES.register("drinked", () ->
+            AttachmentType.builder(() -> 0)
+                .serialize(Codec.INT.optionalFieldOf("value", 0))
+                .copyOnDeath()
+                .sync(ByteBufCodecs.VAR_INT)
+                .build());
+
     public LittleData(IEventBus modBus)
     {
         ATTACHMENT_TYPES.register(modBus);
@@ -116,6 +136,36 @@ public class LittleData
         if (age <= 6) return 0.0F;
         if (age >= 18) return 1.0F;
         return (age - 6) / 12.0F;
+    }
+
+    public static int getEaten(Player player)
+    {
+        return player.getData(EATEN.get());
+    }
+
+    public static void setEaten(Player player, int value)
+    {
+        player.setData(EATEN.get(), Math.max(0, value));
+    }
+
+    public static void addToEaten(Player player, int amount)
+    {
+        setEaten(player, getEaten(player) + amount);
+    }
+
+    public static int getDrinked(Player player)
+    {
+        return player.getData(DRINKED.get());
+    }
+
+    public static void setDrinked(Player player, int value)
+    {
+        player.setData(DRINKED.get(), Math.max(0, value));
+    }
+
+    public static void addToDrinked(Player player, int amount)
+    {
+        setDrinked(player, getDrinked(player) + amount);
     }
 
     // Body/model scale for a little player of the given age

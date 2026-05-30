@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "P": "littlecraft:plastic",
+    "D": "minecraft:light_gray_dye"
+  },
+  "pattern": [
+    "PDP",
+    "PPP"
+  ],
+  "result": {
+    "id": "littlecraft:light_gray_potty"
+  }
+}

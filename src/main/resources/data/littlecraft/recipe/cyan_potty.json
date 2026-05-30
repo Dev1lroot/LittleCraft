@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "P": "littlecraft:plastic",
+    "D": "minecraft:cyan_dye"
+  },
+  "pattern": [
+    "PDP",
+    "PPP"
+  ],
+  "result": {
+    "id": "littlecraft:cyan_potty"
+  }
+}

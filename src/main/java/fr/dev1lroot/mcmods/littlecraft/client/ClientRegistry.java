@@ -21,7 +21,6 @@ import fr.dev1lroot.mcmods.littlecraft.content.Potty;
 import net.minecraft.resources.Identifier;
 import net.neoforged.neoforge.client.event.RegisterRangeSelectItemModelPropertyEvent;
 import net.neoforged.neoforge.client.event.RegisterSelectItemModelPropertyEvent;
-import fr.dev1lroot.mcmods.littlecraft.model.DiaperModel;
 import fr.dev1lroot.mcmods.littlecraft.model.ThighHighsModel;
 import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
@@ -57,7 +56,7 @@ public class ClientRegistry
 
     private static void onRegisterLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event)
     {
-        event.registerLayerDefinition(DiaperModel.LAYER_LOCATION, DiaperModel::createBodyLayer);
+        // DiaperModel no longer uses LayerDefinition — geometry is loaded from JSON at runtime.
         event.registerLayerDefinition(ThighHighsModel.LAYER_LOCATION, ThighHighsModel::createBodyLayer);
     }
 

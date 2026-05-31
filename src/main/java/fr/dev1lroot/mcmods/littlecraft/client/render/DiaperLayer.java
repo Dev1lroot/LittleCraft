@@ -6,6 +6,7 @@
 package fr.dev1lroot.mcmods.littlecraft.client.render;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import fr.dev1lroot.mcmods.littlecraft.client.TextureCompositor;
 import fr.dev1lroot.mcmods.littlecraft.content.item.Diaper;
 import fr.dev1lroot.mcmods.littlecraft.model.DiaperModel;
 import net.minecraft.client.Minecraft;
@@ -31,33 +32,33 @@ public class DiaperLayer<S extends HumanoidRenderState, M extends EntityModel<? 
         extends RenderLayer<S, M>
 {
     // Caches resolved [primary, wetness] texture pairs per design name.
-    // Cleared on resource pack reload so new designs are picked up without restart.
     private static final Map<String, Identifier[]> TEXTURE_CACHE = new HashMap<>();
 
-    private final DiaperModel primaryModel;
-    private final DiaperModel wetnessModel;
+    // diaper.json — default dry shape
+    private final DiaperModel modelDry;
+    // diaper_full.json — capacity >= 5000 OR used >= capacity/2
+    private final DiaperModel modelFull;
+    // diaper_flooded.json — used >= capacity/5 OR capacity >= 7000
+    private final DiaperModel modelFlooded;
 
     public DiaperLayer(RenderLayerParent<S, M> parent, EntityModelSet modelSet)
     {
         super(parent);
-        this.primaryModel = new DiaperModel(modelSet.bakeLayer(DiaperModel.LAYER_LOCATION));
-        this.primaryModel.overlay.visible = false;
-        this.primaryModel.overlay_inner.visible = false;
-
-        this.wetnessModel = new DiaperModel(modelSet.bakeLayer(DiaperModel.LAYER_LOCATION));
-        this.wetnessModel.primary.visible = false;
-        this.wetnessModel.primary_inner.visible = false;
+        var rm = Minecraft.getInstance().getResourceManager();
+        this.modelDry     = new DiaperModel(rm, DiaperModel.MODEL_DRY,     0.0f);
+        this.modelFull    = new DiaperModel(rm, DiaperModel.MODEL_FULL,    0.0f);
+        this.modelFlooded = new DiaperModel(rm, DiaperModel.MODEL_FLOODED, 0.0f);
     }
 
     public static void clearCache()
     {
         TEXTURE_CACHE.clear();
+        TextureCompositor.clearAll();
     }
 
     private static Identifier[] resolveTextures(String design)
     {
         return TEXTURE_CACHE.computeIfAbsent(design, d -> {
-            // Sanitize: only lowercase letters, digits, and underscores are valid
             String safe = d.replaceAll("[^a-z0-9_]", "");
             if (safe.isEmpty()) safe = "default";
 
@@ -75,8 +76,6 @@ public class DiaperLayer<S extends HumanoidRenderState, M extends EntityModel<? 
     @Override
     public void submit(PoseStack pose, SubmitNodeCollector collector, int light, S state, float yRot, float xRot)
     {
-        // state.legsEquipment is populated because the diaper's Equippable has an assetId,
-        // which satisfies HumanoidMobRenderer.getEquipmentIfRenderable()'s shouldRender() check.
         ItemStack legs = state.legsEquipment;
         if (legs.isEmpty()) return;
         if (!(legs.getItem() instanceof Diaper.DiaperItem)) return;
@@ -90,32 +89,44 @@ public class DiaperLayer<S extends HumanoidRenderState, M extends EntityModel<? 
         }
 
         Identifier[] textures = resolveTextures(design);
-
         int used     = Diaper.getUsed(legs);
         int capacity = Diaper.getCapacity(legs);
 
-        primaryModel.setupAnim(state);
-        wetnessModel.setupAnim(state);
+        // flooded: used >= capacity/5 OR capacity >= 7000 (takes priority)
+        // full:    capacity >= 5000 OR used >= capacity/2
+        boolean isFlooded = used * 5 >= capacity || capacity >= 7000;
+        boolean isFull    = capacity >= 5000 || used * 2 >= capacity;
+        DiaperModel model = isFlooded ? modelFlooded : (isFull ? modelFull : modelDry);
 
-        renderColoredCutoutModel(primaryModel, textures[0], pose, collector, light, state, -1, -1);
-
-        if (used > 0)
+        // Composite wetness into the base texture on the CPU; use plain base when dry.
+        // Bucket alpha to steps of 4 (64 levels) before compiling to limit cache size.
+        Identifier texture = textures[0];
+        if (used > 0 && Diaper.isPeed(legs))
         {
-            int alpha = Math.min(255, Math.round(255f * used / capacity));
-            int color = (alpha << 24) | 0x00FFFFFF;
-            collector.order(color)
-                    .submitModel(
-                            wetnessModel,
-                            state,
-                            pose,
-                            RenderTypes.armorTranslucent(textures[1]),
-                            light,
-                            LivingEntityRenderer.getOverlayCoords(state, 0.0F),
-                            color,
-                            null,
-                            state.outlineColor,
-                            null
-                    );
+            int rawAlpha = Math.min(255, Math.round(255f * used / capacity));
+            int alpha    = (rawAlpha >> 2) << 2;
+            texture = new TextureCompositor()
+                    .addLayer(textures[0])
+                    .addLayer(textures[1], alpha)
+                    .compile();
         }
+
+        model.setupAnim(state);
+        pose.pushPose();
+        pose.scale(1.25f, 1.25f, 1.25f);
+        collector.order(-1)
+                .submitModel(
+                        model,
+                        state,
+                        pose,
+                        RenderTypes.entityTranslucent(texture),
+                        light,
+                        LivingEntityRenderer.getOverlayCoords(state, 0.0f),
+                        -1,
+                        null,
+                        state.outlineColor,
+                        null
+                );
+        pose.popPose();
     }
 }

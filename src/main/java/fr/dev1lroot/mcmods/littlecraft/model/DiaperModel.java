@@ -5,107 +5,75 @@
 
 package fr.dev1lroot.mcmods.littlecraft.model;
 
+import com.dev1lroot.mclib.formabitur.Formabitur;
 import net.minecraft.client.model.EntityModel;
-import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
-import net.minecraft.client.model.geom.PartPose;
-import net.minecraft.client.model.geom.builders.CubeListBuilder;
-import net.minecraft.client.model.geom.builders.LayerDefinition;
-import net.minecraft.client.model.geom.builders.MeshDefinition;
-import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.client.renderer.entity.state.HumanoidRenderState;
 import net.minecraft.resources.Identifier;
+import net.minecraft.server.packs.resources.ResourceManager;
 
 import static fr.dev1lroot.mcmods.littlecraft.LittleMod.MODID;
 
+/**
+ * Entity model for the worn diaper, driven entirely by {@code models/block/diaper.json}.
+ * Geometry is loaded at construction time via {@link Formabitur}; edit the JSON in
+ *
+ * Two instances are used by {@link fr.dev1lroot.mcmods.littlecraft.client.render.DiaperLayer}:
+ *  • inflate = 0.0  → primary (dry) layer
+ *  • inflate = 0.01 → wetness overlay (slightly larger to avoid Z-fighting)
+ *
+ * Texture identifiers remain as constants so other code can reference them.
+ */
 public class DiaperModel extends EntityModel<HumanoidRenderState>
 {
-    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(Identifier.fromNamespaceAndPath(MODID, "diaper_model"), "main");
-
     public static final Identifier TEXTURE_PRIMARY = Identifier.fromNamespaceAndPath(MODID, "textures/diaper/default/default.png");
     public static final Identifier TEXTURE_WETNESS = Identifier.fromNamespaceAndPath(MODID, "textures/diaper/default/wetness.png");
 
-    public final ModelPart primary;
-    public final ModelPart overlay;
-    public final ModelPart primary_inner;
-    public final ModelPart overlay_inner;
+    public static final Identifier MODEL_DRY     =
+        Identifier.fromNamespaceAndPath(MODID, "models/block/diaper.json");
+    public static final Identifier MODEL_FULL    =
+        Identifier.fromNamespaceAndPath(MODID, "models/block/diaper_full.json");
+    public static final Identifier MODEL_FLOODED =
+        Identifier.fromNamespaceAndPath(MODID, "models/block/diaper_flooded.json");
 
-    public DiaperModel(ModelPart root)
+    private static final float TEX_WIDTH  = 32f;
+    private static final float TEX_HEIGHT = 32f;
+
+    // Base placement offset (entity-model units, 1 unit = 1 voxel).
+    private static final float OFFSET_X   =  8.0f;  // right
+    private static final float OFFSET_Z   =  -8.0f;  // front
+    private static final float OFFSET_Y   =  14.0f;  // down - tune to taste
+
+    // Crouching offsets in entity-model units.
+    private static final float CROUCH_Y   =  2.0f;
+    private static final float CROUCH_Z   =  6.0f;
+    private static final float CROUCH_ROT =  0.5f;
+
+    /** The root part is also the sole animated part (no sub-hierarchy). */
+    private final ModelPart root;
+
+    public DiaperModel(ResourceManager rm, Identifier modelPath, float inflate)
     {
-        super(root);
-
-        // Base diaper box    
-        this.primary = root.getChild("primary");
-        this.overlay = root.getChild("overlay");
-
-        // Internal safeguards
-        this.primary_inner = root.getChild("primary_inner");
-        this.overlay_inner = root.getChild("overlay_inner");
-    }
-
-    public static LayerDefinition createBodyLayer()
-    {
-        MeshDefinition mesh = new MeshDefinition();
-        PartDefinition root = mesh.getRoot();
-
-        root.addOrReplaceChild("primary",
-                CubeListBuilder.create()
-                        .texOffs(0, 0)
-                        .addBox(-4.0F, 0.0F, -2.0F, 8.0F, 7.0F, 4.0F),
-                PartPose.offset(0.0F, 0.0F, 0.0F));
-
-        root.addOrReplaceChild("overlay",
-                CubeListBuilder.create()
-                        .texOffs(0, 0)
-                        .addBox(-4.0F, 0.0F, -2.0F, 8.0F, 7.0F, 4.0F),
-                PartPose.offset(0.0F, 0.0F, 0.0F));
-
-        root.addOrReplaceChild("primary_inner",
-                CubeListBuilder.create()
-                        .texOffs(0, 11)
-                        .addBox(-2.0F, 0.0F, -2.0F, 4.0F, 7.0F, 4.0F),
-                PartPose.offset(0.0F, 0.0F, 0.0F));
-
-        root.addOrReplaceChild("overlay_inner",
-                CubeListBuilder.create()
-                        .texOffs(0, 11)
-                        .addBox(-2.0F, 0.0F, -2.0F, 4.0F, 7.0F, 4.0F),
-                PartPose.offset(0.0F, 0.0F, 0.0F));
-
-        return LayerDefinition.create(mesh, 32, 32);
+        super(Formabitur.buildFromBlockModel(rm, modelPath, TEX_WIDTH, TEX_HEIGHT, inflate));
+        this.root = root();
     }
 
     @Override
     public void setupAnim(HumanoidRenderState state)
     {
-        reset();
+        root.x      = OFFSET_X;
+        root.y      = OFFSET_Y;
+        root.z      = OFFSET_Z;
+        root.xRot   = 0f;
+        root.zRot   = 0f;
+        root.xScale = -1f;
+        root.yScale = -1f;
 
         if (state.isCrouching)
         {
-            // body.xRot = +0.5F when crouching (lean forward); diaper matches.
-            this.primary.y = this.overlay.y = this.primary_inner.y = this.overlay_inner.y = 9.0F;
-            this.primary.z = this.overlay.z = this.primary_inner.z = this.overlay_inner.z = 3.0F;
-            this.primary.xRot = this.overlay.xRot = this.primary_inner.xRot = this.overlay_inner.xRot = 0.5F;
+            root.y    += CROUCH_Y;
+            root.z    += CROUCH_Z;
+            root.xRot  = CROUCH_ROT;
         }
-        // Swimming and sleeping rotations are handled by the entity renderer's setupRotations;
-        // the diaper inherits those poseStack transforms automatically as a RenderLayer.
-    }
-
-    private void reset()
-    {
-        // y=8 places the box at model y=8–16 (the hip joint of a standard player model).
-        this.primary.y = this.overlay.y = this.primary_inner.y = this.overlay_inner.y = 8.0F;
-        this.primary.z = this.overlay.z = this.primary_inner.z = this.overlay_inner.z = 0.0F;
-        this.primary.x = this.overlay.x = this.primary_inner.x = this.overlay_inner.x = 0.0F;
-
-        this.primary.xRot = this.overlay.xRot = this.primary_inner.xRot = this.overlay_inner.xRot = 0.0F;
-        this.primary.yRot = this.overlay.yRot = this.primary_inner.yRot = this.overlay_inner.yRot = 0.0F;
-        this.primary.zRot = this.overlay.zRot = this.primary_inner.zRot = this.overlay_inner.zRot = 0.0F;
-
-        this.primary.xScale = this.primary.yScale = this.primary.zScale =
-        this.primary_inner.xScale = this.primary_inner.yScale = this.primary_inner.zScale   = 1.2F;
-
-        this.overlay.xScale = this.overlay.yScale = this.overlay.zScale =
-        this.overlay_inner.xScale = this.overlay_inner.yScale = this.overlay_inner.zScale   = 1.21F;
     }
 }

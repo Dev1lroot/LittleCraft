@@ -85,7 +85,8 @@ public record PissPacket() implements CustomPacketPayload
             {
                 int bladder = LittleData.getBladder(player);
                 int actual  = Math.min(amount, bladder);
-                player.setItemSlot(EquipmentSlot.LEGS, Diaper.setUsed(legs, used + actual));
+                ItemStack updated = Diaper.setPeed(Diaper.setUsed(legs, used + actual), true);
+                player.setItemSlot(EquipmentSlot.LEGS, updated);
                 LittleData.setBladder(player, bladder - actual);
                 return;
             }

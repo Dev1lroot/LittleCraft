@@ -3,7 +3,7 @@
 [![Minecraft Version](https://img.shields.io/badge/Minecraft-26.1.2-darkgreen.svg?logo=minecraft)](https://minecraft.net)
 [![NeoForge Version](https://img.shields.io/badge/NeoForge-26.1.2.64--beta-orange.svg)](https://neoforged.net)
 [![License](https://img.shields.io/badge/License-GNU%20GPL%203.0--Only-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.html)
-[![Mod Version](https://img.shields.io/badge/Version-3.1.0-purple.svg)](https://semver.org/)
+[![Mod Version](https://img.shields.io/badge/Version-3.2.0-purple.svg)](https://semver.org/)
 
 **LittleCraft** is a NeoForge mod for **Minecraft 26.1.2**, designed to bring immersive **Age Regression** (Agere) and **ABDL** elements into roleplay gameplay. It introduces dynamic character scaling, functional roleplay items, and unique player-to-player interactions tailored for community servers where size mechanics and thematic props matter.
 

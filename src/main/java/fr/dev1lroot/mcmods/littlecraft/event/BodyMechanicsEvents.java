@@ -25,6 +25,10 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import fr.dev1lroot.mcmods.littlecraft.content.item.Diaper;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.event.AddServerReloadListenersEvent;
 import net.neoforged.neoforge.event.entity.living.EffectParticleModificationEvent;
 import net.neoforged.neoforge.event.entity.living.LivingEntityUseItemEvent;
@@ -32,7 +36,9 @@ import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 
 import static fr.dev1lroot.mcmods.littlecraft.LittleMod.MODID;
@@ -43,6 +49,9 @@ public class BodyMechanicsEvents
     // Saves the Stink effect instance when milk is about to be drunk, so it can be
     // re-applied after milk would have cleared it. Keyed by entity UUID.
     private static final Map<UUID, MobEffectInstance> savedStinkForMilk = new HashMap<>();
+
+    // Tracks which entities were in water last tick for entry detection.
+    private static final Set<UUID> lastInWater = new HashSet<>();
 
     @SubscribeEvent
     public static void onItemUseStart(LivingEntityUseItemEvent.Start event)
@@ -148,9 +157,32 @@ public class BodyMechanicsEvents
     {
         if (!(event.getEntity() instanceof LivingEntity entity)) return;
         if (entity.level().isClientSide()) return;
-        if (!entity.isInWater()) return;
-        if (entity.hasEffect(LittleMobEffects.STINK))
-            entity.removeEffect(LittleMobEffects.STINK);
+
+        boolean inWater    = entity.isInWater();
+        boolean wasInWater = lastInWater.contains(entity.getUUID());
+
+        if (inWater)
+        {
+            if (entity.hasEffect(LittleMobEffects.STINK))
+                entity.removeEffect(LittleMobEffects.STINK);
+
+            // First tick entering water: flood the diaper without marking is_peed.
+            if (!wasInWater && entity instanceof Player player)
+            {
+                ItemStack legs = player.getItemBySlot(EquipmentSlot.LEGS);
+                if (legs.getItem() instanceof Diaper.DiaperItem)
+                {
+                    int capacity = Diaper.getCapacity(legs);
+                    player.setItemSlot(EquipmentSlot.LEGS, Diaper.setUsed(legs, capacity));
+                }
+            }
+
+            lastInWater.add(entity.getUUID());
+        }
+        else
+        {
+            lastInWater.remove(entity.getUUID());
+        }
     }
 
     @SubscribeEvent

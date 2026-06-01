@@ -5,6 +5,7 @@
 
 package fr.dev1lroot.mcmods.littlecraft;
 
+import fr.dev1lroot.mcmods.littlecraft.command.DiaperCommand;
 import fr.dev1lroot.mcmods.littlecraft.command.LittleCommand;
 import fr.dev1lroot.mcmods.littlecraft.content.LittleContentRegistry;
 import fr.dev1lroot.mcmods.littlecraft.network.PissPacket;
@@ -28,7 +29,7 @@ import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
     ║            and sets up a soft, safe foundation for little      ║
     ║            experiences in Minecraft.                           ║
     ║                                                                ║
-    ║  License: MIT (or your choice — feel free to adjust)           ║
+    ║  License: GPL-3.0-only                                         ║
     ║  Created with love, softness, and too many warm blankets. 🧸   ║
     ╚════════════════════════════════════════════════════════════════╝
 */
@@ -48,6 +49,8 @@ public class LittleMod
     {
         // Register age commands (/age get|set, /age <player> get|set)
         LittleCommand.register();
+        // Register diaper commands (/diaper open|close [<player>])
+        DiaperCommand.register();
         // Register all the cute little items and blocks
         LittleContentRegistry.register(modEventBus);
         // Register network payloads

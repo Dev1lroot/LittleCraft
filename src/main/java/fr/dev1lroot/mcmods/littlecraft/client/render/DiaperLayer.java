@@ -40,6 +40,8 @@ public class DiaperLayer<S extends HumanoidRenderState, M extends EntityModel<? 
     private final DiaperModel modelFull;
     // diaper_flooded.json — used >= capacity/5 OR capacity >= 7000
     private final DiaperModel modelFlooded;
+    // diaper_unwrap.json — is_open:true overrides all capacity-based selection
+    private final DiaperModel modelUnwrap;
 
     public DiaperLayer(RenderLayerParent<S, M> parent, EntityModelSet modelSet)
     {
@@ -48,6 +50,7 @@ public class DiaperLayer<S extends HumanoidRenderState, M extends EntityModel<? 
         this.modelDry     = new DiaperModel(rm, DiaperModel.MODEL_DRY,     0.0f);
         this.modelFull    = new DiaperModel(rm, DiaperModel.MODEL_FULL,    0.0f);
         this.modelFlooded = new DiaperModel(rm, DiaperModel.MODEL_FLOODED, 0.0f);
+        this.modelUnwrap  = new DiaperModel(rm, DiaperModel.MODEL_UNWRAP,  0.0f);
     }
 
     public static void clearCache()
@@ -92,11 +95,16 @@ public class DiaperLayer<S extends HumanoidRenderState, M extends EntityModel<? 
         int used     = Diaper.getUsed(legs);
         int capacity = Diaper.getCapacity(legs);
 
-        // flooded: used >= capacity/5 OR capacity >= 7000 (takes priority)
-        // full:    capacity >= 5000 OR used >= capacity/2
-        boolean isFlooded = used * 5 >= capacity || capacity >= 7000;
-        boolean isFull    = capacity >= 5000 || used * 2 >= capacity;
-        DiaperModel model = isFlooded ? modelFlooded : (isFull ? modelFull : modelDry);
+        // is_open overrides all capacity-based shape selection.
+        // Otherwise: flooded > full > dry.
+        DiaperModel model;
+        if (Diaper.isOpen(legs)) {
+            model = modelUnwrap;
+        } else {
+            boolean isFlooded = used * 5 >= capacity || capacity >= 7000;
+            boolean isFull    = capacity >= 5000 || used * 2 >= capacity;
+            model = isFlooded ? modelFlooded : (isFull ? modelFull : modelDry);
+        }
 
         // Composite wetness into the base texture on the CPU; use plain base when dry.
         // Bucket alpha to steps of 4 (64 levels) before compiling to limit cache size.

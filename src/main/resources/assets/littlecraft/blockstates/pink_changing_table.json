@@ -1,0 +1,12 @@
+{
+  "variants": {
+    "facing=south,part=head": { "model": "littlecraft:block/changing_table_head_pink" },
+    "facing=west,part=head":  { "model": "littlecraft:block/changing_table_head_pink", "y": 90 },
+    "facing=north,part=head": { "model": "littlecraft:block/changing_table_head_pink", "y": 180 },
+    "facing=east,part=head":  { "model": "littlecraft:block/changing_table_head_pink", "y": 270 },
+    "facing=south,part=foot": { "model": "littlecraft:block/changing_table_foot_pink" },
+    "facing=west,part=foot":  { "model": "littlecraft:block/changing_table_foot_pink", "y": 90 },
+    "facing=north,part=foot": { "model": "littlecraft:block/changing_table_foot_pink", "y": 180 },
+    "facing=east,part=foot":  { "model": "littlecraft:block/changing_table_foot_pink", "y": 270 }
+  }
+}

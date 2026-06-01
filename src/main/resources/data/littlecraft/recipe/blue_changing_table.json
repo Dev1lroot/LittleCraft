@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": "minecraft:blue_bed",
+    "L": "minecraft:ladder"
+  },
+  "pattern": [" L ", "LBL", " L "],
+  "result": {
+    "id": "littlecraft:blue_changing_table"
+  }
+}

@@ -8,10 +8,16 @@
     "LittleSizeMixin",
     "PlayerTickMixin",
     "LocalPlayerLittleMixin",
-    "PlayerPersistentLittleMixin"
+    "PlayerPersistentLittleMixin",
+    "PlayerVehicleMixin",
+    "PlayerCarryPositionMixin",
+    "PlayerSleepHitboxMixin"
   ],
   "client": [
-    "client.LittleHeadScaleMixin"
+    "client.LittleHeadScaleMixin",
+    "client.InfantSittingMixin",
+    "client.ChangingTableLyingMixin",
+    "client.ChangingTableLookMixin"
   ],
   "injectors": {
     "defaultRequire": 1

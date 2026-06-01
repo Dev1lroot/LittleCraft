@@ -5,6 +5,7 @@
 
 package fr.dev1lroot.mcmods.littlecraft.content;
 
+import fr.dev1lroot.mcmods.littlecraft.content.ChangingTable;
 import fr.dev1lroot.mcmods.littlecraft.content.item.Diaper;
 import fr.dev1lroot.mcmods.littlecraft.content.item.Pacifier;
 import fr.dev1lroot.mcmods.littlecraft.content.item.LittleMaterials;
@@ -52,6 +53,11 @@ public class LittleCreativeTab
                 // Cribs — follow DyeColor enum order (white → black)
                 for (DyeColor color : DyeColor.values()) {
                     output.accept(Crib.CRIB_ITEMS.get(color).get());
+                }
+
+                // Changing Tables — follow DyeColor enum order (white → black)
+                for (DyeColor color : DyeColor.values()) {
+                    output.accept(ChangingTable.CHANGING_TABLE_ITEMS.get(color).get());
                 }
 
                 // Potties — follow DyeColor enum order (white → black)

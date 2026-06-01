@@ -182,6 +182,23 @@ public class Diaper
         return result;
     }
 
+    public static boolean isOpen(ItemStack stack)
+    {
+        CustomData data = stack.get(DataComponents.CUSTOM_DATA);
+        if (data != null) return data.copyTag().getBooleanOr("is_open", false);
+        return false;
+    }
+
+    public static ItemStack setOpen(ItemStack stack, boolean value)
+    {
+        ItemStack result = stack.copy();
+        CustomData existing = result.get(DataComponents.CUSTOM_DATA);
+        CompoundTag tag = existing != null ? existing.copyTag() : new CompoundTag();
+        tag.putBoolean("is_open", value);
+        result.set(DataComponents.CUSTOM_DATA, CustomData.of(tag));
+        return result;
+    }
+
     public static boolean isPeed(ItemStack stack)
     {
         CustomData data = stack.get(DataComponents.CUSTOM_DATA);

@@ -35,6 +35,8 @@ public class DiaperModel extends EntityModel<HumanoidRenderState>
         Identifier.fromNamespaceAndPath(MODID, "models/block/diaper_full.json");
     public static final Identifier MODEL_FLOODED =
         Identifier.fromNamespaceAndPath(MODID, "models/block/diaper_flooded.json");
+    public static final Identifier MODEL_UNWRAP  =
+        Identifier.fromNamespaceAndPath(MODID, "models/block/diaper_unwrap.json");
 
     private static final float TEX_WIDTH  = 32f;
     private static final float TEX_HEIGHT = 32f;

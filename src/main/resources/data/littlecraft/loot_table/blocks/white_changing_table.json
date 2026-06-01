@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [{ "condition": "minecraft:survives_explosion" }],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "block": "littlecraft:white_changing_table",
+              "condition": "minecraft:block_state_property",
+              "properties": { "part": "head" }
+            }
+          ],
+          "name": "littlecraft:white_changing_table"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "littlecraft:blocks/white_changing_table"
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "littlecraft:block/changing_table_foot",
+  "textures": {
+    "2": "littlecraft:block/changing_table/red"
+  }
+}

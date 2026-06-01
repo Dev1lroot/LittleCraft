@@ -1,0 +1,6 @@
+{
+  "parent": "littlecraft:block/changing_table_head",
+  "textures": {
+    "2": "littlecraft:block/changing_table/light_blue"
+  }
+}

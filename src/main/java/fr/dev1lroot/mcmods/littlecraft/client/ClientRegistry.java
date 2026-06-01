@@ -12,10 +12,14 @@ import fr.dev1lroot.mcmods.littlecraft.client.color.ThighHighsStripeColorTint;
 import fr.dev1lroot.mcmods.littlecraft.client.item.DiaperDesignProperty;
 import fr.dev1lroot.mcmods.littlecraft.client.item.DiaperFillProperty;
 import fr.dev1lroot.mcmods.littlecraft.client.render.BodyStatsHud;
+import fr.dev1lroot.mcmods.littlecraft.client.render.ChangingTableClientEvents;
+import fr.dev1lroot.mcmods.littlecraft.client.render.ChangingTableRenderer;
+import fr.dev1lroot.mcmods.littlecraft.client.render.ChangingTableSeatRenderer;
 import fr.dev1lroot.mcmods.littlecraft.client.render.CribRenderer;
 import fr.dev1lroot.mcmods.littlecraft.client.render.DiaperLayer;
 import fr.dev1lroot.mcmods.littlecraft.client.render.PottySeatRenderer;
 import fr.dev1lroot.mcmods.littlecraft.client.render.ThighHighsLayer;
+import fr.dev1lroot.mcmods.littlecraft.content.ChangingTable;
 import fr.dev1lroot.mcmods.littlecraft.content.Crib;
 import fr.dev1lroot.mcmods.littlecraft.content.Potty;
 import net.minecraft.resources.Identifier;
@@ -35,6 +39,7 @@ import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
 import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
+import net.neoforged.neoforge.common.NeoForge;
 
 import static fr.dev1lroot.mcmods.littlecraft.LittleMod.MODID;
 
@@ -43,6 +48,10 @@ public class ClientRegistry
 {
     public ClientRegistry(IEventBus modEventBus)
     {
+        // Register changing table render events on the GAME bus (not the mod bus).
+        NeoForge.EVENT_BUS.addListener(ChangingTableClientEvents::onRenderPlayerPre);
+        NeoForge.EVENT_BUS.addListener(ChangingTableClientEvents::onRenderPlayerPost);
+
         modEventBus.addListener(ClientRegistry::onRegisterLayerDefinitions);
         modEventBus.addListener(ClientRegistry::onAddLayers);
         modEventBus.addListener(ClientRegistry::onRegisterBlockEntityRenderers);
@@ -63,7 +72,9 @@ public class ClientRegistry
     private static void onRegisterBlockEntityRenderers(EntityRenderersEvent.RegisterRenderers event)
     {
         event.registerBlockEntityRenderer(Crib.CRIB_BLOCK_ENTITY.get(), CribRenderer::new);
+        event.registerBlockEntityRenderer(ChangingTable.CHANGING_TABLE_BLOCK_ENTITY.get(), ChangingTableRenderer::new);
         event.registerEntityRenderer(Potty.POTTY_SEAT.get(), PottySeatRenderer::new);
+        event.registerEntityRenderer(ChangingTable.CHANGING_TABLE_SEAT.get(), ChangingTableSeatRenderer::new);
     }
 
     @SuppressWarnings("unchecked")

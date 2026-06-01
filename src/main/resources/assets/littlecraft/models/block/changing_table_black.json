@@ -1,0 +1,7 @@
+{
+  "parent": "littlecraft:block/changing_table",
+  "textures": {
+    "2": "littlecraft:block/changing_table/black",
+    "particle": "littlecraft:block/changing_table/black"
+  }
+}

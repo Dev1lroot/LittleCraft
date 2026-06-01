@@ -41,8 +41,25 @@ public final class ChangingTableClientEvents
         // Suppress the isPassenger bent-leg animation that setupAnim forces on riders.
         renderState.isPassenger = false;
 
+        // Lock the matrix-level Y rotation (bodyRot drives setupRotations' YP transform)
+        // and yRot (drives head orientation in setupAnim) to the seat's fixed orientation
+        // so the model doesn't rotate with mouse input.
+        var level = Minecraft.getInstance().level;
+        Entity entity = level.getEntity(renderState.id);
+        float seatYRot = ((Player) entity).getVehicle().getYRot();
+        renderState.bodyRot = 90f; // Facing to top
+        renderState.yRot    = 0f;
+        //renderState.xRot    = 180; // Facing to the correct heading;
+
+        // FUCK EULER
+
+        // Scale the offset by the player's render scale so a half-sized little lands
+        // at the same position relative to the table surface as a full-sized player.
+        float s = renderState.scale;
+        poseStack.translate(-0.5F * s, 0.51F * s, 0);
+
         // Rotate the whole model 90° around Z to go from vertical → horizontal.
-        poseStack.mulPose(Axis.ZP.rotationDegrees(90f));
+        poseStack.mulPose(Axis.ZP.rotationDegrees(-90f));
     }
 
     public static void onRenderPlayerPost(RenderPlayerEvent.Post<?> event)
@@ -58,12 +75,12 @@ public final class ChangingTableClientEvents
             model.leftLeg.xRot  =  0f;
             model.rightLeg.yRot =  0f;
             model.leftLeg.yRot  =  0f;
-            model.rightLeg.zRot =  0.25f;
-            model.leftLeg.zRot  = -0.25f;
-            model.rightArm.xRot = -0.2f;
-            model.leftArm.xRot  = -0.2f;
-            model.rightArm.zRot = -0.6f;
-            model.leftArm.zRot  =  0.6f;
+            model.rightLeg.zRot =  0.5f;
+            model.leftLeg.zRot  = -0.5f;
+            model.rightArm.xRot = 0.2f;
+            model.leftArm.xRot  = 0.2f;
+            model.rightArm.zRot = 0.6f;
+            model.leftArm.zRot  = -0.6f;
         }
 
         event.getPoseStack().popPose(); // always paired with Pre pushPose

@@ -16,8 +16,7 @@
   "client": [
     "client.LittleHeadScaleMixin",
     "client.InfantSittingMixin",
-    "client.ChangingTableLyingMixin",
-    "client.ChangingTableLookMixin"
+    "client.ChangingTableLyingMixin"
   ],
   "injectors": {
     "defaultRequire": 1

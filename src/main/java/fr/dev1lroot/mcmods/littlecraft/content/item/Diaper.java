@@ -15,8 +15,6 @@ import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextColor;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -81,45 +79,8 @@ public class Diaper
         @Override
         public @NotNull InteractionResult interactLivingEntity(ItemStack stack, Player player, LivingEntity target, InteractionHand hand)
         {
-            if (!player.level().isClientSide())
-            {
-                if(target instanceof Player)
-                {
-                    ItemStack butt = target.getItemBySlot(EquipmentSlot.LEGS);
-
-                    if(Diaper.getUsed(stack) == 0 && stack.getDamageValue() == 0 && !Diaper.isPooped(stack))
-                    {
-                        if(butt.isEmpty() || butt.getItem() instanceof DiaperItem)
-                        {
-                            ItemStack diaperCopy = stack.copy();
-
-                            player.setItemInHand(hand, butt.copy());
-                            target.setItemSlot(EquipmentSlot.LEGS, diaperCopy);
-
-                            player.sendSystemMessage(Component.translatable("littlecraft.notification.item.diaper.change.success"));
-                            ((Player) target).sendSystemMessage(Component.translatable("littlecraft.notification.item.diaper.change.changed_by_other"));
-
-                            player.level().playSound(
-                                    null,
-                                    player.blockPosition(),
-                                    SoundEvents.WOOL_BREAK,
-                                    SoundSource.PLAYERS,
-                                    1.0F,
-                                    1.0F
-                            );
-                        }
-                        else
-                        {
-                            player.sendSystemMessage(Component.translatable("littlecraft.notification.item.diaper.change.error.armor_equipped"));
-                        }
-                    }
-                    else
-                    {
-                        player.sendSystemMessage(Component.translatable("littlecraft.notification.item.diaper.change.error.diaper_used"));
-                    }
-                }
-            }
-            return InteractionResult.SUCCESS;
+            // Handled by ChangingTableEvents; target must be on a changing table.
+            return InteractionResult.PASS;
         }
     }
 

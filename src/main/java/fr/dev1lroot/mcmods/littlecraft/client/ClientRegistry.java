@@ -51,6 +51,7 @@ public class ClientRegistry
         // Register changing table render events on the GAME bus (not the mod bus).
         NeoForge.EVENT_BUS.addListener(ChangingTableClientEvents::onRenderPlayerPre);
         NeoForge.EVENT_BUS.addListener(ChangingTableClientEvents::onRenderPlayerPost);
+        NeoForge.EVENT_BUS.addListener(ChangingTableClientEvents::onClientLevelTick);
 
         modEventBus.addListener(ClientRegistry::onRegisterLayerDefinitions);
         modEventBus.addListener(ClientRegistry::onAddLayers);

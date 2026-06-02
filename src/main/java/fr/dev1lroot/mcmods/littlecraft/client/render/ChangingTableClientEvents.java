@@ -9,11 +9,13 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import fr.dev1lroot.mcmods.littlecraft.content.block.AbstractChangingTableBlock;
 import fr.dev1lroot.mcmods.littlecraft.content.entity.ChangingTableSeatEntity;
+import net.minecraft.client.CameraType;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.state.AvatarRenderState;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.client.event.RenderPlayerEvent;
+import net.neoforged.neoforge.event.tick.LevelTickEvent;
 
 /**
  * Renders the player lying flat when seated on a {@link ChangingTableSeatEntity}.
@@ -28,6 +30,8 @@ import net.neoforged.neoforge.client.event.RenderPlayerEvent;
  */
 public final class ChangingTableClientEvents
 {
+    private static CameraType savedCamera = null;
+
     private ChangingTableClientEvents() {}
 
     public static void onRenderPlayerPre(RenderPlayerEvent.Pre<?> event)
@@ -84,6 +88,25 @@ public final class ChangingTableClientEvents
         }
 
         event.getPoseStack().popPose(); // always paired with Pre pushPose
+    }
+
+    public static void onClientLevelTick(LevelTickEvent.Post event)
+    {
+        Minecraft mc = Minecraft.getInstance();
+        if (mc.player == null) return;
+
+        boolean onTable = mc.player.getVehicle() instanceof ChangingTableSeatEntity;
+
+        if (onTable && savedCamera == null && mc.options.getCameraType().isFirstPerson())
+        {
+            savedCamera = mc.options.getCameraType();
+            mc.options.setCameraType(CameraType.THIRD_PERSON_BACK);
+        }
+        else if (!onTable && savedCamera != null)
+        {
+            mc.options.setCameraType(savedCamera);
+            savedCamera = null;
+        }
     }
 
     // ── helpers ──────────────────────────────────────────────────────────────

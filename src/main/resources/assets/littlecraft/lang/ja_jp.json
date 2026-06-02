@@ -56,5 +56,11 @@
   "key.littlecraft.piss": "おしっこ",
   "key.littlecraft.poop": "うんち",
   "effect.littlecraft.stink": "悪臭",
-  "effect.littlecraft.incontinence": "失禁"
+  "effect.littlecraft.incontinence": "失禁",
+  "item.littlecraft.baby_bottle": "哺乳瓶",
+  "item.littlecraft.baby_bottle.fluid": "中身:",
+  "item.littlecraft.baby_bottle.fluid.empty": "空",
+  "item.littlecraft.baby_bottle.amount": "量:",
+  "littlecraft.fluid.choco_milk": "チョコレートミルク",
+  "littlecraft.fluid.apple_juice": "リンゴジュース"
 }

@@ -56,5 +56,11 @@
   "key.littlecraft.piss": "Пописать",
   "key.littlecraft.poop": "Покакать",
   "effect.littlecraft.stink": "Вонь",
-  "effect.littlecraft.incontinence": "Недержание"
+  "effect.littlecraft.incontinence": "Недержание",
+  "item.littlecraft.baby_bottle": "Бутылочка",
+  "item.littlecraft.baby_bottle.fluid": "Содержимое:",
+  "item.littlecraft.baby_bottle.fluid.empty": "Пусто",
+  "item.littlecraft.baby_bottle.amount": "Количество:",
+  "littlecraft.fluid.choco_milk": "Шоколадное молоко",
+  "littlecraft.fluid.apple_juice": "Яблочный сок"
 }

@@ -56,5 +56,11 @@
   "key.littlecraft.piss": "Pinkeln",
   "key.littlecraft.poop": "Kacken",
   "effect.littlecraft.stink": "Gestank",
-  "effect.littlecraft.incontinence": "Inkontinenz"
+  "effect.littlecraft.incontinence": "Inkontinenz",
+  "item.littlecraft.baby_bottle": "Babyflasche",
+  "item.littlecraft.baby_bottle.fluid": "Inhalt:",
+  "item.littlecraft.baby_bottle.fluid.empty": "Leer",
+  "item.littlecraft.baby_bottle.amount": "Menge:",
+  "littlecraft.fluid.choco_milk": "Schokoladenmilch",
+  "littlecraft.fluid.apple_juice": "Apfelsaft"
 }

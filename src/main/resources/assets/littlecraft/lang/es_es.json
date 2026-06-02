@@ -56,5 +56,11 @@
   "key.littlecraft.piss": "Orinar",
   "key.littlecraft.poop": "Defecar",
   "effect.littlecraft.stink": "Hedor",
-  "effect.littlecraft.incontinence": "Incontinencia"
+  "effect.littlecraft.incontinence": "Incontinencia",
+  "item.littlecraft.baby_bottle": "Biberón",
+  "item.littlecraft.baby_bottle.fluid": "Líquido:",
+  "item.littlecraft.baby_bottle.fluid.empty": "Vacío",
+  "item.littlecraft.baby_bottle.amount": "Cantidad:",
+  "littlecraft.fluid.choco_milk": "Leche con Chocolate",
+  "littlecraft.fluid.apple_juice": "Zumo de Manzana"
 }

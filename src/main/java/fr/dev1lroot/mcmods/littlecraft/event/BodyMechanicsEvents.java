@@ -25,6 +25,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import fr.dev1lroot.mcmods.littlecraft.content.item.BabyBottle;
 import fr.dev1lroot.mcmods.littlecraft.content.item.Diaper;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
@@ -84,6 +85,9 @@ public class BodyMechanicsEvents
     public static void onItemUseFinish(LivingEntityUseItemEvent.Finish event)
     {
         if (event.getEntity().level().isClientSide()) return;
+
+        // Baby bottle handles its own bladder contribution in finishUsingItem.
+        if (event.getItem().getItem() instanceof BabyBottle.BabyBottleItem) return;
 
         // Restore Stink if milk just stripped it.
         if (event.getItem().is(Items.MILK_BUCKET))

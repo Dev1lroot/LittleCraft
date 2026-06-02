@@ -56,5 +56,11 @@
   "key.littlecraft.piss": "Pisser",
   "key.littlecraft.poop": "Faire caca",
   "effect.littlecraft.stink": "Puanteur",
-  "effect.littlecraft.incontinence": "Incontinence"
+  "effect.littlecraft.incontinence": "Incontinence",
+  "item.littlecraft.baby_bottle": "Biberon",
+  "item.littlecraft.baby_bottle.fluid": "Liquide :",
+  "item.littlecraft.baby_bottle.fluid.empty": "Vide",
+  "item.littlecraft.baby_bottle.amount": "Quantité :",
+  "littlecraft.fluid.choco_milk": "Lait Chocolaté",
+  "littlecraft.fluid.apple_juice": "Jus de Pomme"
 }

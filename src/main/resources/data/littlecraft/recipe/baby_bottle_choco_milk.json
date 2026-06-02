@@ -1,0 +1,9 @@
+{
+  "type": "littlecraft:baby_bottle_fill",
+  "fluid_name": "littlecraft.fluid.choco_milk",
+  "fluid_amount": 500,
+  "ingredients": [
+    {"item": "minecraft:milk_bucket"},
+    {"item": "minecraft:cocoa_beans"}
+  ]
+}

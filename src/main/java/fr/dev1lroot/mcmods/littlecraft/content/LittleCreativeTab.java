@@ -7,6 +7,7 @@ package fr.dev1lroot.mcmods.littlecraft.content;
 
 import fr.dev1lroot.mcmods.littlecraft.content.ChangingTable;
 import fr.dev1lroot.mcmods.littlecraft.content.item.Diaper;
+import fr.dev1lroot.mcmods.littlecraft.content.item.BabyBottle;
 import fr.dev1lroot.mcmods.littlecraft.content.item.Pacifier;
 import fr.dev1lroot.mcmods.littlecraft.content.item.LittleMaterials;
 import fr.dev1lroot.mcmods.littlecraft.content.item.ThighHighs;
@@ -49,6 +50,9 @@ public class LittleCreativeTab
 
                 // Pacifier
                 output.accept(Pacifier.PACIFIER.get());
+
+                // Baby Bottle
+                output.accept(BabyBottle.BABY_BOTTLE.get());
 
                 // Cribs — follow DyeColor enum order (white → black)
                 for (DyeColor color : DyeColor.values()) {

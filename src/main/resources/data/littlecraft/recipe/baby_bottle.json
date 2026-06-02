@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "GPG",
+    "G G",
+    " G "
+  ],
+  "key": {
+    "G": "minecraft:glass_pane",
+    "P": "littlecraft:plastic"
+  },
+  "result": {
+    "id": "littlecraft:baby_bottle",
+    "count": 1
+  }
+}

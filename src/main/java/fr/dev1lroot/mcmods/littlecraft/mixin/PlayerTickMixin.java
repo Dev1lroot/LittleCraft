@@ -7,6 +7,7 @@ package fr.dev1lroot.mcmods.littlecraft.mixin;
 
 import fr.dev1lroot.mcmods.littlecraft.common.LittleData;
 import fr.dev1lroot.mcmods.littlecraft.content.LittleMobEffects;
+import fr.dev1lroot.mcmods.littlecraft.content.entity.ChangingTableSeatEntity;
 import fr.dev1lroot.mcmods.littlecraft.content.item.Diaper;
 import fr.dev1lroot.mcmods.littlecraft.network.PissPacket;
 import fr.dev1lroot.mcmods.littlecraft.network.PoopPacket;
@@ -168,6 +169,14 @@ public abstract class PlayerTickMixin
                         player.getY() + 0.8,
                         player.getZ() + (player.getRandom().nextDouble() - 0.5) * 0.4,
                         1, 0.0, 0.0, 0.0, 0.0);
+            }
+
+            if (!player.level().isClientSide()
+                    && Diaper.isOpen(diaper)
+                    && !(player.getVehicle() instanceof ChangingTableSeatEntity))
+            {
+                player.setItemSlot(EquipmentSlot.LEGS, ItemStack.EMPTY);
+                player.drop(Diaper.setOpen(diaper, false), false);
             }
         }
     }

@@ -8,23 +8,37 @@
 	"elements": [
 		{
 			"name": "back01a",
-			"from": [1, 0, 10],
-			"to": [15, 7, 10],
-			"rotation": {"angle": 0, "axis": "y", "origin": [6, -8, 13]},
+			"from": [5, 0, 10],
+			"to": [11, 7, 10],
+			"rotation": {"angle": 0, "axis": "y", "origin": [10, -8, 13]},
 			"faces": {
-				"north": {"uv": [4.5, 11, 11.5, 7.5], "texture": "#0"},
+				"north": {"uv": [6.5, 11, 9.5, 7.5], "texture": "#0"},
 				"east": {"uv": [2, 2, 0, 0], "texture": "#0"},
-				"south": {"uv": [4.5, 11, 11.5, 7.5], "texture": "#0"},
+				"south": {"uv": [6.5, 11, 9.5, 7.5], "texture": "#0"},
 				"west": {"uv": [2, 2, 0, 0], "texture": "#0"},
 				"up": {"uv": [6, 0, 10, 2], "texture": "#0"},
 				"down": {"uv": [0, 0, 2, 2], "texture": "#0"}
 			}
 		},
 		{
-			"name": "back01a",
-			"from": [15, 0, 10],
-			"to": [17, 7, 10],
-			"rotation": {"angle": 35, "axis": "y", "origin": [15, 4, 10]},
+			"name": "backrightwing01a",
+			"from": [11, 0, 10],
+			"to": [15, 7, 10],
+			"rotation": {"angle": 22.5, "axis": "y", "origin": [11, 7, 10]},
+			"faces": {
+				"north": {"uv": [4.5, 11, 6.5, 7.5], "texture": "#0"},
+				"east": {"uv": [2, 2, 0, 0], "texture": "#0"},
+				"south": {"uv": [6.5, 11, 4.5, 7.5], "texture": "#0"},
+				"west": {"uv": [2, 2, 0, 0], "texture": "#0"},
+				"up": {"uv": [6, 0, 10, 2], "texture": "#0"},
+				"down": {"uv": [0, 0, 2, 2], "texture": "#0"}
+			}
+		},
+		{
+			"name": "backrightwing02a",
+			"from": [14.5, 0, 8.5],
+			"to": [16.5, 7, 8.5],
+			"rotation": {"angle": 0, "axis": "y", "origin": [15, 6, 7]},
 			"faces": {
 				"north": {"uv": [12.5, 11, 11.5, 7.5], "texture": "#0"},
 				"east": {"uv": [2, 2, 0, 0], "texture": "#0"},
@@ -35,10 +49,24 @@
 			}
 		},
 		{
-			"name": "back01a",
-			"from": [-1, 0, 10],
-			"to": [1, 7, 10],
-			"rotation": {"angle": -35, "axis": "y", "origin": [1, 4, 10]},
+			"name": "backleftwing01a",
+			"from": [1, 0, 10],
+			"to": [5, 7, 10],
+			"rotation": {"angle": -22.5, "axis": "y", "origin": [5, 7, 10]},
+			"faces": {
+				"north": {"uv": [9.5, 11, 11.5, 7.5], "texture": "#0"},
+				"east": {"uv": [2, 2, 0, 0], "texture": "#0"},
+				"south": {"uv": [11.5, 11, 9.5, 7.5], "texture": "#0"},
+				"west": {"uv": [2, 2, 0, 0], "texture": "#0"},
+				"up": {"uv": [6, 0, 10, 2], "texture": "#0"},
+				"down": {"uv": [0, 0, 2, 2], "texture": "#0"}
+			}
+		},
+		{
+			"name": "backleftwing02a",
+			"from": [-0.5, 0, 8.5],
+			"to": [1.5, 7, 8.5],
+			"rotation": {"angle": 0, "axis": "y", "origin": [0, 6, 7]},
 			"faces": {
 				"north": {"uv": [4.5, 11, 3.5, 7.5], "texture": "#0"},
 				"east": {"uv": [2, 2, 0, 0], "texture": "#0"},
@@ -104,5 +132,26 @@
 				"down": {"uv": [0, 0, 2, 2], "texture": "#0"}
 			}
 		}
+	],
+	"groups": [
+		0,
+		{
+			"name": "backrightwing",
+			"origin": [15, 4, 10],
+			"scope": 0,
+			"color": 0,
+			"children": [1, 2]
+		},
+		{
+			"name": "backleftwing",
+			"origin": [1, 4, 10],
+			"scope": 0,
+			"color": 0,
+			"children": [3, 4]
+		},
+		5,
+		6,
+		7,
+		8
 	]
 }

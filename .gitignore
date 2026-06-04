@@ -1,5 +1,7 @@
 # User-specific stuff
 .idea/
+net/
+minecraft_sources/
 
 *.iml
 *.ipr

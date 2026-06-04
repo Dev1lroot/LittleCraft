@@ -11,6 +11,14 @@
           "scale": 1.0,
           "entries": [
             {
+              "threshold": 0.0,
+              "model": { "type": "minecraft:model", "model": "littlecraft:item/diaper/default/new" }
+            },
+            {
+              "threshold": 0.1,
+              "model": { "type": "minecraft:model", "model": "littlecraft:item/diaper/default/dry" }
+            },
+            {
               "threshold": 0.5,
               "model": { "type": "minecraft:model", "model": "littlecraft:item/diaper/default/wet" }
             },
@@ -30,6 +38,14 @@
           "scale": 1.0,
           "entries": [
             {
+              "threshold": 0.0,
+              "model": { "type": "minecraft:model", "model": "littlecraft:item/diaper/pure/new" }
+            },
+            {
+              "threshold": 0.1,
+              "model": { "type": "minecraft:model", "model": "littlecraft:item/diaper/pure/dry" }
+            },
+            {
               "threshold": 0.5,
               "model": { "type": "minecraft:model", "model": "littlecraft:item/diaper/pure/wet" }
             },
@@ -40,6 +56,33 @@
           ],
           "fallback": { "type": "minecraft:model", "model": "littlecraft:item/diaper/pure/dry" }
         }
+      },
+      {
+        "when": "debug",
+        "model": {
+          "type": "minecraft:range_dispatch",
+          "property": "littlecraft:diaper_fill",
+          "scale": 1.0,
+          "entries": [
+            {
+              "threshold": 0.0,
+              "model": { "type": "minecraft:model", "model": "littlecraft:item/diaper/debug/new" }
+            },
+            {
+              "threshold": 0.1,
+              "model": { "type": "minecraft:model", "model": "littlecraft:item/diaper/debug/dry" }
+            },
+            {
+              "threshold": 0.5,
+              "model": { "type": "minecraft:model", "model": "littlecraft:item/diaper/debug/wet" }
+            },
+            {
+              "threshold": 1.0,
+              "model": { "type": "minecraft:model", "model": "littlecraft:item/diaper/debug/full" }
+            }
+          ],
+          "fallback": { "type": "minecraft:model", "model": "littlecraft:item/diaper/debug/dry" }
+        }
       }
     ],
     "fallback": {
@@ -47,6 +90,14 @@
       "property": "littlecraft:diaper_fill",
       "scale": 1.0,
       "entries": [
+        {
+          "threshold": 0.0,
+          "model": { "type": "minecraft:model", "model": "littlecraft:item/diaper/default/new" }
+        },
+        {
+          "threshold": 0.1,
+          "model": { "type": "minecraft:model", "model": "littlecraft:item/diaper/default/dry" }
+        },
         {
           "threshold": 0.5,
           "model": { "type": "minecraft:model", "model": "littlecraft:item/diaper/default/wet" }

@@ -15,6 +15,7 @@ import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextColor;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -28,6 +29,7 @@ import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.item.equipment.Equippable;
 import net.minecraft.world.item.equipment.EquipmentAsset;
 import net.minecraft.world.item.equipment.EquipmentAssets;
+import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.registries.DeferredItem;
 import org.jetbrains.annotations.NotNull;
 
@@ -62,18 +64,54 @@ public class Diaper
             }
 
             int capacity = Diaper.getCapacity(stack);
-            int used     = Diaper.getUsed(stack);
 
             consumer.accept(Component.translatable("item.littlecraft.diaper.capacity")
                     .append(Component.literal(" " + String.format(Locale.ENGLISH, "%,d", capacity) + "ml"))
                     .withStyle(ChatFormatting.GRAY));
-            consumer.accept(Component.translatable("item.littlecraft.diaper.used")
-                    .append(Component.literal(" " + String.format(Locale.ENGLISH, "%,d", used) + "ml"))
-                    .withStyle(ChatFormatting.GRAY));
 
-            if (Diaper.isPooped(stack))
-                consumer.accept(Component.translatable("item.littlecraft.diaper.pooped")
-                        .withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0x8B4513))));
+            if (Diaper.isPrepared(stack))
+            {
+                int used = Diaper.getUsed(stack);
+                consumer.accept(Component.translatable("item.littlecraft.diaper.used")
+                        .append(Component.literal(" " + String.format(Locale.ENGLISH, "%,d", used) + "ml"))
+                        .withStyle(ChatFormatting.GRAY));
+
+                if (Diaper.isPooped(stack))
+                    consumer.accept(Component.translatable("item.littlecraft.diaper.pooped")
+                            .withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0x8B4513))));
+            }
+        }
+
+        @Override
+        public @NotNull InteractionResult use(Level level, Player player, InteractionHand hand)
+        {
+            ItemStack stack = player.getItemInHand(hand);
+            if (!Diaper.isPrepared(stack))
+            {
+                if (!level.isClientSide())
+                {
+                    ItemStack prepared = Diaper.prepare(stack.copyWithCount(1));
+                    int remaining = stack.getCount() - 1;
+                    player.setItemInHand(hand, remaining > 0 ? stack.copyWithCount(remaining) : prepared);
+                    if (remaining > 0 && !player.getInventory().add(prepared))
+                        player.drop(prepared, false);
+                }
+                player.playSound(SoundEvents.ARMOR_EQUIP_LEATHER.value(), 1.0f, 1.0f);
+                return InteractionResult.SUCCESS;
+            }
+            return InteractionResult.PASS;
+        }
+
+        @Override
+        public int getMaxStackSize(ItemStack stack)
+        {
+            return Diaper.isPrepared(stack) ? 1 : 10;
+        }
+
+        @Override
+        public boolean canEquip(ItemStack stack, EquipmentSlot armorType, LivingEntity entity)
+        {
+            return Diaper.isPrepared(stack) && super.canEquip(stack, armorType, entity);
         }
 
         @Override
@@ -98,7 +136,6 @@ public class Diaper
         CompoundTag tag = new CompoundTag();
         tag.putString("DESIGN", "default");
         tag.putInt("capacity", BASE_CAPACITY);
-        tag.putInt("used", 0);
         return CustomData.of(tag);
     }
 
@@ -123,6 +160,36 @@ public class Diaper
         CompoundTag tag = existing != null ? existing.copyTag() : new CompoundTag();
         tag.putInt("used", Math.min(value, getCapacity(stack)));
         result.set(DataComponents.CUSTOM_DATA, CustomData.of(tag));
+        return result;
+    }
+
+    public static boolean isPrepared(ItemStack stack)
+    {
+        CustomData data = stack.get(DataComponents.CUSTOM_DATA);
+        if (data != null) return data.copyTag().getBooleanOr("is_prepared", false);
+        return false;
+    }
+
+    public static ItemStack setPrepared(ItemStack stack, boolean value)
+    {
+        ItemStack result = stack.copy();
+        CustomData existing = result.get(DataComponents.CUSTOM_DATA);
+        CompoundTag tag = existing != null ? existing.copyTag() : new CompoundTag();
+        tag.putBoolean("is_prepared", value);
+        result.set(DataComponents.CUSTOM_DATA, CustomData.of(tag));
+        return result;
+    }
+
+    // Unfolds an unboxed diaper: sets is_prepared=true and initialises used=0 in one copy.
+    public static ItemStack prepare(ItemStack stack)
+    {
+        ItemStack result = stack.copy();
+        CustomData existing = result.get(DataComponents.CUSTOM_DATA);
+        CompoundTag tag = existing != null ? existing.copyTag() : new CompoundTag();
+        tag.putBoolean("is_prepared", true);
+        tag.putInt("used", 0);
+        result.set(DataComponents.CUSTOM_DATA, CustomData.of(tag));
+        result.set(DataComponents.MAX_STACK_SIZE, 1);
         return result;
     }
 
@@ -180,8 +247,7 @@ public class Diaper
     public static final DeferredItem<DiaperItem> DIAPER =
             LittleContentRegistry.ITEMS.registerItem("diaper",
                     props -> new DiaperItem(props
-                            .stacksTo(1)
-                            .durability(255)
+                            .stacksTo(10)
                             .component(DataComponents.CUSTOM_DATA, defaultData())
                             .component(DataComponents.EQUIPPABLE,
                                     Equippable.builder(EquipmentSlot.LEGS)

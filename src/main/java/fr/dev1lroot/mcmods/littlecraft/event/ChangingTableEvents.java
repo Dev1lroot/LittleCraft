@@ -101,8 +101,8 @@ public class ChangingTableEvents
 
     private static boolean isFresh(ItemStack stack)
     {
-        return Diaper.getUsed(stack) == 0
-            && stack.getDamageValue() == 0
+        return Diaper.isPrepared(stack)
+            && Diaper.getUsed(stack) == 0
             && !Diaper.isPooped(stack);
     }
 

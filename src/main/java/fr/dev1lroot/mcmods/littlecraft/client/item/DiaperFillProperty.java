@@ -20,9 +20,14 @@ public record DiaperFillProperty() implements RangeSelectItemModelProperty
     @Override
     public float get(ItemStack stack, @Nullable ClientLevel level, @Nullable ItemOwner owner, int seed)
     {
+        // Unboxed (not yet prepared): "new" model.
+        if (!Diaper.isPrepared(stack)) return 0.0f;
+
         int used     = Diaper.getUsed(stack);
         int capacity = Diaper.getCapacity(stack);
-        if (used < 10) return 0.0f;
+
+        // Prepared but unused: threshold 0.0 → fallback "dry" model.
+        if (used < 10) return 0.1f;
         if (used >= capacity - 100 || used >= 5000) return 1.0f;
         return 0.5f;
     }

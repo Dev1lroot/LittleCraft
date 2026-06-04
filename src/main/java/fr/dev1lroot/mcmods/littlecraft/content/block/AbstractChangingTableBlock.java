@@ -13,6 +13,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BedBlock;
 import net.minecraft.world.level.block.RenderShape;
@@ -23,11 +24,16 @@ import net.minecraft.world.level.block.state.properties.BedPart;
 import net.minecraft.world.level.entity.EntityTypeTest;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
 import java.util.List;
 
 public class AbstractChangingTableBlock extends BedBlock
 {
+    // Flat surface: full block width/depth, only 2px tall — one half of the two-block table.
+    private static final VoxelShape SURFACE_SHAPE = box(0, 0, 0, 16, 2, 16);
+
     @SuppressWarnings("unchecked")
     private static final MapCodec<BedBlock> CODEC =
         (MapCodec<BedBlock>) (MapCodec<?>) simpleCodec(
@@ -43,6 +49,18 @@ public class AbstractChangingTableBlock extends BedBlock
 
     @Override
     protected RenderShape getRenderShape(BlockState state) { return RenderShape.INVISIBLE; }
+
+    @Override
+    protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context)
+    {
+        return SURFACE_SHAPE;
+    }
+
+    @Override
+    protected VoxelShape getCollisionShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context)
+    {
+        return SURFACE_SHAPE;
+    }
 
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state)

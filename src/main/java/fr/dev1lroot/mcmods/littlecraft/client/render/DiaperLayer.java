@@ -42,6 +42,11 @@ public class DiaperLayer<S extends HumanoidRenderState, M extends EntityModel<? 
     private final DiaperModel modelFlooded;
     // diaper_unwrap.json — is_open:true overrides all capacity-based selection
     private final DiaperModel modelUnwrap;
+    // diaper_poop.json — overlaid on modelUnwrap when is_pooped:true
+    private final DiaperModel modelPoop;
+
+    private static final Identifier TEXTURE_POOP =
+        Identifier.fromNamespaceAndPath("minecraft", "textures/block/brown_terracotta.png");
 
     public DiaperLayer(RenderLayerParent<S, M> parent, EntityModelSet modelSet)
     {
@@ -51,6 +56,7 @@ public class DiaperLayer<S extends HumanoidRenderState, M extends EntityModel<? 
         this.modelFull    = new DiaperModel(rm, DiaperModel.MODEL_FULL,    0.0f);
         this.modelFlooded = new DiaperModel(rm, DiaperModel.MODEL_FLOODED, 0.0f);
         this.modelUnwrap  = new DiaperModel(rm, DiaperModel.MODEL_UNWRAP,  0.0f);
+        this.modelPoop    = new DiaperModel(rm, DiaperModel.MODEL_POOP,    0.0f);
     }
 
     public static void clearCache()
@@ -65,13 +71,15 @@ public class DiaperLayer<S extends HumanoidRenderState, M extends EntityModel<? 
             String safe = d.replaceAll("[^a-z0-9_]", "");
             if (safe.isEmpty()) safe = "default";
 
-            Identifier primary = Identifier.fromNamespaceAndPath(MODID, "textures/diaper/" + safe + "/default.png");
-            Identifier wetness = Identifier.fromNamespaceAndPath(MODID, "textures/diaper/" + safe + "/wetness.png");
+            Identifier primary   = Identifier.fromNamespaceAndPath(MODID, "textures/diaper/" + safe + "/default.png");
+            Identifier wetness   = Identifier.fromNamespaceAndPath(MODID, "textures/diaper/" + safe + "/wetness.png");
+            Identifier wetness2  = Identifier.fromNamespaceAndPath(MODID, "textures/diaper/" + safe + "/wetness_layer_2.png");
 
             var rm = Minecraft.getInstance().getResourceManager();
             return new Identifier[]{
-                rm.getResource(primary).isPresent() ? primary : DiaperModel.TEXTURE_PRIMARY,
-                rm.getResource(wetness).isPresent() ? wetness : DiaperModel.TEXTURE_WETNESS
+                rm.getResource(primary).isPresent()  ? primary  : DiaperModel.TEXTURE_PRIMARY,
+                rm.getResource(wetness).isPresent()  ? wetness  : DiaperModel.TEXTURE_WETNESS,
+                rm.getResource(wetness2).isPresent() ? wetness2 : DiaperModel.TEXTURE_WETNESS_2
             };
         });
     }
@@ -97,8 +105,9 @@ public class DiaperLayer<S extends HumanoidRenderState, M extends EntityModel<? 
 
         // is_open overrides all capacity-based shape selection.
         // Otherwise: flooded > full > dry.
+        boolean isOpen = Diaper.isOpen(legs);
         DiaperModel model;
-        if (Diaper.isOpen(legs)) {
+        if (isOpen) {
             model = modelUnwrap;
         } else {
             boolean isFlooded = used * 5 >= capacity || capacity >= 7000;
@@ -113,10 +122,19 @@ public class DiaperLayer<S extends HumanoidRenderState, M extends EntityModel<? 
         {
             int rawAlpha = Math.min(255, Math.round(255f * used / capacity));
             int alpha    = (rawAlpha >> 2) << 2;
-            texture = new TextureCompositor()
+
+            // wetness_layer_2: triangle 0→255→0 over 0ml→250ml→500ml
+            int raw2 = used <= 250
+                    ? Math.round(255f * used / 250f)
+                    : used <= 500 ? Math.round(255f * (500 - used) / 250f) : 0;
+            int alpha2 = ((Math.clamp(raw2, 0, 255)) >> 2) << 2;
+
+            TextureCompositor compositor = new TextureCompositor()
                     .addLayer(textures[0])
-                    .addLayer(textures[1], alpha)
-                    .compile();
+                    .addLayer(textures[1], alpha);
+            if (alpha2 > 0)
+                compositor.addLayer(textures[2], alpha2);
+            texture = compositor.compile();
         }
 
         model.setupAnim(state);
@@ -135,6 +153,25 @@ public class DiaperLayer<S extends HumanoidRenderState, M extends EntityModel<? 
                         state.outlineColor,
                         null
                 );
+
+        if (isOpen && Diaper.isPooped(legs))
+        {
+            modelPoop.setupAnim(state);
+            collector.order(-1)
+                    .submitModel(
+                            modelPoop,
+                            state,
+                            pose,
+                            RenderTypes.entityTranslucent(TEXTURE_POOP),
+                            light,
+                            LivingEntityRenderer.getOverlayCoords(state, 0.0f),
+                            -1,
+                            null,
+                            state.outlineColor,
+                            null
+                    );
+        }
+
         pose.popPose();
     }
 }

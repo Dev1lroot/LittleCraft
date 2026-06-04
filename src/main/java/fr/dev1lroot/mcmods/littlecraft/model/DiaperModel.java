@@ -26,8 +26,9 @@ import static fr.dev1lroot.mcmods.littlecraft.LittleMod.MODID;
  */
 public class DiaperModel extends EntityModel<HumanoidRenderState>
 {
-    public static final Identifier TEXTURE_PRIMARY = Identifier.fromNamespaceAndPath(MODID, "textures/diaper/default/default.png");
-    public static final Identifier TEXTURE_WETNESS = Identifier.fromNamespaceAndPath(MODID, "textures/diaper/default/wetness.png");
+    public static final Identifier TEXTURE_PRIMARY   = Identifier.fromNamespaceAndPath(MODID, "textures/diaper/default/default.png");
+    public static final Identifier TEXTURE_WETNESS   = Identifier.fromNamespaceAndPath(MODID, "textures/diaper/default/wetness.png");
+    public static final Identifier TEXTURE_WETNESS_2 = Identifier.fromNamespaceAndPath(MODID, "textures/diaper/default/wetness_layer_2.png");
 
     public static final Identifier MODEL_DRY     =
         Identifier.fromNamespaceAndPath(MODID, "models/block/diaper.json");
@@ -37,6 +38,8 @@ public class DiaperModel extends EntityModel<HumanoidRenderState>
         Identifier.fromNamespaceAndPath(MODID, "models/block/diaper_flooded.json");
     public static final Identifier MODEL_UNWRAP  =
         Identifier.fromNamespaceAndPath(MODID, "models/block/diaper_unwrap.json");
+    public static final Identifier MODEL_POOP    =
+        Identifier.fromNamespaceAndPath(MODID, "models/block/diaper_poop.json");
 
     private static final float TEX_WIDTH  = 32f;
     private static final float TEX_HEIGHT = 32f;

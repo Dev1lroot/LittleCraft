@@ -16,6 +16,7 @@ import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BedBlock;
+import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -29,7 +30,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 import java.util.List;
 
-public class AbstractChangingTableBlock extends BedBlock
+public class AbstractChangingTableBlock extends BedBlock implements EntityBlock
 {
     // Flat surface: full block width/depth, only 2px tall — one half of the two-block table.
     private static final VoxelShape SURFACE_SHAPE = box(0, 0, 0, 16, 2, 16);

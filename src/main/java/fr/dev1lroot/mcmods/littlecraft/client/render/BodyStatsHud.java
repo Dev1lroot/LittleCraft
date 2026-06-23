@@ -29,7 +29,7 @@ public class BodyStatsHud implements GuiLayer
     public void render(GuiGraphicsExtractor gui, DeltaTracker delta)
     {
         Minecraft mc = Minecraft.getInstance();
-        if (mc.player == null || mc.options.hideGui) return;
+        if (mc.player == null || mc.gui.hud.isHidden()) return;
 
         Player player = mc.player;
         if (!LittleData.isLittle(player)) return;

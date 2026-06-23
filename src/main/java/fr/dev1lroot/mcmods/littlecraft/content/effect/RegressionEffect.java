@@ -24,13 +24,13 @@ public class RegressionEffect extends MobEffect
     }
 
     @Override
-    public boolean isInstantenous()
+    public boolean isInstantaneous()
     {
         return true;
     }
 
     @Override
-    public void applyInstantenousEffect(ServerLevel level, Entity source, Entity indirectSource, LivingEntity entity, int amplifier, double health)
+    public void applyInstantaneousEffect(ServerLevel level, Entity source, Entity indirectSource, LivingEntity entity, int amplifier, double health)
     {
         if (entity instanceof ServerPlayer player)
         {

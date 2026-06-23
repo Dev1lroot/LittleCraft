@@ -7,6 +7,7 @@ package fr.dev1lroot.mcmods.littlecraft.mixin;
 
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
@@ -23,6 +24,6 @@ public abstract class PlayerVehicleMixin
     )
     private boolean littlecraft$allowPlayerVehicle(EntityType<?> type)
     {
-        return type == EntityType.PLAYER || type.canSerialize();
+        return type == EntityTypes.PLAYER || type.canSerialize();
     }
 }

@@ -30,6 +30,7 @@ import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.server.packs.resources.ResourceManagerReloadListener;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.player.PlayerModelType;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
@@ -93,7 +94,7 @@ public class ClientRegistry
             }
         }
 
-        var armorStandRenderer = (LivingEntityRenderer) event.<net.minecraft.world.entity.decoration.ArmorStand, LivingEntityRenderer>getRenderer(EntityType.ARMOR_STAND);
+        var armorStandRenderer = (LivingEntityRenderer) event.<net.minecraft.world.entity.decoration.ArmorStand, LivingEntityRenderer>getRenderer(EntityTypes.ARMOR_STAND);
         if (armorStandRenderer != null)
         {
             armorStandRenderer.addLayer(new DiaperLayer<>(armorStandRenderer, modelSet));

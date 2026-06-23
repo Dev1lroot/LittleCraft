@@ -1,11 +1,11 @@
 # LittleCraft
 
-[![Minecraft Version](https://img.shields.io/badge/Minecraft-26.1.2-darkgreen.svg?logo=minecraft)](https://minecraft.net)
-[![NeoForge Version](https://img.shields.io/badge/NeoForge-26.1.2.64--beta-orange.svg)](https://neoforged.net)
+[![Minecraft Version](https://img.shields.io/badge/Minecraft-26.2-darkgreen.svg?logo=minecraft)](https://minecraft.net)
+[![NeoForge Version](https://img.shields.io/badge/NeoForge-26.2.0.6--beta-orange.svg)](https://neoforged.net)
 [![License](https://img.shields.io/badge/License-GNU%20GPL%203.0--Only-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.html)
 [![Mod Version](https://img.shields.io/badge/Version-3.2.0-purple.svg)](https://semver.org/)
 
-**LittleCraft** is a NeoForge mod for **Minecraft 26.1.2**, designed to bring immersive **Age Regression** (Agere) and **ABDL** elements into roleplay gameplay. It introduces dynamic character scaling, functional roleplay items, and unique player-to-player interactions tailored for community servers where size mechanics and thematic props matter.
+**LittleCraft** is a NeoForge mod for **Minecraft 26.2**, designed to bring immersive **Age Regression** (Agere) and **ABDL** elements into roleplay gameplay. It introduces dynamic character scaling, functional roleplay items, and unique player-to-player interactions tailored for community servers where size mechanics and thematic props matter.
 
 ![Overview](./documentation/images/preview.png)
 
@@ -128,7 +128,7 @@ Custom **MobEffects** (`littlecraft:regression`, `littlecraft:growth`) are insta
 
 The **Potty** block entity stores `piss` (0–1000 ml) and `poop` (0–1000 g). On break, the values are serialised into `DataComponents.BLOCK_ENTITY_DATA` on the dropped item and restored automatically when the item is re-placed, following the same pattern as vanilla shulker boxes.
 
-The **Diaper**, **Thigh-Highs**, and **Pacifier** store their color and state data in `DataComponents.CUSTOM_DATA`. Item model tinting uses the MC 26.1.2 `items/*.json` pipeline with registered `ItemTintSource` types (`littlecraft:thigh_highs_base_color`, `littlecraft:thigh_highs_stripe_color`, `littlecraft:pacifier_body_color`, `littlecraft:pacifier_ring_color`). The `is_pooped` boolean in `CUSTOM_DATA` on any equippable legs item triggers the **Stink** effect each server tick.
+The **Diaper**, **Thigh-Highs**, and **Pacifier** store their color and state data in `DataComponents.CUSTOM_DATA`. Item model tinting uses the MC 26.2 `items/*.json` pipeline with registered `ItemTintSource` types (`littlecraft:thigh_highs_base_color`, `littlecraft:thigh_highs_stripe_color`, `littlecraft:pacifier_body_color`, `littlecraft:pacifier_ring_color`). The `is_pooped` boolean in `CUSTOM_DATA` on any equippable legs item triggers the **Stink** effect each server tick.
 
 ---
 
@@ -150,7 +150,7 @@ The **Diaper**, **Thigh-Highs**, and **Pacifier** store their color and state da
 | 26.1.2 | 3.0.3       | Annoying HUD is hidden, now it only appears when you wear a pacifier with name "Debug"                                                                                                                                                  |
 | 26.1.2 | 3.1.0       | **Digestion system overhaul:** per-food stomach/bladder values driven by data-pack JSON files (`data/<ns>/littlecraft/food_effects/`); digestion buffers (`eaten`, `drinked`) drain gradually into stomach/bladder; cake block eating captured. **HUD:** all four stats (stomach, eating, bladder, drinking) shown bottom-right, right-aligned. **New effects:** `need` (buffers blocked by full reservoir) and `shame` (accident without diaper/potty). **Incontinence rework:** age-based chance (up to 30 % for young/elderly, 0.1 % floor for all ages); triggers INCONTINENCE effect; while active performs involuntary piss (scaled 1–24 ml / 40 ticks) and poop (when stomach full) through the full routing chain. **Piss/poop routing unified:** `performPiss` / `performPoop` static helpers shared by packets and incontinence; other-pants piss now also applies Shame; bare-floor piss/poop fully implemented. |
 
-- **Current Maintained Minecraft Version:** 26.1.2
+- **Current Maintained Minecraft Version:** 26.2
 - **No backports** to older versions are planned.
 
 ---

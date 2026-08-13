@@ -5,8 +5,8 @@
 
 package fr.dev1lroot.mcmods.littlecraft.client.render;
 
+import com.dev1lroot.mclib.pigmentabitur.Pigmentabitur;
 import com.mojang.blaze3d.vertex.PoseStack;
-import fr.dev1lroot.mcmods.littlecraft.client.TextureCompositor;
 import fr.dev1lroot.mcmods.littlecraft.content.item.Diaper;
 import fr.dev1lroot.mcmods.littlecraft.model.DiaperModel;
 import net.minecraft.client.Minecraft;
@@ -62,7 +62,7 @@ public class DiaperLayer<S extends HumanoidRenderState, M extends EntityModel<? 
     public static void clearCache()
     {
         TEXTURE_CACHE.clear();
-        TextureCompositor.clearAll();
+        Pigmentabitur.clearAll();
     }
 
     private static Identifier[] resolveTextures(String design)
@@ -129,7 +129,7 @@ public class DiaperLayer<S extends HumanoidRenderState, M extends EntityModel<? 
                     : used <= 500 ? Math.round(255f * (500 - used) / 250f) : 0;
             int alpha2 = ((Math.clamp(raw2, 0, 255)) >> 2) << 2;
 
-            TextureCompositor compositor = new TextureCompositor()
+            Pigmentabitur compositor = new Pigmentabitur(MODID)
                     .addLayer(textures[0])
                     .addLayer(textures[1], alpha);
             if (alpha2 > 0)

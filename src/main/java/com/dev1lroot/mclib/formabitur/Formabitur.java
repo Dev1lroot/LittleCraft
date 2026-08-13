@@ -1,4 +1,9 @@
 /*
+ * Copyright (c) 2026 David Eichendorf <admin@dev1lroot.com>
+ * SPDX-License-Identifier: GPL-3.0-only
+ */
+
+/*
  * Formabitur — block-model JSON → EntityModel geometry bridge.
  * Part of mclib, a shared utility library for dev1lroot's Minecraft mods.
  *

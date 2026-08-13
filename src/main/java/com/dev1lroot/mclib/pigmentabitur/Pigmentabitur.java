@@ -3,7 +3,12 @@
  * SPDX-License-Identifier: GPL-3.0-only
  */
 
-package fr.dev1lroot.mcmods.littlecraft.client;
+/*
+ * Pigmentabitur — general-purpose CPU-side texture layer compositor.
+ * Part of mclib, a shared utility library for dev1lroot's Minecraft mods.
+ */
+
+package com.dev1lroot.mclib.pigmentabitur;
 
 import com.mojang.blaze3d.platform.NativeImage;
 import net.minecraft.client.Minecraft;
@@ -18,14 +23,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import static fr.dev1lroot.mcmods.littlecraft.LittleMod.MODID;
-
 /**
  * General-purpose CPU-side texture compositor.
  *
  * <p>Usage:
  * <pre>{@code
- *   Identifier result = new TextureCompositor()
+ *   Identifier result = new Pigmentabitur(MODID)
  *       .addLayer(baseTexture)
  *       .addLayer(overlayTexture, wetnessAlpha)
  *       .compile();
@@ -42,7 +45,7 @@ import static fr.dev1lroot.mcmods.littlecraft.LittleMod.MODID;
  * <p>Alpha bucketing is the caller's responsibility — round the alpha value
  * before calling {@code addLayer} to control cache granularity.
  */
-public final class TextureCompositor {
+public final class Pigmentabitur {
 
     // ── Static caches ────────────────────────────────────────────────────────
 
@@ -55,9 +58,18 @@ public final class TextureCompositor {
 
     // ── Instance state ───────────────────────────────────────────────────────
 
+    private final String namespace;
     private final List<Layer> layers = new ArrayList<>();
 
     private record Layer(Identifier path, int alpha) {}
+
+    /**
+     * @param namespace namespace under which compiled composite textures are
+     *                  registered (typically the caller mod's MODID)
+     */
+    public Pigmentabitur(String namespace) {
+        this.namespace = namespace;
+    }
 
     // ── Public API ───────────────────────────────────────────────────────────
 
@@ -66,7 +78,7 @@ public final class TextureCompositor {
      *
      * @return {@code this} for fluent chaining
      */
-    public TextureCompositor addLayer(Identifier path) {
+    public Pigmentabitur addLayer(Identifier path) {
         return addLayer(path, 255);
     }
 
@@ -76,7 +88,7 @@ public final class TextureCompositor {
      *
      * @return {@code this} for fluent chaining
      */
-    public TextureCompositor addLayer(Identifier path, int alpha) {
+    public Pigmentabitur addLayer(Identifier path, int alpha) {
         layers.add(new Layer(path, Math.clamp(alpha, 0, 255)));
         return this;
     }
@@ -93,7 +105,7 @@ public final class TextureCompositor {
      */
     public Identifier compile() {
         if (layers.isEmpty())
-            throw new IllegalStateException("TextureCompositor.compile() called with no layers");
+            throw new IllegalStateException("Pigmentabitur.compile() called with no layers");
 
         // Fast-path: nothing to composite.
         if (layers.size() == 1 && layers.getFirst().alpha() == 255)
@@ -119,7 +131,7 @@ public final class TextureCompositor {
             return layers.getFirst().path();
 
         String texPath = "texture_compositor/" + String.format("%08x", key.hashCode() & 0x7FFFFFFF);
-        Identifier id  = Identifier.fromNamespaceAndPath(MODID, texPath);
+        Identifier id  = Identifier.fromNamespaceAndPath(namespace, texPath);
 
         // DynamicTexture(Supplier<String> label, NativeImage) uploads immediately.
         Minecraft.getInstance().getTextureManager()

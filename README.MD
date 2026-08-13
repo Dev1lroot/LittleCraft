@@ -152,6 +152,7 @@ The **Diaper**, **Thigh-Highs**, and **Pacifier** store their color and state da
 | 26.1.2 | 3.2.0       | **Graphics overhaul:** custom CPU-based texture compositor that removes z-fighting and double geometry that was used to indicate wetness, json-to-java model conversion harness to allow players to change diaper geometry and other future things simply by using **Blockbench** |
 | 26.2 | 3.2.1       | The mod ported to Minecraft 26.2 |
 | 26.2 | 3.2.2       | the texture compositor is separated from the mod codebase |
+| 26.2 | 3.2.3       | **Texture Compositor Fixes**: improved cached texture ids now fix the collision between multiple different cached diaper textures with different designs and wetness, UVmap fix - now each new texture scales exactly by its own scale, not using layer0 texture size as base for all textures, so changing resolution of one texture layer would not affect another, but I'm unsure whether it is the fix that was needed to resolve issues #10 and #11, because I cannot reproduce the bug itself |
 
 - **Current Maintained Minecraft Version:** 26.2
 - **No backports** to older versions are planned.

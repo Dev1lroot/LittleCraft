@@ -115,22 +115,45 @@ public final class Pigmentabitur {
         Identifier cached = COMPILED_CACHE.get(key);
         if (cached != null) return cached;
 
-        // Composite layers left-to-right into a mutable NativeImage.
-        NativeImage canvas = null;
+        // Load every source up front so a layer at a different resolution than the
+        // others (e.g. a resource pack that only reskins some of the layers) gets
+        // normalized to a common canvas instead of silently cropped to the smallest.
+        List<NativeImage> sources = new ArrayList<>(layers.size());
+        int canvasW = 0, canvasH = 0;
         for (Layer layer : layers) {
             NativeImage src = loadOnce(layer.path());
-            if (src == null) continue;
-            if (canvas == null) {
-                canvas = copyWithAlpha(src, layer.alpha());
-            } else {
-                blendOver(canvas, src, layer.alpha());
+            sources.add(src);
+            if (src != null) {
+                canvasW = Math.max(canvasW, src.getWidth());
+                canvasH = Math.max(canvasH, src.getHeight());
             }
+        }
+        if (canvasW == 0 || canvasH == 0)
+            return layers.getFirst().path();
+
+        // Composite layers left-to-right into a mutable NativeImage.
+        NativeImage canvas = null;
+        for (int i = 0; i < layers.size(); i++) {
+            NativeImage src = sources.get(i);
+            if (src == null) continue;
+
+            boolean matches = src.getWidth() == canvasW && src.getHeight() == canvasH;
+            NativeImage sized = matches ? src : resample(src, canvasW, canvasH);
+
+            int alpha = layers.get(i).alpha();
+            if (canvas == null) {
+                canvas = copyWithAlpha(sized, alpha);
+            } else {
+                blendOver(canvas, sized, alpha);
+            }
+
+            if (!matches) sized.close();
         }
 
         if (canvas == null)
             return layers.getFirst().path();
 
-        String texPath = "texture_compositor/" + String.format("%08x", key.hashCode() & 0x7FFFFFFF);
+        String texPath = "texture_compositor/" + sanitize(key);
         Identifier id  = Identifier.fromNamespaceAndPath(namespace, texPath);
 
         // DynamicTexture(Supplier<String> label, NativeImage) uploads immediately.
@@ -166,6 +189,16 @@ public final class Pigmentabitur {
             sb.append(l.path()).append(':').append(l.alpha());
         }
         return sb.toString();
+    }
+
+    /**
+     * Turns a cache key into a valid {@link Identifier} path segment, one-to-one,
+     * so distinct layer stacks can never collide onto the same registered texture
+     * (unlike a hashed path, which can and previously did have birthday-bound
+     * collisions across many design/alpha-bucket combinations).
+     */
+    private static String sanitize(String key) {
+        return key.replace(':', '.').replace('|', '-');
     }
 
     /** Loads and caches a {@link NativeImage}; returns {@code null} on missing / I/O error. */
@@ -211,14 +244,33 @@ public final class Pigmentabitur {
     /**
      * Composites {@code top} over {@code canvas} in-place.
      * Top pixels' alpha is first multiplied by {@code topAlphaScale / 255}.
-     * Only the overlapping region (min dimensions) is modified.
+     * Callers must ensure {@code top} already matches {@code canvas}'s dimensions
+     * (see {@link #resample}) — mismatched layers are never silently cropped.
      */
     private static void blendOver(NativeImage canvas, NativeImage top, int topAlphaScale) {
-        int w = Math.min(canvas.getWidth(),  top.getWidth());
-        int h = Math.min(canvas.getHeight(), top.getHeight());
+        int w = canvas.getWidth(), h = canvas.getHeight();
         for (int y = 0; y < h; y++)
             for (int x = 0; x < w; x++)
                 canvas.setPixel(x, y, over(canvas.getPixel(x, y), top.getPixel(x, y), topAlphaScale));
+    }
+
+    /**
+     * Nearest-neighbor resample of {@code src} into a new {@code w x h} image.
+     * Used to normalize a layer whose source resolution differs from the other
+     * layers in the stack (e.g. an unevenly reskinned resource pack) onto the
+     * shared composite canvas, instead of letting it get cropped or crop others.
+     */
+    private static NativeImage resample(NativeImage src, int w, int h) {
+        NativeImage out = new NativeImage(w, h, false);
+        int sw = src.getWidth(), sh = src.getHeight();
+        for (int y = 0; y < h; y++) {
+            int sy = y * sh / h;
+            for (int x = 0; x < w; x++) {
+                int sx = x * sw / w;
+                out.setPixel(x, y, src.getPixel(sx, sy));
+            }
+        }
+        return out;
     }
 
     /** Scales a pixel's alpha channel by {@code scale / 255}; RGB is unchanged. */

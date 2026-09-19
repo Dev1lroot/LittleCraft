@@ -5,7 +5,6 @@
 
 package fr.dev1lroot.mcmods.littlecraft.content.block;
 
-import com.mojang.serialization.MapCodec;
 import fr.dev1lroot.mcmods.littlecraft.content.entity.ChangingTableSeatEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -35,18 +34,10 @@ public class AbstractChangingTableBlock extends BedBlock implements EntityBlock
     // Flat surface: full block width/depth, only 2px tall — one half of the two-block table.
     private static final VoxelShape SURFACE_SHAPE = box(0, 0, 0, 16, 2, 16);
 
-    @SuppressWarnings("unchecked")
-    private static final MapCodec<BedBlock> CODEC =
-        (MapCodec<BedBlock>) (MapCodec<?>) simpleCodec(
-            props -> new AbstractChangingTableBlock(DyeColor.WHITE, props));
-
     public AbstractChangingTableBlock(DyeColor color, BlockBehaviour.Properties properties)
     {
         super(color, properties);
     }
-
-    @Override
-    public MapCodec<BedBlock> codec() { return CODEC; }
 
     @Override
     protected RenderShape getRenderShape(BlockState state) { return RenderShape.INVISIBLE; }

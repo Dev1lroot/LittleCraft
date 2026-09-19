@@ -1,11 +1,11 @@
 # LittleCraft
 
-[![Minecraft Version](https://img.shields.io/badge/Minecraft-26.2-darkgreen.svg?logo=minecraft)](https://minecraft.net)
-[![NeoForge Version](https://img.shields.io/badge/NeoForge-26.2.0.6--beta-orange.svg)](https://neoforged.net)
+[![Minecraft Version](https://img.shields.io/badge/Minecraft-26.3-darkgreen.svg?logo=minecraft)](https://minecraft.net)
+[![NeoForge Version](https://img.shields.io/badge/NeoForge-26.3.0.1--beta-orange.svg)](https://neoforged.net)
 [![License](https://img.shields.io/badge/License-GNU%20GPL%203.0--Only-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.html)
-[![Mod Version](https://img.shields.io/badge/Version-3.2.3-purple.svg)](https://semver.org/)
+[![Mod Version](https://img.shields.io/badge/Version-3.2.5-purple.svg)](https://semver.org/)
 
-**LittleCraft** is a NeoForge mod for **Minecraft 26.2**, designed to bring immersive **Age Regression** (Agere) and **ABDL** elements into roleplay gameplay. It introduces dynamic character scaling, functional roleplay items, and unique player-to-player interactions tailored for community servers where size mechanics and thematic props matter.
+**LittleCraft** is a NeoForge mod for **Minecraft 26.3**, designed to bring immersive **Age Regression** (Agere) and **ABDL** elements into roleplay gameplay. It introduces dynamic character scaling, functional roleplay items, and unique player-to-player interactions tailored for community servers where size mechanics and thematic props matter.
 
 ![Overview](./documentation/images/preview.png)
 
@@ -128,7 +128,7 @@ Custom **MobEffects** (`littlecraft:regression`, `littlecraft:growth`) are insta
 
 The **Potty** block entity stores `piss` (0–1000 ml) and `poop` (0–1000 g). On break, the values are serialised into `DataComponents.BLOCK_ENTITY_DATA` on the dropped item and restored automatically when the item is re-placed, following the same pattern as vanilla shulker boxes.
 
-The **Diaper**, **Thigh-Highs**, and **Pacifier** store their color and state data in `DataComponents.CUSTOM_DATA`. Item model tinting uses the MC 26.2 `items/*.json` pipeline with registered `ItemTintSource` types (`littlecraft:thigh_highs_base_color`, `littlecraft:thigh_highs_stripe_color`, `littlecraft:pacifier_body_color`, `littlecraft:pacifier_ring_color`). The `is_pooped` boolean in `CUSTOM_DATA` on any equippable legs item triggers the **Stink** effect each server tick.
+The **Diaper**, **Thigh-Highs**, and **Pacifier** store their color and state data in `DataComponents.CUSTOM_DATA`. Item model tinting uses the MC 26.3 `items/*.json` pipeline with registered `ItemTintSource` types (`littlecraft:thigh_highs_base_color`, `littlecraft:thigh_highs_stripe_color`, `littlecraft:pacifier_body_color`, `littlecraft:pacifier_ring_color`). The `is_pooped` boolean in `CUSTOM_DATA` on any equippable legs item triggers the **Stink** effect each server tick.
 
 ---
 
@@ -153,8 +153,10 @@ The **Diaper**, **Thigh-Highs**, and **Pacifier** store their color and state da
 | 26.2 | 3.2.1       | The mod ported to Minecraft 26.2 |
 | 26.2 | 3.2.2       | the texture compositor is separated from the mod codebase |
 | 26.2 | 3.2.3       | **Texture Compositor Fixes**: improved cached texture ids now fix the collision between multiple different cached diaper textures with different designs and wetness, UVmap fix - now each new texture scales exactly by its own scale, not using layer0 texture size as base for all textures, so changing resolution of one texture layer would not affect another, but I'm unsure whether it is the fix that was needed to resolve issues #10 and #11, because I cannot reproduce the bug itself |
+| 26.3 | 3.2.4       | The mod ported to Minecraft 26.3: brewing recipes moved to data-driven `minecraft:brewing` recipes, bed items/blocks, `Player.drop`, bonemeal and rendering API updates |
+| 26.3 | 3.2.5       | **Sodium compatibility fixed** ([#10](https://github.com/Dev1lroot/LittleCraft/issues/10), [#12](https://github.com/Dev1lroot/LittleCraft/issues/12)): diaper model UVs no longer break (tiny, repeating texture) when Sodium is installed |
 
-- **Current Maintained Minecraft Version:** 26.2
+- **Current Maintained Minecraft Version:** 26.3
 - **No backports** to older versions are planned.
 
 ---

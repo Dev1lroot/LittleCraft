@@ -13,6 +13,7 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.AreaEffectCloud;
 import net.minecraft.world.item.BoneMealItem;
 import net.minecraft.world.item.alchemy.PotionContents;
+import net.minecraft.world.level.block.BonemealSource;
 import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -59,8 +60,8 @@ public class PotionEventHandler
         {
             BlockState state = level.getBlockState(pos);
             if (state.getBlock() instanceof BonemealableBlock bonemeal
-                    && bonemeal.isValidBonemealTarget(level, pos, state)
-                    && bonemeal.isBonemealSuccess(level, level.getRandom(), pos, state))
+                    && bonemeal.isValidBonemealTarget(level, pos, state, BonemealSource.INTERACTION)
+                    && bonemeal.isBonemealSuccess(level, level.getRandom(), pos, state, BonemealSource.INTERACTION))
             {
                 candidates.add(pos.immutable());
             }
@@ -70,7 +71,7 @@ public class PotionEventHandler
         {
             BlockPos chosen = candidates.get(level.getRandom().nextInt(candidates.size()));
             BlockState chosenState = level.getBlockState(chosen);
-            ((BonemealableBlock) chosenState.getBlock()).performBonemeal(level, level.getRandom(), chosen, chosenState);
+            ((BonemealableBlock) chosenState.getBlock()).performBonemeal(level, level.getRandom(), chosen, chosenState, BonemealSource.INTERACTION);
             BoneMealItem.addGrowthParticles(level, chosen, 3);
         }
     }

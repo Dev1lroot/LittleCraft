@@ -5,7 +5,6 @@
 
 package fr.dev1lroot.mcmods.littlecraft.content.block;
 
-import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.block.BedBlock;
@@ -17,20 +16,9 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class AbstractCribBlock extends BedBlock implements EntityBlock
 {
-    @SuppressWarnings("unchecked")
-    private static final MapCodec<BedBlock> CODEC =
-        (MapCodec<BedBlock>) (MapCodec<?>) simpleCodec(
-            props -> new AbstractCribBlock(DyeColor.WHITE, props));
-
     public AbstractCribBlock(DyeColor color, BlockBehaviour.Properties properties)
     {
         super(color, properties);
-    }
-
-    @Override
-    public MapCodec<BedBlock> codec()
-    {
-        return CODEC;
     }
 
     @Override

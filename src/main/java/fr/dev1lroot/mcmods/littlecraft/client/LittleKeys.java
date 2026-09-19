@@ -12,14 +12,14 @@ public class LittleKeys
 {
     public static final KeyMapping KEY_PISS = new KeyMapping(
             "key.littlecraft.piss",
-            InputConstants.Type.KEYSYM,
+            InputConstants.Type.KEYBOARD,
             InputConstants.UNKNOWN.getValue(),
             KeyMapping.Category.GAMEPLAY
     );
 
     public static final KeyMapping KEY_POOP = new KeyMapping(
             "key.littlecraft.poop",
-            InputConstants.Type.KEYSYM,
+            InputConstants.Type.KEYBOARD,
             InputConstants.UNKNOWN.getValue(),
             KeyMapping.Category.GAMEPLAY
     );

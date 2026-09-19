@@ -19,6 +19,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.AbstractBedBlock;
 import net.minecraft.world.level.block.BedBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BedPart;
@@ -135,11 +136,11 @@ public class CarryEventHandler
                 little.stopRiding();
                 placeOnPotty(level, pos, little);
             }
-            else if (state.getBlock() instanceof BedBlock)
+            else if (state.getBlock() instanceof AbstractBedBlock bed)
             {
                 event.setCanceled(true);
                 little.stopRiding();
-                little.startSleepInBed(pos);
+                little.startSleepInBed(bed, state, bed.getBedRule(level, pos), pos);
             }
         }
     }

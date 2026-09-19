@@ -13,6 +13,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.Prediction;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -115,7 +116,7 @@ public class ChangingTableEvents
             else if (!isFresh(targetLegs))
             {
                 target.setItemSlot(EquipmentSlot.LEGS, ItemStack.EMPTY);
-                if (!changer.addItem(targetLegs)) changer.drop(targetLegs, false);
+                if (!changer.addItem(targetLegs)) changer.drop(targetLegs, false, Prediction.SERVER_ONLY);
                 playSound(changer);
                 changer.sendSystemMessage(Component.translatable("littlecraft.notification.diaper.change.removed"));
                 target.sendSystemMessage(Component.translatable("littlecraft.notification.diaper.change.removed_by_other"));

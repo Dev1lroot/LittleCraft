@@ -10,6 +10,7 @@ import fr.dev1lroot.mcmods.littlecraft.content.LittleMobEffects;
 import fr.dev1lroot.mcmods.littlecraft.content.entity.ChangingTableSeatEntity;
 import fr.dev1lroot.mcmods.littlecraft.content.item.Diaper;
 import fr.dev1lroot.mcmods.littlecraft.network.PissPacket;
+import net.minecraft.util.Prediction;
 import fr.dev1lroot.mcmods.littlecraft.network.PoopPacket;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
@@ -176,7 +177,7 @@ public abstract class PlayerTickMixin
                     && !(player.getVehicle() instanceof ChangingTableSeatEntity))
             {
                 player.setItemSlot(EquipmentSlot.LEGS, ItemStack.EMPTY);
-                player.drop(Diaper.setOpen(diaper, false), false);
+                player.drop(Diaper.setOpen(diaper, false), false, Prediction.SERVER_ONLY);
             }
         }
     }

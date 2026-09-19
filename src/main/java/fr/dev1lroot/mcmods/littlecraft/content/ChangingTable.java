@@ -12,7 +12,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
-import net.minecraft.world.item.BedItem;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -28,7 +28,7 @@ public class ChangingTable
     public static final Map<DyeColor, DeferredBlock<AbstractChangingTableBlock>> CHANGING_TABLE_BLOCKS =
         new EnumMap<>(DyeColor.class);
 
-    public static final Map<DyeColor, DeferredItem<BedItem>> CHANGING_TABLE_ITEMS =
+    public static final Map<DyeColor, DeferredItem<BlockItem>> CHANGING_TABLE_ITEMS =
         new EnumMap<>(DyeColor.class);
 
     static {
@@ -43,7 +43,7 @@ public class ChangingTable
         for (DyeColor color : DyeColor.values()) {
             CHANGING_TABLE_ITEMS.put(color, LittleContentRegistry.ITEMS.registerItem(
                 color.getName() + "_changing_table",
-                props -> new BedItem(CHANGING_TABLE_BLOCKS.get(color).get(), props)
+                props -> new BlockItem(CHANGING_TABLE_BLOCKS.get(color).get(), props)
             ));
         }
     }

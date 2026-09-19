@@ -36,10 +36,13 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.resources.ResourceManager;
+import org.joml.Matrix4f;
 import org.joml.Vector3f;
 import org.joml.Vector3fc;
 
@@ -151,7 +154,7 @@ public final class Formabitur
             : EnumSet.copyOf(faceUvs.keySet());
 
         // Create the Cube for its bounding box; all polygons are replaced below.
-        ModelPart.Cube cube = new ModelPart.Cube(
+        ModelPart.Cube cube = new PolygonCube(
             0, 0,
             ax0, ay0, az0,
             ax1 - ax0, ay1 - ay0, az1 - az0,
@@ -171,6 +174,52 @@ public final class Formabitur
         }
 
         return cube;
+    }
+
+    // ── Polygon-driven cube ───────────────────────────────────────────────
+
+    /**
+     * A {@link ModelPart.Cube} that always renders its own {@code polygons}.
+     * <p>
+     * Formabitur replaces the polygons after construction to get exact per-face UVs.
+     * Renderer mods such as Sodium bake their own vertex data from the constructor
+     * arguments and cancel {@code Cube.compile}, which would discard those UVs.
+     * Overriding {@code compile} here (without calling super) keeps the polygons
+     * authoritative regardless of such mods.
+     */
+    private static final class PolygonCube extends ModelPart.Cube
+    {
+        PolygonCube(int xTexOffs, int yTexOffs,
+                    float x, float y, float z, float w, float h, float d,
+                    float growX, float growY, float growZ,
+                    boolean mirror, float xTexSize, float yTexSize,
+                    Set<Direction> visibleFaces)
+        {
+            super(xTexOffs, yTexOffs, x, y, z, w, h, d, growX, growY, growZ,
+                  mirror, xTexSize, yTexSize, visibleFaces);
+        }
+
+        @Override
+        public void compile(PoseStack.Pose pose, VertexConsumer builder,
+                            int lightCoords, int overlayCoords, int color)
+        {
+            Matrix4f matrix  = pose.pose();
+            Vector3f scratch = new Vector3f();
+
+            for (ModelPart.Polygon polygon : polygons)
+            {
+                Vector3f normal = pose.transformNormal(polygon.normal(), scratch);
+                float nx = normal.x(), ny = normal.y(), nz = normal.z();
+
+                for (ModelPart.Vertex vertex : polygon.vertices())
+                {
+                    Vector3f pos = matrix.transformPosition(
+                        vertex.worldX(), vertex.worldY(), vertex.worldZ(), scratch);
+                    builder.addVertex(pos.x(), pos.y(), pos.z(), color,
+                        vertex.u(), vertex.v(), overlayCoords, lightCoords, nx, ny, nz);
+                }
+            }
+        }
     }
 
     // ── Eight-corner helpers ──────────────────────────────────────────────

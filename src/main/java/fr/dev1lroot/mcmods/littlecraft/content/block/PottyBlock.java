@@ -5,13 +5,13 @@
 
 package fr.dev1lroot.mcmods.littlecraft.content.block;
 
-import com.mojang.serialization.MapCodec;
 import fr.dev1lroot.mcmods.littlecraft.content.Potty;
 import fr.dev1lroot.mcmods.littlecraft.content.entity.PottySeatEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.ProblemReporter;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -46,9 +46,6 @@ public class PottyBlock extends BaseEntityBlock
     public static final EnumProperty<Direction> FACING = BlockStateProperties.HORIZONTAL_FACING;
     private static final VoxelShape SHAPE = Block.box(2, 0, 2, 14, 4, 14);
 
-    public static final MapCodec<PottyBlock> CODEC =
-        simpleCodec(props -> new PottyBlock(DyeColor.WHITE, props));
-
     private final DyeColor color;
 
     public PottyBlock(DyeColor color, BlockBehaviour.Properties properties)
@@ -59,9 +56,6 @@ public class PottyBlock extends BaseEntityBlock
     }
 
     public DyeColor getColor() { return color; }
-
-    @Override
-    public MapCodec<PottyBlock> codec() { return CODEC; }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder)
@@ -123,10 +117,10 @@ public class PottyBlock extends BaseEntityBlock
     }
 
     @Override
-    public void playerDestroy(Level level, Player player, BlockPos pos, BlockState state,
+    public void playerDestroy(ServerLevel level, ServerPlayer player, BlockPos pos, BlockState state,
                                BlockEntity blockEntity, ItemStack tool)
     {
-        if (!level.isClientSide() && blockEntity instanceof PottyBlockEntity entity)
+        if (blockEntity instanceof PottyBlockEntity entity)
             Block.popResource(level, pos, createDrop(entity));
         super.playerDestroy(level, player, pos, state, blockEntity, tool);
     }

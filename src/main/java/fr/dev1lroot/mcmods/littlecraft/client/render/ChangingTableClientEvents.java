@@ -77,31 +77,31 @@ public final class ChangingTableClientEvents
                 renderState.bodyRot = 90f;
                 renderState.yRot    = 0f;
                 poseStack.translate(-dw, dy, 0);
-                poseStack.mulPose(Axis.ZP.rotationDegrees(-90f));
+                poseStack.rotateDegrees(Axis.ZP, -90f);
             }
             case WEST -> {
                 renderState.bodyRot = 270f;
                 renderState.yRot    = 0f;
                 poseStack.translate(dw, dy, 0);
-                poseStack.mulPose(Axis.ZP.rotationDegrees(90f));
+                poseStack.rotateDegrees(Axis.ZP, 90f);
             }
             case NORTH -> {
                 renderState.bodyRot = 0f;
                 renderState.yRot    = 0f;
                 poseStack.translate(0, dy, dw);
-                poseStack.mulPose(Axis.XP.rotationDegrees(-90f));
+                poseStack.rotateDegrees(Axis.XP, -90f);
             }
             case SOUTH -> {
                 renderState.bodyRot = 180f;
                 renderState.yRot    = 0f;
                 poseStack.translate(0, dy, -dw);
-                poseStack.mulPose(Axis.XP.rotationDegrees(90f));
+                poseStack.rotateDegrees(Axis.XP, 90f);
             }
             default -> {
                 renderState.bodyRot = 90f;
                 renderState.yRot    = 0f;
                 poseStack.translate(-dw, dy, 0);
-                poseStack.mulPose(Axis.ZP.rotationDegrees(-90f));
+                poseStack.rotateDegrees(Axis.ZP, -90f);
             }
         }
     }

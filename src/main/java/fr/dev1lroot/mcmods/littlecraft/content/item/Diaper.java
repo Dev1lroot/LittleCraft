@@ -16,6 +16,7 @@ import net.minecraft.network.chat.TextColor;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.Prediction;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -94,7 +95,7 @@ public class Diaper
                     int remaining = stack.getCount() - 1;
                     player.setItemInHand(hand, remaining > 0 ? stack.copyWithCount(remaining) : prepared);
                     if (remaining > 0 && !player.getInventory().add(prepared))
-                        player.drop(prepared, false);
+                        player.drop(prepared, false, Prediction.SERVER_ONLY);
                 }
                 player.playSound(SoundEvents.ARMOR_EQUIP_LEATHER.value(), 1.0f, 1.0f);
                 return InteractionResult.SUCCESS;

@@ -150,8 +150,7 @@ public class DiaperLayer<S extends HumanoidRenderState, M extends EntityModel<? 
                         LivingEntityRenderer.getOverlayCoords(state, 0.0f),
                         -1,
                         null,
-                        state.outlineColor,
-                        null
+                        state.outlineColor
                 );
 
         if (isOpen && Diaper.isPooped(legs))
@@ -167,8 +166,7 @@ public class DiaperLayer<S extends HumanoidRenderState, M extends EntityModel<? 
                             LivingEntityRenderer.getOverlayCoords(state, 0.0f),
                             -1,
                             null,
-                            state.outlineColor,
-                            null
+                            state.outlineColor
                     );
         }
 

@@ -7,7 +7,7 @@ package fr.dev1lroot.mcmods.littlecraft.content;
 
 import fr.dev1lroot.mcmods.littlecraft.content.block.AbstractCribBlock;
 import fr.dev1lroot.mcmods.littlecraft.content.block.CribBlockEntity;
-import net.minecraft.world.item.BedItem;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -23,7 +23,7 @@ public class Crib
     public static final Map<DyeColor, DeferredBlock<AbstractCribBlock>> CRIB_BLOCKS =
         new EnumMap<>(DyeColor.class);
 
-    public static final Map<DyeColor, DeferredItem<BedItem>> CRIB_ITEMS =
+    public static final Map<DyeColor, DeferredItem<BlockItem>> CRIB_ITEMS =
         new EnumMap<>(DyeColor.class);
 
     static {
@@ -38,7 +38,7 @@ public class Crib
         for (DyeColor color : DyeColor.values()) {
             CRIB_ITEMS.put(color, LittleContentRegistry.ITEMS.registerItem(
                 color.getName() + "_crib",
-                props -> new BedItem(CRIB_BLOCKS.get(color).get(), props)
+                props -> new BlockItem(CRIB_BLOCKS.get(color).get(), props)
             ));
         }
     }
